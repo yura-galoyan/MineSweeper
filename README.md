@@ -1,2 +1,2 @@
 # MineSweeper
-minesweeper console game with ncurses
+    Minesweeper console game with ncurses
