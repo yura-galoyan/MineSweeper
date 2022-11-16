@@ -20,7 +20,7 @@ class MENU
 {
 private:
     unsigned delta = 8;
-    coord overAllX = getmaxx(stdscr) ; 
+    coord overAllX; 
     
 private:
     struct TABS_Y {

@@ -3,6 +3,7 @@
 
 MENU::MENU(){
     startNcurses();
+    overAllX = getmaxx(stdscr)/2 - 40;
     initTabs();
 }
 
@@ -24,25 +25,25 @@ void MENU::initTabs(){
 void MENU::initStart(){
     start.coordY = getmaxy(stdscr)/4;
     start.win = newwin(7,60,start.coordY,overAllX);
-    start.name = "start";
+    start.name = "Start";
 };
 
 void MENU::initOptions(){    
     options.coordY = start.coordY + delta;
     options.win = newwin(7,60,options.coordY,overAllX);
-    options.name = "options";
+    options.name = "Options";
 };
 
 void MENU::initRecords(){    
     records.coordY = options.coordY + delta;
     records.win = newwin(7,60,records.coordY,overAllX);
-    records.name = "records";
+    records.name = "Records";
 };
 
 void MENU::initQuit(){
     quit.coordY = records.coordY + delta;
     quit.win = newwin(7,60,quit.coordY,overAllX);
-    quit.name = "quit";
+    quit.name = "Quit";
 };
 
 void MENU::createMenu(){
