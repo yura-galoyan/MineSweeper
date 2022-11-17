@@ -1,6 +1,6 @@
 #include <vector>
-#include "ncurses.h"
-#include "map"
+#include <ncurses.h>
+#include <map>
 
 using Tab = std::pair<WINDOW*,int>;
 using states = std::vector<Tab>;
