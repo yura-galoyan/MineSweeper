@@ -5,7 +5,7 @@
 
 
 MENUCONTROLLER::MENUCONTROLLER():menuLoop{true},
-                                 //s              //w
+                                                //s                    //w
                     menuCursor{{{ {menu.getOptionsW(),1},  {menu.getStartW(),0} },
                                 { {menu.getRecordsW(),2},  {menu.getStartW(),0} },
                                 { {menu.getQuitW(),3},     {menu.getOptionsW(),1} },
