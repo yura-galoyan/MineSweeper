@@ -20,11 +20,12 @@ void MENUCONTROLLER::startMenu(){
     menuCursor.highlightCursor(currTab);
     while(menuLoop){
        actionKey = chooseAction();
-       nextTab = menuCursor.getNextTab(currTab, actionKey);
+       nextTab = menuCursor.getNextTab(currTab, actionKey); //TODO add move or press condition
        menuCursor.moveCursor(nextTab,actionKey);
     }
 }
 
+//TODO add function to analize action is for moving or for pressing
 
 keyType MENUCONTROLLER::chooseAction(){
     keyType key = getPressedKey();
