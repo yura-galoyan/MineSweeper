@@ -38,11 +38,18 @@ public:
     void startNcurses();
     void createMenu();
     void setUpBoardSize();
+    
+    void initTabs();
     void initStart();
     void initOptions();
     void initRecords();
     void initQuit();
-    void initTabs();
+
+    WINDOW* getStartW();
+    WINDOW* getOptionsW();
+    WINDOW* getRecordsW();
+    WINDOW* getQuitW();
+
     void printCenteredText(WINDOW *, const char *text);
     void drawTab(WINDOW * win,const char*);
     ~MENU();

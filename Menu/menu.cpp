@@ -53,6 +53,24 @@ void MENU::createMenu(){
    drawTab(quit.win,quit.name);
 }
 
+WINDOW* MENU::getStartW(){
+    return start.win;
+}
+
+WINDOW* MENU::getOptionsW(){
+    return options.win;
+}
+
+WINDOW* MENU::getRecordsW(){
+    return records.win;
+}
+
+WINDOW* MENU::getQuitW(){
+    return quit.win;
+}
+
+
+
 void MENU::drawTab(WINDOW * win,const char* text){
     box(win,0,0);
     printCenteredText(win,text);

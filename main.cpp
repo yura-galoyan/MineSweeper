@@ -1,13 +1,13 @@
 
 #include "Menu/menu.hpp"
 #include "ncurses.h"
+#include "Menu/MenuControl/menuController.hpp"
 const auto& pause = getch;
 
 
 int main(){
-    MENU menu;
-    menu.createMenu();
-
+    MENUCONTROLLER menuController;
+    menuController.startMenu();
 
 
 
