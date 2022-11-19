@@ -1,57 +1,38 @@
-
-/*          INCLUDES          */
-
-#include <utility>  // std::pair
-#include <ncurses.h>
-#include <string>
-
-/*          INCLUDES          */
-
-/*     ALIASES AND CONSTS     */
+#pragma once
+#include "../Library/libraries.hpp"
 
 using coord = unsigned;
 using word = std::string;
 
-/*     ALIASES AND CONSTS     */
 
 
 
-class MENU
+class MAINMENU
 {
-private:
+protected:
     unsigned delta = 8;
     coord overAllX; 
-    
-private:
-    struct TABS_Y {
+    struct MENUTABS {
     coord coordY;
     WINDOW* win;
     const char * name;
-} start,options,records,quit;
-
-
-
-
+} play,options,records,quit;
 
 public:
-    MENU();
-    void startNcurses();
-    void createMenu();
+    MAINMENU();
+    void createMainMenu();
+    void clearScreen();
     void setUpBoardSize();
-    
-    void initTabs();
-    void initStart();
-    void initOptions();
-    void initRecords();
-    void initQuit();
+    void startNcurses();
+    void initTab(MENUTABS&,coord,const char*);
+
+    void initMainMenuTabs();
 
     WINDOW* getStartW();
     WINDOW* getOptionsW();
     WINDOW* getRecordsW();
     WINDOW* getQuitW();
 
-    void printCenteredText(WINDOW *, const char *text);
-    void drawTab(WINDOW * win,const char*);
-    ~MENU();
+    ~MAINMENU();
 
 };

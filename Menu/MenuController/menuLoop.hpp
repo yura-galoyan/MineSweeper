@@ -8,7 +8,6 @@ private:
 public:
     MENULOOP(bool );
 
-    bool isMenuRunning();
     operator bool();
     ~MENULOOP();
 };

@@ -1,92 +1,65 @@
 #include "menu.hpp"
+#include "ncurses.h"
 
-
-MENU::MENU(){
+MAINMENU::MAINMENU(){
     startNcurses();
     overAllX = getmaxx(stdscr)/2 - 40;
-    initTabs();
+    initMainMenuTabs();
 }
 
-void MENU::startNcurses(){
+void MAINMENU::startNcurses(){
     initscr();
+    use_default_colors();
     noecho();
     curs_set(0);
     refresh();
 };
 
-void MENU::initTabs(){
-    initStart();
-    initOptions();
-    initRecords();
-    initQuit();
 
-};
-
-void MENU::initStart(){
-    start.coordY = getmaxy(stdscr)/4;
-    start.win = newwin(7,60,start.coordY,overAllX);
-    start.name = "Start";
-};
-
-void MENU::initOptions(){    
-    options.coordY = start.coordY + delta;
-    options.win = newwin(7,60,options.coordY,overAllX);
-    options.name = "Options";
-};
-
-void MENU::initRecords(){    
-    records.coordY = options.coordY + delta;
-    records.win = newwin(7,60,records.coordY,overAllX);
-    records.name = "Records";
-};
-
-void MENU::initQuit(){
-    quit.coordY = records.coordY + delta;
-    quit.win = newwin(7,60,quit.coordY,overAllX);
-    quit.name = "Quit";
-};
-
-void MENU::createMenu(){
-   drawTab(start.win,start.name);
-   drawTab(options.win,options.name);
-   drawTab(records.win,records.name);
-   drawTab(quit.win,quit.name);
+void MAINMENU::clearScreen(){
+    clear();
+    refresh();
 }
 
-WINDOW* MENU::getStartW(){
-    return start.win;
+void MAINMENU::initTab(MENUTABS &tab, coord Y,const char * text){
+    tab.coordY = Y;
+    tab.name = text;
+    tab.win = newwin(7,60,Y,overAllX);
 }
 
-WINDOW* MENU::getOptionsW(){
+
+void MAINMENU::initMainMenuTabs(){
+    initTab(play,    getmaxy(stdscr)/5,       "Play"    );
+    initTab(options, play.coordY + delta,     "Options" );
+    initTab(records, options.coordY + delta,  "Records" );
+    initTab(quit,    records.coordY + delta,  "Quit"    );
+
+};
+
+void MAINMENU::createMainMenu(){
+   DRAW::drawTab(play.win,play.name);
+   DRAW::drawTab(options.win,options.name);
+   DRAW::drawTab(records.win,records.name);
+   DRAW::drawTab(quit.win,quit.name);
+}
+
+WINDOW* MAINMENU::getStartW(){
+    return play.win;
+}
+
+
+WINDOW* MAINMENU::getOptionsW(){
     return options.win;
 }
 
-WINDOW* MENU::getRecordsW(){
+WINDOW* MAINMENU::getRecordsW(){
     return records.win;
 }
 
-WINDOW* MENU::getQuitW(){
+WINDOW* MAINMENU::getQuitW(){
     return quit.win;
 }
 
-
-
-void MENU::drawTab(WINDOW * win,const char* text){
-    box(win,0,0);
-    printCenteredText(win,text);
-    wrefresh(win);
-}
-
-void MENU::printCenteredText(WINDOW * win, const char *text){
-    coord halfX = win->_maxx/2 - 3;
-    coord halfY = win->_maxy/2;
-    mvwprintw(win,halfY,halfX,"%6s",text);
-}
-
-void MENU::setUpBoardSize(){
-
-}
-
-MENU::~MENU(){
+MAINMENU::~MAINMENU(){
     endwin();
 }

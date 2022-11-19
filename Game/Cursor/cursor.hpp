@@ -1,4 +1,3 @@
-#include "cursor.hpp"
 
 
 
@@ -9,5 +8,8 @@ private:
     /* data */
 public:
     CURSOR(/* args */);
+    void createCursor();
+
+
     ~CURSOR();
 };

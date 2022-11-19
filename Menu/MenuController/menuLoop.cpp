@@ -1,8 +1,9 @@
 #include "menuLoop.hpp"
 
 
-MENULOOP::MENULOOP(bool menuProcessOn){
-    this->menuProcessOn = menuProcessOn;
+MENULOOP::MENULOOP(bool menuProcessOn):menuProcessOn(menuProcessOn)
+{
+
 }
 
 MENULOOP::operator bool(){
