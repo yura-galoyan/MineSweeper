@@ -4,7 +4,6 @@
 #include "../../Library/libraries.hpp"
 
 
-
 #define UpLeftCorner    ACS_ULCORNER
 #define UpRightCorner   ACS_URCORNER
 #define LowLeftCorner   ACS_LLCORNER
@@ -15,7 +14,8 @@
 #define RightCross      ACS_RTEE
 
 /*          ALIASES           */
-using coords= std::pair<unsigned,unsigned>;
+
+using coords = std::pair<unsigned,unsigned>;
 
 class BOARD{
 private:

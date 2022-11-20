@@ -39,7 +39,7 @@ void MAINMENU::initMainMenuTabs(){
 void MAINMENU::createMainMenu(){
    clearScreen();
    move(1,0);
-   DRAW::drawGameName();
+   DRAW::drawGameNameHeader();
    DRAW::drawTab(play.win,play.name);
    DRAW::drawTab(options.win,options.name);
    DRAW::drawTab(records.win,records.name);

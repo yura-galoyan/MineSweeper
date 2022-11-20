@@ -5,9 +5,12 @@
 class CURSOR
 {
 private:
-    /* data */
+    
+
+
+    
 public:
-    CURSOR(/* args */);
+    CURSOR();
     void createCursor();
 
 

@@ -1,11 +1,6 @@
 #include "options.hpp"
 
 
-
-
-
-
-
 OPTIONS:: OPTIONS(/* args */){
    
     overAllX = getmaxx(stdscr)/2 - 40;
@@ -24,7 +19,7 @@ void OPTIONS::initOptionsTabs(){
 void OPTIONS::createOptionMenu(){
     clearScreen();
     move(1,0);
-    DRAW::drawOptions();
+    DRAW::drawOptionsHeader();
     DRAW::drawTab(height.win,height.name);
     DRAW::drawTab(width.win,width.name);
     DRAW::drawTab(mines_count.win,mines_count.name);
