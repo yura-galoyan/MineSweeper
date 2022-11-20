@@ -1,7 +1,7 @@
 #include "controller.hpp"
 
 
-CONTROLLER::CONTROLLER():board{{40,80}},gameloop(true)
+CONTROLLER::CONTROLLER():board{{25,40}},gameloop(true)
 {
    
 }

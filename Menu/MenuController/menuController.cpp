@@ -49,7 +49,12 @@ void MENUCONTROLLER::startMenu(){
             quit = false;
             menu.clearScreen();
             return;
-            } 
+            }
+        else if(currTab.second == 3) {
+            play = false;
+            quit = true;
+            return;
+        } 
       }
     }
 
@@ -65,7 +70,7 @@ keyType MENUCONTROLLER::chooseAction(){
         return action.down;
     case 'w':
         return action.up;
-    case 'd':
+    case 'e':
         return action.enter;
     default:
         return 0;

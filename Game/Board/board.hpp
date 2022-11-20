@@ -1,6 +1,7 @@
+#pragma once
 #include <utility>  // std::pair
 #include <ncurses.h>
-
+#include "../../Library/libraries.hpp"
 
 
 

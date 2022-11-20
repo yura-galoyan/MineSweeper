@@ -3,7 +3,7 @@
 
 
 
-BOARD::BOARD(coords yx):yx{40,80}
+BOARD::BOARD(coords yx):yx{yx}
 {
 }
 
@@ -16,9 +16,9 @@ void BOARD::startNcurses(){
 }
 
 void BOARD::createBoard(){
-
-  startNcurses(); 
-  int posY = 5,
+  DRAW::drawGameName();
+  startNcurses();
+  int posY = 7,
       posX = 5;
 
   move(posY,posX);
