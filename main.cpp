@@ -1,6 +1,5 @@
 #include "Menu/MenuController/menuController.hpp"
 #include "Game/Controller/controller.hpp"
-const auto& pause = getch;
 
 
 int main(){
@@ -8,7 +7,6 @@ int main(){
     menuController.startMenu();
     if(menuController.quit){  
     endwin();
-    printw("\n            Game is Over, press key to end");
     return 0;
     }
 
@@ -16,5 +14,5 @@ int main(){
     controller.startGame();
 
 
-    pause();
+   getch();
 }

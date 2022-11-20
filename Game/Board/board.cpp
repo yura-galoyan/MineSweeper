@@ -8,14 +8,6 @@ BOARD::BOARD(coords yx):yx{yx }
 
 }
 
-void BOARD::startNcurses(){
-    initscr();
-    noecho();
-    curs_set(0);
-    use_default_colors();
-    refresh();
-}
-
 void BOARD::createBoard(){
   startNcurses();
   
@@ -25,6 +17,14 @@ void BOARD::createBoard(){
   refresh();
 }
 
+
+void BOARD::startNcurses(){
+    initscr();
+    noecho();
+    curs_set(0);
+    use_default_colors();
+    refresh();
+}
 
 BOARD::~BOARD(){
 

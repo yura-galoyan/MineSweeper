@@ -1,16 +1,17 @@
 #include "controller.hpp"
 
 
-CONTROLLER::CONTROLLER():board{{25,40}},gameloop(true)
+CONTROLLER::CONTROLLER():board{{10,10}},gameloop(true),cursor{10,10}
 {
    
 }
 
 void CONTROLLER::startGame(){
     board.createBoard();
-    cursor.createCursor();
+    cursor.placeCursor();
     while(gameloop){
-
+        auto key = getch();
+        cursor.interact(key);
     }
 }
 
