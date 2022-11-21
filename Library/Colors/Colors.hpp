@@ -1,4 +1,4 @@
-#include "ncurses.h"
+
 
 using colorType = int;
 
@@ -13,8 +13,8 @@ public:
 public:
     COLOR(colorType ,colorType );
 
-    void startColor(WINDOW*);
-    void endColor(WINDOW*);
+//     void startColor(WINDOW*);
+//     void endColor(WINDOW*);
 
     ~COLOR();
 };

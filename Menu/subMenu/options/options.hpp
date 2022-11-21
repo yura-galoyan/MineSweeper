@@ -1,4 +1,3 @@
-#include "../../../Library/libraries.hpp"
 #include "../../menu.hpp"
 
 
@@ -12,9 +11,11 @@ public:
     OPTIONS();
     void initOptionsTabs();
     void createOptionMenu();
-    WINDOW* getHeightW();
-    WINDOW* getWidthW();
-    WINDOW* getMinesCountW();
-    WINDOW* getBackW();
+    //TODO: wrap WINDOW*  into layer of abstraction
+//    WINDOW* getHeightW();
+//    WINDOW* getWidthW();
+//    WINDOW* getMinesCountW();
+//    WINDOW* getBackW();
+     void drawOptionsHeader();
     ~ OPTIONS();
 };

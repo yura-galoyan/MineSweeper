@@ -1,7 +1,5 @@
 #pragma once
-#include <utility>  // std::pair
-#include <ncurses.h>
-#include "../../Library/libraries.hpp"
+//#include <ncurses.h>
 
 
 
@@ -17,7 +15,10 @@ public:
     BOARD(coords);
     void startNcurses();
     void createBoard();
-
+    void drawBoardHeader();
+    void drawBoardBody();
+    void initScreen();
+    void printCenteredText();
 
 
     ~BOARD();
