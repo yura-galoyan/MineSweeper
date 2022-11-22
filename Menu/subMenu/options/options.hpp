@@ -1,4 +1,3 @@
-#include "../../../Library/libraries.hpp"
 #include "../../menu.hpp"
 
 
@@ -12,7 +11,6 @@ public:
     OPTIONS();
     void initOptionsTabs();
     void createOptionMenu();
-    // Change WINDOW*
     WINDOW* getHeightW();
     WINDOW* getWidthW();
     WINDOW* getMinesCountW();

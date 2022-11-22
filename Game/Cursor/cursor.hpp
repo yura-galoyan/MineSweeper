@@ -1,5 +1,5 @@
-//deminer A.K.A. player
-#include <ncurses.h>
+
+//#include <ncurses.h>
 #define CURS_COLOR 1
 #define cursOFF() curs_set(0)
 class CURSOR{

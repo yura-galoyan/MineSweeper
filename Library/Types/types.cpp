@@ -1,16 +1,17 @@
-#include "ncurses.h"
 
+
+//TODO: Put this into MENU class
 class triple{
 public:
-    WINDOW* first;
+//    WINDOW* first;
     int second;
     const char* third;
 public:
-    triple(WINDOW *f = stdscr,int s = 1,const char*t = "\0"){
-        first = f;
-        second = s;
-        third = t;
-    }
+//    triple(WINDOW *f = stdscr,int s = 1,const char*t = "\0"){
+  //      first = f;
+  //      second = s;
+  //      third = t;
+  //  }
 
 
 

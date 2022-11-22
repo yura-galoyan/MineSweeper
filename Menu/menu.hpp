@@ -1,9 +1,8 @@
 #pragma once
-#include "../Library/libraries.hpp"
-
+//#include <ncurses.h>
+#include <string>
 using coord = unsigned;
 using word = std::string;
-
 
 
 
@@ -14,7 +13,8 @@ protected:
     coord overAllX; 
     struct MENUTABS {
     coord coordY;
-    WINDOW* win;
+    //TODO: wrap WINDOW*  into layer of abstraction
+  //  WINDOW* win;
     const char * name;
 } play,options,records,quit;
 
@@ -23,15 +23,17 @@ public:
     void createMainMenu();
     void clearScreen();
     void setUpBoardSize();
-    void startNcurses();
+    void initScreen();
     void initTab(MENUTABS&,coord,const char*);
-
+    void drawGameNameHeader();
+    void drawTab(); //FIXME: Make this function VIRTUAL, but not PURE
     void initMainMenuTabs();
+    //TODO: wrap WINDOW*  into layer of abstraction
 
-    WINDOW* getStartW();
-    WINDOW* getOptionsW();
-    WINDOW* getRecordsW();
-    WINDOW* getQuitW();
+   // WINDOW* getStartW();
+   // WINDOW* getOptionsW();
+   // WINDOW* getRecordsW();
+   // WINDOW* getQuitW();
 
     ~MAINMENU();
 

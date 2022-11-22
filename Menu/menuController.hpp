@@ -1,6 +1,6 @@
-#include "../subMenu/options/options.hpp"
-#include "menuCursor.hpp"
-#include "menuLoop.hpp"
+#include "subMenu/options/options.hpp"
+#include "MenuController/menuCursor.hpp"
+#include "MenuController/menuLoop.hpp"
 
 using keyType = int;
 
