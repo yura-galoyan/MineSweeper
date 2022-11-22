@@ -6,7 +6,7 @@
 
 START::START(line text,int y,int x){
     name = text;
-    start = newwin(7,60,tab.start,overAllX);
+   // start = newwin(7,60,tab.start,overAllX);
 }
 
 START::~START(){

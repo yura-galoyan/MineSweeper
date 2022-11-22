@@ -1,7 +1,7 @@
 #include "options.hpp"
 
 
-OPTIONS:: OPTIONS(/* args */){
+OPTIONS:: OPTIONS(){
    
     overAllX = getmaxx(stdscr)/2 - 40;
     initOptionsTabs();

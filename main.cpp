@@ -5,14 +5,14 @@
 int main(){
     MENUCONTROLLER menuController;
     menuController.startMenu();
-    if(menuController.quit){  
-    endwin();
-    return 0;
+        if(menuController.quit){  
+        endwin();
+        
+    }
+   else if(menuController.play){
+        CONTROLLER controller;
+        controller.startGame();
     }
 
-    CONTROLLER controller;
-    controller.startGame();
 
-
-   getch();
 }

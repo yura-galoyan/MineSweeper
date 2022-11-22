@@ -35,7 +35,7 @@ void DRAW::drawBoardHeader(unsigned y,unsigned x){
 
   int posY = 7,
       posX = 5;
-  coords yx = {y,x};
+  maxCoords yx = {y,x};
   move(posY,posX);
   addch(ACS_ULCORNER);
   for(int j = 0;j<2*yx.second + 1;++j){//1
@@ -61,7 +61,7 @@ void DRAW::drawBoardHeader(unsigned y,unsigned x){
 void DRAW::drawBoardBody(unsigned y,unsigned x){
 
   int posY = 9,posX = 5;
-  coords yx = {y,x};
+  maxCoords yx = {y,x};
   for(int i = 0;i<yx.first;++i){//2
     posY++;
     move(posY,posX);

@@ -3,7 +3,7 @@
 
 
 
-BOARD::BOARD(coords yx):yx{yx }
+BOARD::BOARD(maxCoords yx):yx{yx }
 {
 
 }

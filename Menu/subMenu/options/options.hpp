@@ -2,8 +2,8 @@
 #include "../../menu.hpp"
 
 
-class OPTIONS:private MAINMENU
-{
+class OPTIONS
+    :private MAINMENU{
 private:
 
     MENUTABS height,width,mines_count,back;
@@ -12,6 +12,7 @@ public:
     OPTIONS();
     void initOptionsTabs();
     void createOptionMenu();
+    // Change WINDOW*
     WINDOW* getHeightW();
     WINDOW* getWidthW();
     WINDOW* getMinesCountW();

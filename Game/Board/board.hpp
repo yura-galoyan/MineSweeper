@@ -7,14 +7,14 @@
 
 /*          ALIASES           */
 
-using coords = std::pair<unsigned,unsigned>;
+using maxCoords = std::pair<unsigned,unsigned>;
 
 class BOARD{
 private:
-    coords yx;
+    maxCoords yx;
 
 public:
-    BOARD(coords);
+    BOARD(maxCoords);
     void startNcurses();
     void createBoard();
 

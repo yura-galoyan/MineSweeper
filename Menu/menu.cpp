@@ -15,11 +15,12 @@ void MAINMENU::startNcurses(){
     refresh();
 };
 
-
 void MAINMENU::clearScreen(){
     clear();
     refresh();
 }
+
+
 
 void MAINMENU::initTab(MENUTABS &tab, coord Y,const char * text){
     tab.coordY = Y;
