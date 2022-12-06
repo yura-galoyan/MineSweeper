@@ -9,11 +9,10 @@ BOARD::BOARD(maxCoords yx):yx{yx }
 }
 
 void BOARD::createBoard(){
-  startNcurses();
-  
-//      DRAW::drawGameNameHeader();
-//      DRAW::drawBoardHeader(yx.first,yx.second);
-//      DRAW::drawBoardBody(yx.first,yx.second);
+     startNcurses();
+     drawGameNameHeader();
+     drawBoardHeader(yx.first,yx.second);
+     drawBoardBody(yx.first,yx.second);
 
 //  refresh();
 }

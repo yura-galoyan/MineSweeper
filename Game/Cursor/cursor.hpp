@@ -22,7 +22,7 @@ public:
 private:
     int i = 0,
         j = 0;
-    int x,y; //coordinates
+    int maxx,maxy; //coordinates
     int y0 = 12; // up left coordiantes
     int x0 = 7; // up left coordiantes
 private:

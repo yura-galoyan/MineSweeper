@@ -12,7 +12,11 @@ private:
     MENUCURSOR mainMenuCursor;
     MENUCURSOR optionsCursor;
     MENULOOP menuLoop;
+    
+private:
     keyType actionKey;
+
+private:
     struct actions{
         keyType down = 0;
         keyType up = 1;

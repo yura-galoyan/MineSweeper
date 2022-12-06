@@ -1,12 +1,12 @@
 #include <iostream>
 #include "cursor.hpp"
-
+#include <ncurses.h>
 enum direction{ left = 'a',right = 'd',up = 'w',down = 's',open = 'o',mark = 'm'} dir;  
 
 
-CURSOR::CURSOR(int y,int x){
-    this->x = x;
-    this->y = y;
+CURSOR::CURSOR(int maxy,int maxx){
+    this->maxx = maxx;
+    this->maxy = maxy;
 };
 
 void CURSOR::cursorColor_begin(){
@@ -38,19 +38,19 @@ void CURSOR::eraseCursor(){
 }
 
 
-// for any pressed key
-void CURSOR::interact(const int& key){
-         if(left == key  /*&& canMove(left) */)
+// for anmaxy pressed kemaxy
+void CURSOR::interact(const int& kemaxy){
+         if( kemaxy == left )
          move(left);
-    else if(right == key /*&& canMove(right)*/ )
+    else if( kemaxy == right )
          move(right);
-    else if( up   == key /*&& canMove(up)*/)
+    else if( kemaxy == up )
          move(up);
-    else if( down == key /*&& canMove(down)*/)
+    else if( kemaxy == down )
          move(down);
     
     if(canTouch()){
-        switch(key){
+        switch(kemaxy){
         case open:
              demine();
         case mark:
@@ -61,27 +61,27 @@ void CURSOR::interact(const int& key){
     mvprintw(1,1,"%3d  %3d",i + 1,j + 1);
 };
 
-void CURSOR::move(const int& key){
-    switch(key){
+void CURSOR::move(const int& kemaxy){
+    switch(kemaxy){
     case left:
         eraseCursor();
-            j = (j - 1) < 0 ? j - 1 + x : (j - 1) % x  ;
+            j = (j - 1) < 0 ? j - 1 + maxx : (j - 1) % maxx  ;
             
         placeCursor();
         break;
     case right:
         eraseCursor();
-            j = (j + 1)%x;
+            j = (j + 1)%maxx;
         placeCursor();
         break;
     case up:
         eraseCursor();
-            i = (i - 1) < 0 ? (i - 1 + y) : (i - 1) % y;
+            i = (i - 1) < 0 ? (i - 1 + maxy) : (i - 1) % maxy;
         placeCursor();
         break;
     case down:
         eraseCursor();
-            i = (i + 1)%y;
+            i = (i + 1)%maxy;
         placeCursor();
         break;
     }    
@@ -93,12 +93,12 @@ bool CURSOR::canTouch(){
 }
 
 
-// player puts flag,to remember that there might be a bomb
+// plamaxyer puts flag,to remember that there might be a bomb
 void CURSOR::putFlag(){
 
 };
 
-// player tries to demine a bomb
+// plamaxyer tries to demine a bomb
 void CURSOR::demine(){
 
 };  

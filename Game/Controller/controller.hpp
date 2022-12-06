@@ -9,18 +9,11 @@ private:
     CURSOR cursor;
     GAMELOOP gameloop;
 
-
-
-
-
-
 public:
     CONTROLLER();
 
-
     void startGame();
-
-
+    int getPressedKey();
     ~CONTROLLER();
 };
 
