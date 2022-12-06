@@ -1,18 +1,19 @@
 #include <vector>
-#include "../../Library/Colors/"
-//FIXME: DO SOMETHING WITH TRIPLE IT MUST BE IN MENU I THINK BUt IF CAN'T I DUNNO
-//using Tab = triple;
-//      using states = std::vector<Tab>;
-//      using Matrix = std::vector<states>;
-using keyType = int;
+#include "../../Library/Colors/Colors.hpp"
+#include "../menu.hpp"
+#include "../../Library/Types/types.cpp" FIXME:
+      using Tab = triple;
+      using states = std::vector<Tab>;
+      using Matrix = std::vector<states>;
+      using keyType = int;
 
 const keyType UP   = 'w';
 const keyType DOWN = 's';
 
-//FIXME: fix all this
 
 
 class MENUCURSOR
+    :public MAINMENU
 {    
 private:
     Matrix transactionMatrix;

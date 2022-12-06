@@ -7,7 +7,6 @@ MENUCURSOR::MENUCURSOR(Matrix transactionMatrix)
 
 }
 
-
 void MENUCURSOR::moveCursor(Tab& tab,keyType actionKey){
     unHighlightCursor(tab);
     Tab nextTab = getNextTab(tab,actionKey);
@@ -24,13 +23,13 @@ Tab MENUCURSOR::getNextTab(const Tab currTab, const keyType &actionKey){
 }
 
 void MENUCURSOR::unHighlightCursor(Tab tab){
-    green.endColor(tab.first); 
-    DRAW::drawTab(tab.first,tab.third);
+    green.endColor(tab.win); 
+    drawTab(tab.win,tab.name);
 }
 
 void MENUCURSOR::highlightCursor(const Tab tab){
-    green.startColor(tab.first);
-    DRAW::drawTab(tab.first,tab.third);
+    green.startColor(tab.win);
+    drawTab(tab.win,tab.name);
     
 }
 
