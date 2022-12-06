@@ -1,35 +1,34 @@
-#include "subMenu/options/options.hpp"
-#include "MenuController/menuCursor.hpp"
-#include "MenuController/menuLoop.hpp"
+#include "mainmenu.hpp"
+#include "options.hpp"
 
 using keyType = int;
 
-class MENUCONTROLLER
+class Presenter
 {
 private:
-    MAINMENU menu;
+    MAINMENU mainMenu;
     OPTIONS optionsMenu;
-    MENUCURSOR mainMenuCursor;
-    MENUCURSOR optionsCursor;
-    MENULOOP menuLoop;
-    
 private:
     keyType actionKey;
+    bool menuLoop;
 
 private:
     struct actions{
         keyType down = 0;
         keyType up = 1;
         keyType enter = 2;
-        }action;
+        } action;
 
 public:
-    MENUCONTROLLER();
+    Presenter();
+
     void startMenu();
+
     bool play = false;
     bool quit = false;
+    
     void act(keyType);
     keyType getPressedKey();
     keyType chooseAction();
-    ~MENUCONTROLLER();
+    ~Presenter();
 };

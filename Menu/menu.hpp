@@ -1,39 +1,44 @@
 #pragma once
-#include <ncurses.h>
-#include <string>
-using coord = unsigned;
-using word = std::string;
-using window = WINDOW*;
+#include "../Library/Types/types.cpp"
+#include "../Library/Colors/Colors.hpp"
 
 
-class MAINMENU
+#include <vector>
+
+const keyType UP   = 'w';
+const keyType DOWN = 's';
+
+      using Tab = triple;
+      using states = std::vector<Tab>;
+      using Matrix = std::vector<states>;
+      using keyType = int;
+
+class MENU
 {
+private:
+   
+    Matrix transactionMatrix;
+    bool isInMenu = true;
+    COLOR green = {COLOR_WHITE,-1};  
+    Tab currTab,nextTab;
+
 protected:
-    unsigned delta = 8;
-    coord overAllX; 
-    struct MENUTABS {
+    struct MENUTABS{
     coord coordY;
     window win;
     const char * name;
-} play,options,records,quit;
-
+    };
+    
 public:
-    MAINMENU();
-    void createMainMenu();
-    void clearScreen();
-    void setUpBoardSize();
-    void initScreen();
-    void initTab(MENUTABS&,coord,const char*);
-    void drawGameNameHeader();
-    void drawTab(window,const char*);
-    void initMainMenuTabs();
+    MENU(Matrix transactionMatrix);
 
+    Tab getNextTab(const Tab, const keyType&);
+    Tab getCurrTab();
 
-   window getStartW();
-   window getOptionsW();
-   window getRecordsW();
-   window getQuitW();
+    void moveCursor(Tab&, keyType);
+    void highlightCursor(Tab);
+    void unHighlightCursor(Tab);
 
-    ~MAINMENU();
-
+    ~MENU();
 };
+
