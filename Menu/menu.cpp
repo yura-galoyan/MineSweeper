@@ -1,7 +1,7 @@
 #include "menu.hpp"
 
 MENU::MENU()
-    :green(COLOR_GREEN,-1 ) 
+    :green(COLOR_GREEN,-1 ),currTab{menuList[0]}
 {
 
 }
@@ -45,10 +45,13 @@ void MENU::drawTab(WINDOW * win,const char* text){
 Tab MENU::getCurrTab(){
     return currTab;
 }
+Tab MENU::getTab(const int &i){
+   return this->menuList[i];
+}
+    
 window MENU::getWin(const int &i){
    return this->menuList[i].win;
 }
-
 
 void MENU::unHighlightCursor(Tab &tab){
     green.endColor(tab.win); 

@@ -47,6 +47,7 @@ public:
 
     Tab getCurrTab();
 
+    Tab getTab(const int &);
     window getWin(const int &);
     void moveCursor( Tab&, const Tab& );
     void highlightCursor(const Tab&);

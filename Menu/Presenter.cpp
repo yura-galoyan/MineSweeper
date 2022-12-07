@@ -22,10 +22,10 @@ void Presenter::startMenu(){
        actionKey = chooseAction();
        Tab currTab = mainMenu.getCurrTab();
        if(actionKey == action.down  ){
-          mainMenu.moveCursor(currTab,mainMenu.getWin((currTab.second + 1 ) % 4));
+          mainMenu.moveCursor(currTab,mainMenu.getTab((currTab.second + 1 ) % 4));
        }
        else if( actionKey == action.up ){
-          mainMenu.moveCursor(currTab,mainMenu.getWin(currTab.second - 1 < 0 ? currTab.second + 4 : currTab.second - 1));
+          mainMenu.moveCursor(currTab,mainMenu.getTab((currTab.second - 1) < 0 ? currTab.second + 4 : currTab.second - 1));
        }
        else if(actionKey == action.enter ){
         if(currTab.second == 1){
@@ -36,10 +36,10 @@ void Presenter::startMenu(){
             currTab = optionsMenu.getCurrTab();
             actionKey = chooseAction();
             if(actionKey == action.down  ){
-                optionsMenu.moveCursor(currTab,optionsMenu.getWin((currTab.second + 1 ) % 4));
+                optionsMenu.moveCursor(currTab,optionsMenu.getTab( (currTab.second + 1 ) % 4) );
             }
             else if( actionKey == action.up ){
-                optionsMenu.moveCursor(currTab,optionsMenu.getWin(currTab.second - 1 < 0 ? currTab.second + 4 : currTab.second - 1));
+                optionsMenu.moveCursor(currTab,optionsMenu.getTab( (currTab.second - 1 < 0 ? currTab.second - 1 + 4 : currTab.second - 1 ))        );
             }
 
 
