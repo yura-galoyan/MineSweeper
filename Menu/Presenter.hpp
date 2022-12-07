@@ -9,7 +9,7 @@ private:
     MAINMENU mainMenu;
     OPTIONS optionsMenu;
 private:
-    keyType actionKey;
+    keyType actionKey = 0;
     bool menuLoop;
 
 private:
@@ -18,7 +18,6 @@ private:
         keyType up = 1;
         keyType enter = 2;
         } action;
-
 public:
     Presenter();
 

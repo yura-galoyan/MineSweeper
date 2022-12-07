@@ -5,11 +5,9 @@
             "label": "C/C++: g++ build active file",
             "command": "/usr/bin/g++",
             "args": [
-                "-fdiagnostics-color=always",
-                "-g",
-                "${file}",
+                "main.cpp",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}",
+                "main",         
                 "-lncurses",
                 
                 "Library/Colors/Colors.cpp",

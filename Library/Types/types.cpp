@@ -1,17 +1,14 @@
 #include <ncurses.h>
-
+#
 using window = WINDOW*;
 
-//TODO: Put this into MENU class
-class triple{
-public:
-    window win;
-    int second;
-    const char* name;
-public:
-   triple(window f = stdscr,int s = 1,const char*t = "\0"){
-       win = f;
-       second = s;
-       name = t;
-   }
+
+template <typename T1,typename T2,typename T3>
+    struct Triple{
+
+        T1 win;
+        T2 second;
+        T3 name;
 };
+
+using triple = Triple<window,int,const char*>;

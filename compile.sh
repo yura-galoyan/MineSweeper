@@ -1,1 +1,1 @@
-g++ main.cpp -o main Menu/menu.cpp Library/Colors/Colors.cpp Menu/options.cpp Game/Board/*.cpp Game/Controller/controller.cpp Game/Cursor/cursor.cpp Game/Gameloop/gameloop.cpp -lncurses
+g++ main.cpp -o main  Library/Colors/Colors.cpp Menu/menu.cpp Menu/options.cpp Menu/mainmenu.cpp Menu/Presenter.cpp Game/Board/*.cpp Game/Controller/controller.cpp Game/Cursor/cursor.cpp Game/Gameloop/gameloop.cpp -lncurses

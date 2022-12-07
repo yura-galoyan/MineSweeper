@@ -5,7 +5,7 @@
 
 
 class OPTIONS
-    :MENU{
+    :public MENU{
 private:
 
     MENUTABS height,width,mines_count,back;
@@ -16,7 +16,7 @@ private:
     void drawOptionsHeader();
 
 public:
-    OPTIONS();
+    OPTIONS(List);
 
     void initOptionsTabs();
     void createOptionMenu();

@@ -1,6 +1,6 @@
 #include "mainmenu.hpp"
 
-MAINMENU::MAINMENU():
+MAINMENU::MAINMENU(List)
 {
     initScreen();
     overAllX = getmaxx(stdscr)/2 - 40;
@@ -34,7 +34,7 @@ void MAINMENU::createMainMenu(){
    drawTab(play.win,play.name);
    drawTab(options.win,options.name);
    drawTab(records.win,records.name);
-   drawTab(quit.win,quit.name);I
+   drawTab(quit.win,quit.name);
 }          
 
 void MAINMENU::drawGameNameHeader(){
@@ -47,13 +47,11 @@ void MAINMENU::drawGameNameHeader(){
 
 
 
-window MAINMENU::getWin(int i){
-   return menuList[i];
-}
 
 
 
-WINDOW* MAINMENU::getStartW(){
+
+window MAINMENU::getStartW(){
    return play.win;
 }
 

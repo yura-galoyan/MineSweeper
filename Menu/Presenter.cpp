@@ -2,15 +2,15 @@
 
 
 Presenter::Presenter():menuLoop{true},
-                    mainMenu   { {mainMenu.getStartW(),       0,"Start"  },        
-                                 {mainMenu.getOptionsW(),     1,"Options"},        
-                                 {mainMenu.getRecordsW(),     2,"Records"},       
-                                 {mainMenu.getQuitW(),        3,"Quit"   } },
+                       mainMenu{{{mainMenu.getStartW(),       0,"Start"  },        
+                                {mainMenu.getOptionsW(),     1,"Options"},        
+                                {mainMenu.getRecordsW(),     2,"Records"},       
+                                {mainMenu.getQuitW(),        3,"Quit"   } }},
 
-                    optionsMenu{ {optionsMenu.getHeightW(),          0,"Height        10"},   
+                    optionsMenu{{ {optionsMenu.getHeightW(),          0,"Height        10"},   
                                  {optionsMenu.getWidthW(),           1,"Widht         10"},      
                                  {optionsMenu.getMinesCountW(),      2,"Mines Count   10"},     
-                                 {optionsMenu.getBackW(),            3,"Back"            } }
+                                 {optionsMenu.getBackW(),            3,"Back"            } }}
 {
     
 }
@@ -29,15 +29,20 @@ void Presenter::startMenu(){
        }
        else if(actionKey == action.enter ){
         if(currTab.second == 1){
-            Tab currTab = options.getCurrTab();
+            Tab currTab = optionsMenu.getCurrTab();
             optionsMenu.createOptionMenu();
-            options.highlightCursor(currTab);
+            optionsMenu.highlightCursor(currTab);
             while(menuLoop){
-            currTab = options.getCurrTab();
+            currTab = optionsMenu.getCurrTab();
             actionKey = chooseAction();
-            if(actionKey == action.down || actionKey == action.up){
-                options.moveCursor(currTab,actionKey);
+            if(actionKey == action.down  ){
+                optionsMenu.moveCursor(currTab,optionsMenu.getWin((currTab.second + 1 ) % 4));
             }
+            else if( actionKey == action.up ){
+                optionsMenu.moveCursor(currTab,optionsMenu.getWin(currTab.second - 1 < 0 ? currTab.second + 4 : currTab.second - 1));
+            }
+
+
             else if(actionKey == action.enter ){
              if(currTab.second == 3){
                 mainMenu.createMainMenu();

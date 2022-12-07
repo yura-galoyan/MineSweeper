@@ -9,7 +9,7 @@ MENU::MENU()
 void MENU::initTab(MENUTABS &tab, Coord Y,const char * text){
     tab.coordY = Y;
     tab.name = text;
-   tab.win = newwin(7,60,Y,overAllX);
+    tab.win = newwin(7,60,Y,overAllX);
 }
 void MENU::clearScreen(){
     clear();
@@ -45,8 +45,17 @@ void MENU::drawTab(WINDOW * win,const char* text){
 Tab MENU::getCurrTab(){
     return currTab;
 }
+window MENU::getWin(const int &i){
+   return this->menuList[i].win;
+}
+
 
 void MENU::unHighlightCursor(Tab &tab){
     green.endColor(tab.win); 
     drawTab(tab.win,tab.name);
+}
+
+
+MENU::~MENU(){
+    
 }

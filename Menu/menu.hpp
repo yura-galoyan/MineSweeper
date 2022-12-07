@@ -1,7 +1,7 @@
 #pragma once
 #include "../Library/Types/types.cpp"
 #include "../Library/Colors/Colors.hpp"
-
+#include <ncurses.h>
 #include <vector>
 #include <string>
 
@@ -14,7 +14,7 @@ const keyType DOWN = 's';
 const auto colorWhite = 7;
 const auto colorEmpty = -1;
 
-using Tab = triple;;
+using Tab = triple;
 using List = std::vector<Tab>;
 using keyType = int;
 
@@ -39,7 +39,7 @@ protected:
 
 protected: 
     void drawTab(window,const char*);
-
+    List menuList;
 public:
     MENU(); 
     void clearScreen();
@@ -47,6 +47,7 @@ public:
 
     Tab getCurrTab();
 
+    window getWin(const int &);
     void moveCursor( Tab&, const Tab& );
     void highlightCursor(const Tab&);
     void unHighlightCursor(Tab&);

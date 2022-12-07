@@ -10,7 +10,7 @@ using window = WINDOW*;
 
 
 class MAINMENU
-    :MENU{
+    :public MENU{
 
 private:
 
@@ -18,7 +18,7 @@ private:
     MENUTABS play,options,records,quit;
     List menuList;
 public:
-    MAINMENU();
+    MAINMENU(List);
 
     void createMainMenu();
     void setUpBoardSize();
@@ -26,7 +26,6 @@ public:
     void drawGameNameHeader();
     void initMainMenuTabs();
 
-    window getWin(int);
 
     window getStartW();
     window getOptionsW();
