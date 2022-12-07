@@ -14,27 +14,24 @@ class MAINMENU
 
 private:
 
-    unsigned delta = 8;
-    coord overAllX; 
+    
     MENUTABS play,options,records,quit;
-
+    List menuList;
 public:
     MAINMENU();
 
     void createMainMenu();
-    void clearScreen();
     void setUpBoardSize();
     void initScreen();
-    void initTab(MENUTABS&,coord,const char*);
     void drawGameNameHeader();
-    void drawTab(window,const char*);
     void initMainMenuTabs();
 
+    window getWin(int);
 
-   window getStartW();
-   window getOptionsW();
-   window getRecordsW();
-   window getQuitW();
+    window getStartW();
+    window getOptionsW();
+    window getRecordsW();
+    window getQuitW();
 
     ~MAINMENU();
 

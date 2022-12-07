@@ -2,43 +2,55 @@
 #include "../Library/Types/types.cpp"
 #include "../Library/Colors/Colors.hpp"
 
-
 #include <vector>
+#include <string>
+
+using keyType = int;
+using Coord = int;
+
 
 const keyType UP   = 'w';
 const keyType DOWN = 's';
+const auto colorWhite = 7;
+const auto colorEmpty = -1;
 
-      using Tab = triple;
-      using states = std::vector<Tab>;
-      using Matrix = std::vector<states>;
-      using keyType = int;
+using Tab = triple;;
+using List = std::vector<Tab>;
+using keyType = int;
 
 class MENU
 {
 private:
    
-    Matrix transactionMatrix;
     bool isInMenu = true;
-    COLOR green = {COLOR_WHITE,-1};  
+    COLOR green = {colorWhite,colorEmpty};  
     Tab currTab,nextTab;
 
 protected:
     struct MENUTABS{
-    coord coordY;
+    Coord coordY;
     window win;
     const char * name;
     };
-    
-public:
-    MENU(Matrix transactionMatrix);
 
-    Tab getNextTab(const Tab, const keyType&);
+protected:    
+    unsigned delta = 8;
+    Coord overAllX;
+
+protected: 
+    void drawTab(window,const char*);
+
+public:
+    MENU(); 
+    void clearScreen();
+    void initTab(MENUTABS&,Coord,const char*);
+
     Tab getCurrTab();
 
-    void moveCursor(Tab&, keyType);
-    void highlightCursor(Tab);
-    void unHighlightCursor(Tab);
-
+    void moveCursor( Tab&, const Tab& );
+    void highlightCursor(const Tab&);
+    void unHighlightCursor(Tab&);
+    void chooseSubMenu();
     ~MENU();
 };
 

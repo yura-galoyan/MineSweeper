@@ -10,13 +10,16 @@
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
-                "Menu/menu.cpp",
-                "Menu/MenuController/*.cpp",
-                "Library/Colors/Colors.cpp",
-                "Library/draw.cpp",
                 "-lncurses",
-                "Menu/subMenu/options/options.cpp",
-                "Game/Board/*.cpp",
+                
+                "Library/Colors/Colors.cpp",
+
+                "Menu/mainmenu.cpp",
+                "Menu/menu.cpp",
+                "Menu/options.cpp",
+                "Menu/Presenter.cpp",
+
+                "Game/Board/board.cpp",
                 "Game/Controller/controller.cpp",
                 "Game/Cursor/cursor.cpp",
                 "Game/Gameloop/gameloop.cpp",

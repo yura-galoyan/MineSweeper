@@ -15,16 +15,8 @@ void MAINMENU::initScreen(){
     refresh();
 };
 
-void MAINMENU::clearScreen(){
-    clear();
-    refresh();
-}
 
-void MAINMENU::initTab(MENUTABS &tab, coord Y,const char * text){
-    tab.coordY = Y;
-    tab.name = text;
-   tab.win = newwin(7,60,Y,overAllX);
-}
+
 
 
 void MAINMENU::initMainMenuTabs(){
@@ -39,10 +31,10 @@ void MAINMENU::initMainMenuTabs(){
 void MAINMENU::createMainMenu(){
    clearScreen();
    drawGameNameHeader();
-            drawTab(play.win,play.name);
-            drawTab(options.win,options.name);
-            drawTab(records.win,records.name);
-            drawTab(quit.win,quit.name);I
+   drawTab(play.win,play.name);
+   drawTab(options.win,options.name);
+   drawTab(records.win,records.name);
+   drawTab(quit.win,quit.name);I
 }          
 
 void MAINMENU::drawGameNameHeader(){
@@ -51,14 +43,15 @@ void MAINMENU::drawGameNameHeader(){
              mvprintw(3,62,"| | | || ||   || -_||__   || | | || -_|| -_|| . || -_||  _|\n");
              mvprintw(4,62,"|_|_|_||_||_|_||___||_____||_____||___||___||  _||___||_|  \n");
              mvprintw(5,62,"                                            |_|            \n");
-}           
+}     
 
-         void MAINMENU::drawTab(WINDOW * win,const char* text){
-             box(win,0,0);
-             //printCenteredText(win,text);
-             wrefresh(win);
-             refresh();
+
+
+window MAINMENU::getWin(int i){
+   return menuList[i];
 }
+
+
 
 WINDOW* MAINMENU::getStartW(){
    return play.win;
