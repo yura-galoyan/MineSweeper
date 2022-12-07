@@ -14,8 +14,4 @@ public:
        second = s;
        name = t;
    }
-
-
-
-
 };

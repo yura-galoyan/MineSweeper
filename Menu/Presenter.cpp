@@ -2,15 +2,15 @@
 
 
 Presenter::Presenter():menuLoop{true},
-                    mainMenu{{{       {mainMenu.getOptionsW(),1,"Options"},  {menu.getStartW(),0,"Play"}      },
-                                    { {mainMenu.getRecordsW(),2,"Records"},  {menu.getStartW(),0,"Play"}      },
-                                    { {mainMenu.getQuitW(),3,"Quit"},        {menu.getOptionsW(),1,"Options"} },
-                                    { {mainMenu.getQuitW(),3,"Quit"},        {menu.getRecordsW(),2,"Records"} } } },
+                    mainMenu   { {mainMenu.getStartW(),       0,"Start"  },        
+                                 {mainMenu.getOptionsW(),     1,"Options"},        
+                                 {mainMenu.getRecordsW(),     2,"Records"},       
+                                 {mainMenu.getQuitW(),        3,"Quit"   } },
 
-                    options{ {{       {optionsMenu.getWidthW(),1,"Width"},           {optionsMenu.getHeightW(),0,"Height"}      },
-                                    { {optionsMenu.getMinesCountW(),2,"Mines Count"},{optionsMenu.getHeightW(),0,"Height"}      },
-                                    { {optionsMenu.getBackW(),3,"Back"},             {optionsMenu.getWidthW(),1,"Width"}        }, 
-                                    { {optionsMenu.getBackW(),3,"Back"},             {optionsMenu.getMinesCountW(),2,"Mines Count"}   }  } }
+                    optionsMenu{ {optionsMenu.getHeightW(),          0,"Height        10"},   
+                                 {optionsMenu.getWidthW(),           1,"Widht         10"},      
+                                 {optionsMenu.getMinesCountW(),      2,"Mines Count   10"},     
+                                 {optionsMenu.getBackW(),            3,"Back"            } }
 {
     
 }
@@ -21,8 +21,11 @@ void Presenter::startMenu(){
     while(menuLoop){
        actionKey = chooseAction();
        Tab currTab = mainMenu.getCurrTab();
-       if(actionKey == action.down || actionKey == action.up){
-        mainMenu.moveCursor(currTab,actionKey);
+       if(actionKey == action.down  ){
+          mainMenu.moveCursor(currTab,mainMenu.getWin((currTab.second + 1 ) % 4));
+       }
+       else if( actionKey == action.up ){
+          mainMenu.moveCursor(currTab,mainMenu.getWin(currTab.second - 1 < 0 ? currTab.second + 4 : currTab.second - 1));
        }
        else if(actionKey == action.enter ){
         if(currTab.second == 1){
@@ -40,9 +43,9 @@ void Presenter::startMenu(){
                 mainMenu.createMainMenu();
                 mainMenu.highlightCursor(mainMenu.getCurrTab());
                 break;
-             }
+                }
+              }
             }
-           }
         }
         else if(currTab.second == 0) {
             play = true;

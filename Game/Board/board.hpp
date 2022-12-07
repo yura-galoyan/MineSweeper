@@ -1,9 +1,6 @@
 #pragma once
-//#include <ncurses.h>
-
-
-
-/*          ALIASES           */
+#include <ncurses.h>
+#include <utility>
 
 using maxCoords = std::pair<unsigned,unsigned>;
 
@@ -17,6 +14,7 @@ public:
     void createBoard();
     void drawBoardHeader();
     void drawBoardBody();
+    void drawGameNameHeader();
     void initScreen();
     void printCenteredText();
 
