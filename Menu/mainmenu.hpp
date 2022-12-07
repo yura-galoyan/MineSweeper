@@ -15,10 +15,10 @@ class MAINMENU
 private:
 
     
-    MENUTABS play,options,records,quit;
     List menuList;
+    
 public:
-    MAINMENU(List);
+    MAINMENU();
 
     void createMainMenu();
     void setUpBoardSize();
@@ -26,12 +26,7 @@ public:
     void drawGameNameHeader();
     void initMainMenuTabs();
 
-
-    window getStartW();
-    window getOptionsW();
-    window getRecordsW();
-    window getQuitW();
-
+    Tab getTab(const int&);
     ~MAINMENU();
 
 };

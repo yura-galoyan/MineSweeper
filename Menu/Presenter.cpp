@@ -1,34 +1,26 @@
 #include "Presenter.hpp"
 
 
-Presenter::Presenter():menuLoop{true},
-                       mainMenu{{{mainMenu.getStartW(),       0,"Start"  },        
-                                {mainMenu.getOptionsW(),     1,"Options"},        
-                                {mainMenu.getRecordsW(),     2,"Records"},       
-                                {mainMenu.getQuitW(),        3,"Quit"   } }},
-
-                    optionsMenu{{ {optionsMenu.getHeightW(),          0,"Height        10"},   
-                                 {optionsMenu.getWidthW(),           1,"Widht         10"},      
-                                 {optionsMenu.getMinesCountW(),      2,"Mines Count   10"},     
-                                 {optionsMenu.getBackW(),            3,"Back"            } }}
+Presenter::Presenter():menuLoop{true}
 {
     
 }
 
 void Presenter::startMenu(){
     mainMenu.createMainMenu();
-    mainMenu.highlightCursor(mainMenu.getCurrTab());
+    mainMenu.highlightCursor(mainMenu.getTab(0));
+    printw("%s",mainMenu.getCurrTab().name);
     while(menuLoop){
        actionKey = chooseAction();
        Tab currTab = mainMenu.getCurrTab();
        if(actionKey == action.down  ){
-          mainMenu.moveCursor(currTab,mainMenu.getTab((currTab.second + 1 ) % 4));
+          mainMenu.moveCursor(currTab,mainMenu.getTab((currTab.index + 1 ) % 4));
        }
        else if( actionKey == action.up ){
-          mainMenu.moveCursor(currTab,mainMenu.getTab((currTab.second - 1) < 0 ? currTab.second + 4 : currTab.second - 1));
+          mainMenu.moveCursor(currTab,mainMenu.getTab((currTab.index - 1) < 0 ? currTab.index + 4 : currTab.index - 1));
        }
        else if(actionKey == action.enter ){
-        if(currTab.second == 1){
+        if(currTab.index == 1){
             Tab currTab = optionsMenu.getCurrTab();
             optionsMenu.createOptionMenu();
             optionsMenu.highlightCursor(currTab);
@@ -36,15 +28,15 @@ void Presenter::startMenu(){
             currTab = optionsMenu.getCurrTab();
             actionKey = chooseAction();
             if(actionKey == action.down  ){
-                optionsMenu.moveCursor(currTab,optionsMenu.getTab( (currTab.second + 1 ) % 4) );
+                optionsMenu.moveCursor(currTab,optionsMenu.getTab( (currTab.index + 1 ) % 4) );
             }
             else if( actionKey == action.up ){
-                optionsMenu.moveCursor(currTab,optionsMenu.getTab( (currTab.second - 1 < 0 ? currTab.second - 1 + 4 : currTab.second - 1 ))        );
+                optionsMenu.moveCursor(currTab,optionsMenu.getTab( (currTab.index - 1 < 0 ? currTab.index - 1 + 4 : currTab.index - 1 ))        );
             }
 
 
             else if(actionKey == action.enter ){
-             if(currTab.second == 3){
+             if(currTab.index == 3){
                 mainMenu.createMainMenu();
                 mainMenu.highlightCursor(mainMenu.getCurrTab());
                 break;
@@ -52,13 +44,13 @@ void Presenter::startMenu(){
               }
             }
         }
-        else if(currTab.second == 0) {
+        else if(currTab.index == 0) {
             play = true;
             quit = false;
             mainMenu.clearScreen();
             return;
             }
-        else if(currTab.second == 3) {
+        else if(currTab.index == 3) {
             play = false;
             quit = true;
             return;

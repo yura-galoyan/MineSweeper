@@ -14,7 +14,7 @@ const keyType DOWN = 's';
 const auto colorWhite = 7;
 const auto colorEmpty = -1;
 
-using Tab = triple;
+using Tab = Win;
 using List = std::vector<Tab>;
 using keyType = int;
 
@@ -23,19 +23,17 @@ class MENU
 private:
    
     bool isInMenu = true;
-    COLOR green = {colorWhite,colorEmpty};  
+    COLOR green = {colorWhite,colorEmpty};
+      
+protected:
     Tab currTab,nextTab;
 
 protected:
-    struct MENUTABS{
-    Coord coordY;
-    window win;
-    const char * name;
-    };
+  
 
 protected:    
     unsigned delta = 8;
-    Coord overAllX;
+    Coord overAllX = 60;
 
 protected: 
     void drawTab(window,const char*);
@@ -43,16 +41,16 @@ protected:
 public:
     MENU(); 
     void clearScreen();
-    void initTab(MENUTABS&,Coord,const char*);
+    Tab initTab(const Coord ,const Coord,const char*);
 
     Tab getCurrTab();
 
-    Tab getTab(const int &);
     window getWin(const int &);
     void moveCursor( Tab&, const Tab& );
     void highlightCursor(const Tab&);
     void unHighlightCursor(Tab&);
     void chooseSubMenu();
+    void setCurrTab(const Tab&);
     ~MENU();
 };
 

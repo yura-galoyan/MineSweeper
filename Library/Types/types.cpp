@@ -4,11 +4,12 @@ using window = WINDOW*;
 
 
 template <typename T1,typename T2,typename T3>
-    struct Triple{
+    struct Win_{
 
         T1 win;
-        T2 second;
+        T2 index;
         T3 name;
+        T2 coordY = 0;
 };
 
-using triple = Triple<window,int,const char*>;
+using Win = Win_<window,int,const char*>;

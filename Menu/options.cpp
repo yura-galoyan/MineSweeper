@@ -1,28 +1,27 @@
 #include "options.hpp"
 
 
-OPTIONS::OPTIONS(List){
+OPTIONS::OPTIONS(){
    
-    overAllX = getmaxx(stdscr)/2 - 40;
     initOptionsTabs();
 }
 
 
 
 void OPTIONS::initOptionsTabs(){
-    initTab(height,getmaxy(stdscr)/5,"Height");
-    initTab(width,height.coordY + delta,"Width");
-    initTab(mines_count,width.coordY + delta,"Mines Count");
-    initTab(back,mines_count.coordY + delta,"Back");
+   menuList.push_back( initTab(0,          10,              "Height      === 10") ) ;
+   menuList.push_back( initTab(1,menuList[0].coordY + delta,"Width       === 10") ) ;
+   menuList.push_back( initTab(2,menuList[1].coordY + delta,"Mines Count === 10") ) ;
+   menuList.push_back( initTab(3,menuList[2].coordY + delta,"Back") ) ;
 }
 
 void OPTIONS::createOptionMenu(){
     clearScreen();
     drawOptionsHeader();
-    drawTab(height.win,height.name);
-    drawTab(width.win,width.name);
-    drawTab(mines_count.win,mines_count.name);
-    drawTab(back.win,back.name);
+    drawTab(menuList[0].win,menuList[0].name);
+    drawTab(menuList[1].win,menuList[1].name);
+    drawTab(menuList[2].win,menuList[2].name);
+    drawTab(menuList[3].win,menuList[3].name);
 }
 
 void OPTIONS::drawOptionsHeader(){
@@ -33,22 +32,9 @@ void OPTIONS::drawOptionsHeader(){
       mvprintw(5,62,"       |_|                         ");
 }
 
-
-WINDOW* OPTIONS::getHeightW(){
-    return height.win;
-};
-
-WINDOW* OPTIONS::getWidthW(){
-    return width.win;
+Tab OPTIONS::getTab(const int &i){
+   return menuList[i];
 }
-
-WINDOW* OPTIONS::getMinesCountW(){
-    return mines_count.win;
-};
-
-WINDOW* OPTIONS::getBackW(){
-    return back.win;
-};
 
 
 OPTIONS::~ OPTIONS(){

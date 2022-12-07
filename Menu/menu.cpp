@@ -1,15 +1,18 @@
 #include "menu.hpp"
 
 MENU::MENU()
-    :green(COLOR_GREEN,-1 ),currTab{menuList[0]}
+    :green(COLOR_GREEN,-1 )
 {
-
+   
 }
 
-void MENU::initTab(MENUTABS &tab, Coord Y,const char * text){
+Tab MENU::initTab(const Coord i ,const Coord Y,const char * text){
+    Tab tab;
     tab.coordY = Y;
     tab.name = text;
+    tab.index = i;
     tab.win = newwin(7,60,Y,overAllX);
+    return tab;
 }
 void MENU::clearScreen(){
     clear();
@@ -45,10 +48,12 @@ void MENU::drawTab(WINDOW * win,const char* text){
 Tab MENU::getCurrTab(){
     return currTab;
 }
-Tab MENU::getTab(const int &i){
-   return this->menuList[i];
+
+
+void MENU::setCurrTab(const Tab& tab){
+    currTab = tab;
 }
-    
+
 window MENU::getWin(const int &i){
    return this->menuList[i].win;
 }

@@ -1,10 +1,19 @@
 #include "mainmenu.hpp"
 
-MAINMENU::MAINMENU(List)
+MAINMENU::MAINMENU()
 {
-    initScreen();
-    overAllX = getmaxx(stdscr)/2 - 40;
-    initMainMenuTabs();
+   initScreen();
+   initMainMenuTabs();
+   currTab = menuList[0];
+
+}
+
+void MAINMENU::initMainMenuTabs(){
+    
+    menuList.push_back( initTab( 0,         20,                "Play") );
+    menuList.push_back( initTab( 1,menuList[0].coordY + delta, "Options") );
+    menuList.push_back( initTab( 2,menuList[1].coordY + delta, "Records") );
+    menuList.push_back( initTab( 3,menuList[2].coordY + delta, "Quit") );
 }
 
 void MAINMENU::initScreen(){
@@ -15,26 +24,17 @@ void MAINMENU::initScreen(){
     refresh();
 };
 
-
-
-
-
-void MAINMENU::initMainMenuTabs(){
-    //getScreenMaxXY(); 
-    initTab(play,    getmaxy(stdscr)/5,       "Play"    );
-    initTab(options, play.coordY + delta,     "Options" );
-    initTab(records, options.coordY + delta,  "Records" );
-    initTab(quit,    records.coordY + delta,  "Quit"    );
-
-};
+Tab MAINMENU::getTab(const int &i){
+   return menuList[i];
+}
 
 void MAINMENU::createMainMenu(){
    clearScreen();
    drawGameNameHeader();
-   drawTab(play.win,play.name);
-   drawTab(options.win,options.name);
-   drawTab(records.win,records.name);
-   drawTab(quit.win,quit.name);
+   drawTab(menuList[0].win,menuList[0].name); 
+   drawTab(menuList[1].win,menuList[1].name);
+   drawTab(menuList[2].win,menuList[2].name);
+   drawTab(menuList[3].win,menuList[3].name);
 }          
 
 void MAINMENU::drawGameNameHeader(){
@@ -44,29 +44,6 @@ void MAINMENU::drawGameNameHeader(){
              mvprintw(4,62,"|_|_|_||_||_|_||___||_____||_____||___||___||  _||___||_|  \n");
              mvprintw(5,62,"                                            |_|            \n");
 }     
-
-
-
-
-
-
-
-window MAINMENU::getStartW(){
-   return play.win;
-}
-
-
-WINDOW* MAINMENU::getOptionsW(){
-   return options.win;
-}
-
-WINDOW* MAINMENU::getRecordsW(){
-   return records.win;
-}
-
-WINDOW* MAINMENU::getQuitW(){
-   return quit.win;
-}
 
 MAINMENU::~MAINMENU(){
    endwin();

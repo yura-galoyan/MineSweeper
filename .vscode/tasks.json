@@ -9,7 +9,7 @@
                 "-o",
                 "main",         
                 "-lncurses",
-                
+                "-lcurses",
                 "Library/Colors/Colors.cpp",
 
                 "Menu/mainmenu.cpp",
