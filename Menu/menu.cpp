@@ -19,7 +19,7 @@ void MENU::clearScreen(){
     refresh();
 }
 
-void MENU::moveCursor(Tab &currTab,const Tab &nextTab){
+void MENU:: moveCursor(Tab &currTab,const Tab &nextTab){
     unHighlightCursor(currTab);
     currTab = nextTab;
     highlightCursor(currTab);
@@ -27,6 +27,11 @@ void MENU::moveCursor(Tab &currTab,const Tab &nextTab){
 
 void MENU::highlightCursor(const Tab &tab){
     green.startColor(tab.win);
+    drawTab(tab.win,tab.name);
+}
+
+void MENU::unHighlightCursor(Tab &tab){
+    green.endColor(tab.win); 
     drawTab(tab.win,tab.name);
 }
 
@@ -43,25 +48,14 @@ void MENU::drawTab(WINDOW * win,const char* text){
       refresh();
 }
 
-
-
 Tab MENU::getCurrTab(){
     return currTab;
-}
-
-
-void MENU::setCurrTab(const Tab& tab){
-    currTab = tab;
 }
 
 window MENU::getWin(const int &i){
    return this->menuList[i].win;
 }
 
-void MENU::unHighlightCursor(Tab &tab){
-    green.endColor(tab.win); 
-    drawTab(tab.win,tab.name);
-}
 
 
 MENU::~MENU(){

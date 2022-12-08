@@ -26,7 +26,7 @@ private:
     COLOR green = {colorWhite,colorEmpty};
       
 protected:
-    Tab currTab,nextTab;
+    Tab currTab;
 
 protected:
   
