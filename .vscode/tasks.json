@@ -5,11 +5,11 @@
             "label": "C/C++: g++ build active file",
             "command": "/usr/bin/g++",
             "args": [
-                "main.cpp",
+                "~/Desktop/c++/MineSweeper/main.cpp",
                 "-o",
                 "main",         
                 "-lncurses",
-                "-lcurses",
+                "-ltinfo",
                 "Library/Colors/Colors.cpp",
 
                 "Menu/mainmenu.cpp",

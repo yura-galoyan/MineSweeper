@@ -9,7 +9,7 @@ private:
     MAINMENU mainMenu;
     OPTIONS optionsMenu;
 private:
-    keyType actionKey = 0;
+    keyType actionKey;
     bool menuLoop;
 
 private:

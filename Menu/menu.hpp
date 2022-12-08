@@ -47,8 +47,8 @@ public:
 
     window getWin(const int &);
     void moveCursor( Tab&, const Tab& );
-    void highlightCursor(const Tab&);
-    void unHighlightCursor(Tab&);
+    void highlightCursor( Tab);
+    void unHighlightCursor(Tab);
     void chooseSubMenu();
     void setCurrTab(const Tab&);
     ~MENU();

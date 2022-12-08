@@ -25,12 +25,13 @@ void MENU:: moveCursor(Tab &currTab,const Tab &nextTab){
     highlightCursor(currTab);
 }
 
-void MENU::highlightCursor(const Tab &tab){
+void MENU::highlightCursor( Tab tab){
     green.startColor(tab.win);
     drawTab(tab.win,tab.name);
+    green.endColor(tab.win);
 }
 
-void MENU::unHighlightCursor(Tab &tab){
+void MENU::unHighlightCursor(Tab tab){
     green.endColor(tab.win); 
     drawTab(tab.win,tab.name);
 }

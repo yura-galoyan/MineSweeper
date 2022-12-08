@@ -12,6 +12,7 @@ void Presenter::startMenu(){
     Tab currTab = mainMenu.getCurrTab();
     while(menuLoop){
        actionKey = chooseAction();
+       mvprintw(0,0,"\n%d",actionKey);
        if(actionKey == action.down  ){
           mainMenu.moveCursor(currTab,mainMenu.getTab((currTab.index + 1 ) % 4));
        }
@@ -20,22 +21,27 @@ void Presenter::startMenu(){
        }
        else if(actionKey == action.enter ){
         if(currTab.index == 1){
+            mvprintw(0,0,"\n%s",currTab.name);
             optionsMenu.createOptionMenu();
             Tab currTab = optionsMenu.getTab(0);
             optionsMenu.highlightCursor(currTab);
+            mvprintw(0,0,"\n%s",currTab.name);
             while(menuLoop){
             actionKey = chooseAction();
             if(actionKey == action.down  ){
                 optionsMenu.moveCursor(currTab,optionsMenu.getTab( (currTab.index + 1 ) % 4) );
+                mvprintw(0,0,"\ndown - %s   ",currTab.name);
             }
             else if( actionKey == action.up ){
                 optionsMenu.moveCursor(currTab,optionsMenu.getTab( (currTab.index - 1 < 0 ? currTab.index + 3 : currTab.index - 1 ))        );
+                mvprintw(0,0,"\nup - %s     ",currTab.name);
             }
             else if(actionKey == action.enter ){
              if(currTab.index == 3){
                 mainMenu.createMainMenu();
                 Tab currTab = mainMenu.getTab(1);
                 mainMenu.highlightCursor(currTab);
+                mvprintw(0,0,"\n%s",currTab.name);
                 break;
                 }
               }
@@ -69,7 +75,7 @@ keyType Presenter::chooseAction(){
     case 'e':
         return action.enter;
     default:
-        return 0;
+        return 255;
     }
 }
 
