@@ -46,11 +46,13 @@ public:
     Tab getCurrTab();
 
     window getWin(const int &);
+    void printCenteredText(window,const char*);
     void moveCursor( Tab&, const Tab& );
     void highlightCursor( Tab);
     void unHighlightCursor(Tab);
     void chooseSubMenu();
     void setCurrTab(const Tab&);
+    void drawValueTab(window win,const char* text,int value);
     ~MENU();
 };
 

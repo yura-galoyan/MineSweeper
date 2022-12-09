@@ -8,11 +8,13 @@ class OPTIONS
     :public MENU{
 
 private:
+    int width = 10,
+        height = 10,
+        minesCount = 10;
 
     List menuList;
-    void drawOptionsHeader();
-
 public:
+    void drawOptionsHeader( int,int);
     OPTIONS();
 
     void initOptionsTabs();
