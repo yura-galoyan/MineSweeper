@@ -11,7 +11,7 @@ Tab MENU::initTab(const Coord i ,const Coord Y,const char * text){
     tab.coordY = Y;
     tab.name = text;
     tab.index = i;
-    tab.win = newwin(7,60,Y,overAllX);
+    tab.win = newwin(5,45,Y,overAllX);
     return tab;
 }
 void MENU::clearScreen(){

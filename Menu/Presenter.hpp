@@ -16,7 +16,7 @@ private:
     OPTIONS optionsMenu;
 private:
     keyType actionKey;
-    bool menuLoop;
+    bool menuActive;
 
 private:
     keyType getPressedKey();

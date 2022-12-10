@@ -23,8 +23,6 @@ class MENU
 {
 private:
    
-    bool isInMenu = true;
-
 protected:
     COLOR green = {colorWhite,colorEmpty};
       
@@ -32,8 +30,8 @@ protected:
     Tab currTab;
 
 protected:    
-    unsigned delta = 8;
-    Coord overAllX = 60;
+    unsigned delta = 6;
+    Coord overAllX = 67;
 
 protected: 
 

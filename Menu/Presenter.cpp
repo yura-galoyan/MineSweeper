@@ -2,7 +2,7 @@
 
 
 
-Presenter::Presenter():menuLoop{true}
+Presenter::Presenter():menuActive{true}
 {
     
 }
@@ -11,7 +11,7 @@ void Presenter::startMenu(){
     mainMenu.createMainMenu();
     mainMenu.highlightCursor(mainMenu.getTab(0));
     Tab currTab = mainMenu.getCurrTab();
-    while(menuLoop){
+    while(menuActive){
        actionKey = chooseAction();
        if(actionKey == action.down  ){
           mainMenu.moveCursor(currTab,mainMenu.getTab( (currTab.index + 1 ) % 4));
@@ -39,7 +39,7 @@ void Presenter::enterOptionsSubMenu(){
         optionsMenu.createOptionMenu();
         Tab currTab = optionsMenu.getTab(0);
         optionsMenu.highlightCursor(currTab,optionsMenu.getOptionValue(currTab));
-        while(menuLoop){
+        while(menuActive){
             actionKey = chooseAction();
             if(actionKey == action.down  ){
                 optionsMenu.moveCursor(currTab,optionsMenu.getTab( (currTab.index + 1 ) % 4) );
