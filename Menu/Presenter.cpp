@@ -1,6 +1,7 @@
 #include "Presenter.hpp"
 
 
+
 Presenter::Presenter():menuLoop{true}
 {
     
@@ -37,31 +38,39 @@ void Presenter::startMenu(){
 void Presenter::enterOptionsSubMenu(){
         optionsMenu.createOptionMenu();
         Tab currTab = optionsMenu.getTab(0);
-        optionsMenu.highlightCursor(currTab);
+        optionsMenu.highlightCursor(currTab,optionsMenu.getOptionValue(currTab));
         while(menuLoop){
-        actionKey = chooseAction();
-        if(actionKey == action.down  ){
-            optionsMenu.moveCursor(currTab,optionsMenu.getTab( (currTab.index + 1 ) % 4) );
-        }
-        else if( actionKey == action.up ){
-            optionsMenu.moveCursor(currTab,optionsMenu.getTab( (currTab.index - 1 < 0 ? currTab.index + 3 : currTab.index - 1 ))        );
-        }
-        else if( actionKey == action.right){
-            
-        }
-        else if( actionKey == action.left){
-
-        }
-        else if(actionKey == action.enter ){
-         if(currTab.index == 3){
-            mainMenu.createMainMenu();
-            Tab currTab = mainMenu.getTab(1);
-            mainMenu.highlightCursor(currTab);
-            break;
+            actionKey = chooseAction();
+            if(actionKey == action.down  ){
+                optionsMenu.moveCursor(currTab,optionsMenu.getTab( (currTab.index + 1 ) % 4) );
             }
-          }
+            else if( actionKey == action.up ){
+                optionsMenu.moveCursor(currTab,optionsMenu.getTab( (currTab.index - 1 < 0 ? currTab.index + 3 : currTab.index - 1 ))        );
+            }
+            else if( actionKey == action.right/* && optionsMenu.isNotOnLimit( optionsMenu.getOptionValue(currTab) */)
+            {
+                optionsMenu.changeValue(currTab.index,incValue);
+            }
+            else if( actionKey == action.left/* && optionsMenu.isNotOnLimit( optionsMenu.getOptionValue(currTab)*/){
+                optionsMenu.changeValue(currTab.index,decValue);
+            }
+            else if(actionKey == action.enter ){
+                if(currTab.index == 3){
+                    mainMenu.createMainMenu();
+                    Tab currTab = mainMenu.getTab(1);
+                    mainMenu.highlightCursor(currTab);
+                    break;
+                }
+            }
+            if(currTab.index != 3){
+                optionsMenu.highlightCursor(currTab,optionsMenu.getOptionValue(currTab));
+            }
         }
 }
+
+
+
+
 
 void Presenter::startGame(){
     play = true;
@@ -82,6 +91,10 @@ keyType Presenter::chooseAction(){
         return action.down;
     case 'w':
         return action.up;
+    case 'd':
+        return action.right;
+    case 'a':
+        return action.left;
     case 'e':
         return action.enter;
     default:
@@ -93,20 +106,15 @@ keyType Presenter::getPressedKey(){
     return getch();
 }
 
-void Presenter::drawValueTab(window win,const char* text,int value){
-      box(win,0,0);
-      printCenteredText(win,text);
-      printw(" %d",value);
-      wrefresh(win);
-      refresh();   
+
+maxCoords Presenter::getYX(){
+    return optionsMenu.getYX();
+};
+
+unsigned Presenter::getMC(){
+    return optionsMenu.getMC();
 }
 
-void MENU::printCenteredText(window win, const char *text){
-      std::string ex = text;
-      Coord halfX = win->_maxx/2 - ex.length()/2;
-      Coord halfY = win->_maxy/2;
-      mvwprintw(win,halfY,halfX,"%s",text);
-}
 Presenter::~Presenter(){
 
 }

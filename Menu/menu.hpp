@@ -17,42 +17,53 @@ const auto colorEmpty = -1;
 using Tab = Win;
 using List = std::vector<Tab>;
 using keyType = int;
+using maxCoords = std::pair<unsigned,unsigned>;
 
 class MENU
 {
 private:
    
     bool isInMenu = true;
+
+protected:
     COLOR green = {colorWhite,colorEmpty};
       
 protected:
     Tab currTab;
-
-protected:
-  
 
 protected:    
     unsigned delta = 8;
     Coord overAllX = 60;
 
 protected: 
-    void drawTab(window,const char*);
+
     List menuList;
+    int height = 10,
+        width = 10,
+        minesCount = 10;
 public:
     MENU(); 
     void clearScreen();
+
     Tab initTab(const Coord ,const Coord,const char*);
 
-    Tab getCurrTab();
-
-    window getWin(const int &);
-    void printCenteredText(window,const char*);
+    void drawTab(Tab);
+    void drawTab(Tab tab,int value);
+    void drawHighlightedTab(Tab tab,int value);
     void moveCursor( Tab&, const Tab& );
-    void highlightCursor( Tab);
+
+    void printCenteredText(window,const char*);
+    
+    void highlightCursor(Tab);
     void unHighlightCursor(Tab);
-    void chooseSubMenu();
+    void changeHighlightedTab(Tab tab,int value);
+
     void setCurrTab(const Tab&);
-    void drawValueTab(window win,const char* text,int value);
+    Tab getCurrTab();
+    window getWin(const int &);
+
+
+   
     ~MENU();
 };
 

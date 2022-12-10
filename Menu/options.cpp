@@ -9,20 +9,37 @@ OPTIONS::OPTIONS(){
 
 
 void OPTIONS::initOptionsTabs(){
-   menuList.push_back( initTab(0,          10,              "Height = 10") ) ;
-   menuList.push_back( initTab(1,menuList[0].coordY + delta,"Width  = 10") ) ;
-   menuList.push_back( initTab(2,menuList[1].coordY + delta,"Mines Count = 10") ) ;
+   menuList.push_back( initTab(0,          10,              "Height") ) ;
+   menuList.push_back( initTab(1,menuList[0].coordY + delta,"Width") ) ;
+   menuList.push_back( initTab(2,menuList[1].coordY + delta,"Mines Count") ) ;
    menuList.push_back( initTab(3,menuList[2].coordY + delta,"Back") ) ;
 }
 
 void OPTIONS::createOptionMenu(){
     clearScreen();
     drawOptionsHeader(1,62);
-    drawTab(menuList[0].win,menuList[0].name);
-    drawTab(menuList[1].win,menuList[1].name);
-    drawTab(menuList[2].win,menuList[2].name);
-    drawTab(menuList[3].win,menuList[3].name);
+    drawTab(menuList[0]);
+    drawTab(menuList[1]);
+    drawTab(menuList[2]);
+    drawTab(menuList[3]);
 }
+
+void OPTIONS::changeValue(const int &value,int op){
+ switch(value){
+            case 0:
+                height += op;
+                break;
+            case 1:
+                width += op;
+                break;
+            case 2:
+                minesCount += op;
+                break;
+            default:
+                break;
+    }  
+}
+
 
 void OPTIONS::drawOptionsHeader(int y ,int x){
       mvprintw(y,x,    " _____       _    _                ");
@@ -32,8 +49,41 @@ void OPTIONS::drawOptionsHeader(int y ,int x){
       mvprintw(y + 4,x,"       |_|                         ");
 }
 
+void OPTIONS::highlightCursor(Tab tab,int value){
+    green.startColor(tab.win);
+    drawTab(tab,value);
+    green.endColor(tab.win);
+};
+void OPTIONS::unHighlightCursor(Tab tab,int value){
+    green.endColor(tab.win);
+    drawTab(tab,value);
+};
+
+
+int OPTIONS::getOptionValue(Tab tab){
+    switch(tab.index){
+            case 0: 
+                return height;
+            case 1:
+                return width;
+            case 2:
+                return minesCount;
+            default:
+                break;
+    }
+    return -1;
+}
+
 Tab OPTIONS::getTab(const int &i){
    return menuList[i];
+}
+
+maxCoords OPTIONS::getYX(){
+    return {height,width};
+}
+
+unsigned OPTIONS::getMC(){
+    return minesCount;
 }
 
 

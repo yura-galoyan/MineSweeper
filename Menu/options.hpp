@@ -8,19 +8,23 @@ class OPTIONS
     :public MENU{
 
 private:
-    int width = 10,
-        height = 10,
-        minesCount = 10;
-
     List menuList;
+
 public:
     void drawOptionsHeader( int,int);
     OPTIONS();
-
+    void changeValue(const int &,int);
     void initOptionsTabs();
     void createOptionMenu();
 
-    Tab getTab(const int&);
+    void highlightCursor(Tab,int);
+    void unHighlightCursor(Tab,int);
 
-    ~ OPTIONS();
+    bool isNotOnLimit(int);
+    int getOptionValue(Tab);
+    Tab getTab(const int&);
+    maxCoords getYX();
+    unsigned getMC();
+
+    ~OPTIONS();
 };

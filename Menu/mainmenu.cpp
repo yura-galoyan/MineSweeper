@@ -31,10 +31,10 @@ Tab MAINMENU::getTab(const int &i){
 void MAINMENU::createMainMenu(){
    clearScreen();
    drawGameNameHeader();
-   drawTab(menuList[0].win,menuList[0].name); 
-   drawTab(menuList[1].win,menuList[1].name);
-   drawTab(menuList[2].win,menuList[2].name);
-   drawTab(menuList[3].win,menuList[3].name);
+   drawTab(menuList[0]); 
+   drawTab(menuList[1]);
+   drawTab(menuList[2]);
+   drawTab(menuList[3]);
 }          
 
 void MAINMENU::drawGameNameHeader(){

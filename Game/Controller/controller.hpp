@@ -2,7 +2,6 @@
 #include "../Cursor/cursor.hpp"
 #include "../Gameloop/gameloop.hpp"
 
-
 class CONTROLLER
 {
 private:
@@ -11,7 +10,7 @@ private:
     GAMELOOP gameloop;
 
 public:
-    CONTROLLER();
+    CONTROLLER(maxCoords,unsigned);
 
     void startGame();
     int getPressedKey();

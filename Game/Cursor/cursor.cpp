@@ -4,7 +4,7 @@
 enum direction{ left = 'a',right = 'd',up = 'w',down = 's',open = 'o',mark = 'm'} dir;  
 
 
-CURSOR::CURSOR(int maxy,int maxx){
+CURSOR::CURSOR(unsigned maxy,unsigned maxx){
     this->maxx = maxx;
     this->maxy = maxy;
 };
@@ -38,19 +38,19 @@ void CURSOR::eraseCursor(){
 }
 
 
-// for anmaxy pressed kemaxy
-void CURSOR::interact(const int& kemaxy){
-         if( kemaxy == left )
+// for any pressed key
+void CURSOR::interact(const int& key){
+         if( key == left )
          move(left);
-    else if( kemaxy == right )
+    else if( key == right )
          move(right);
-    else if( kemaxy == up )
+    else if( key == up )
          move(up);
-    else if( kemaxy == down )
+    else if( key == down )
          move(down);
     
     if(canTouch()){
-        switch(kemaxy){
+        switch(key){
         case open:
              demine();
         case mark:
@@ -61,8 +61,8 @@ void CURSOR::interact(const int& kemaxy){
     mvprintw(1,1,"%3d  %3d",i + 1,j + 1);
 };
 
-void CURSOR::move(const int& kemaxy){
-    switch(kemaxy){
+void CURSOR::move(const int& key){
+    switch(key){
     case left:
         eraseCursor();
             j = (j - 1) < 0 ? j - 1 + maxx : (j - 1) % maxx  ;

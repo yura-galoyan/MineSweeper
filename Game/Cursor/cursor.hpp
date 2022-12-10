@@ -6,7 +6,7 @@ class CURSOR{
 
 
 public:
-    CURSOR(int,int);
+    CURSOR(unsigned, unsigned);
 
 public:
     void cursorColor_begin(); // makes cursor colorfull
@@ -22,7 +22,7 @@ public:
 private:
     int i = 0,
         j = 0;
-    int maxx,maxy; //coordinates
+    unsigned maxx,maxy; //coordinates
     int y0 = 12; // up left coordiantes
     int x0 = 7; // up left coordiantes
 private:

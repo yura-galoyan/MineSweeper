@@ -9,7 +9,7 @@ int main(){
         
     }
    else if(presenter.play){
-        CONTROLLER controller;
+        CONTROLLER controller(presenter.getYX(),presenter.getMC());
         controller.startGame();
     }
 

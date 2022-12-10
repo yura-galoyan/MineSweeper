@@ -27,14 +27,22 @@ void MENU:: moveCursor(Tab &currTab,const Tab &nextTab){
 
 void MENU::highlightCursor( Tab tab){
     green.startColor(tab.win);
-    drawTab(tab.win,tab.name);
+    drawTab(tab);
     green.endColor(tab.win);
 }
 
+
+
 void MENU::unHighlightCursor(Tab tab){
     green.endColor(tab.win); 
-    drawTab(tab.win,tab.name);
+    drawTab(tab);
 }
+
+void MENU::drawHighlightedTab(Tab tab,int value){
+    green.startColor(tab.win);
+    drawTab(tab,value);
+    green.endColor(tab.win);
+};
 
 void MENU::printCenteredText(window win, const char *text){
       std::string ex = text;
@@ -43,13 +51,25 @@ void MENU::printCenteredText(window win, const char *text){
       mvwprintw(win,halfY,halfX,"%s",text);
 }
 
-void MENU::drawTab(window win,const char* text){
-      box(win,0,0);
-      printCenteredText(win,text);
-      wrefresh(win);
+void MENU::drawTab(Tab tab){
+      wclear(tab.win);
+      box(tab.win,0,0);
+      printCenteredText(tab.win,tab.name);
+      wrefresh(tab.win);
       refresh();
 }
 
+void MENU::drawTab(Tab tab,int value){
+      box(tab.win,0,0);
+      printCenteredText(tab.win,tab.name);
+      wprintw(tab.win," %d",value);
+      wrefresh(tab.win);
+      refresh();   
+}
+
+void MENU::changeHighlightedTab(Tab tab,int value){
+    
+}
 Tab MENU::getCurrTab(){
     return currTab;
 }

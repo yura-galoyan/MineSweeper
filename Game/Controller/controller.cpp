@@ -1,7 +1,7 @@
 #include "controller.hpp"
 #include <ncurses.h>
 
-CONTROLLER::CONTROLLER():board{{10,10}},gameloop(true),cursor{10,10}
+CONTROLLER::CONTROLLER(maxCoords yx,unsigned m):board{{yx.first,yx.second},m},gameloop(true),cursor{yx.first,yx.second}
 {
    
 }
@@ -11,7 +11,6 @@ void CONTROLLER::startGame(){
     board.createBoard();
     cursor.placeCursor();
     while(gameloop){
-        auto key = getch();
         cursor.interact(getPressedKey());
     }
 }

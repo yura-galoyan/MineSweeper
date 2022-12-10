@@ -7,9 +7,10 @@ using maxCoords = std::pair<unsigned,unsigned>;
 class BOARD{
 private:
     maxCoords yx;
+    unsigned minesCount;
 
 public:
-    BOARD(maxCoords);
+    BOARD(maxCoords,unsigned);
     void startNcurses();
     void createBoard();
     void drawBoardHeader();

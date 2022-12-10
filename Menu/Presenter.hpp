@@ -2,6 +2,10 @@
 #include "options.hpp"
 
 using keyType = int;
+using maxCoords  = std::pair<unsigned,unsigned>;
+
+constexpr auto incValue = 1;
+constexpr auto decValue = -1;
 
 class Presenter
 {
@@ -27,9 +31,11 @@ private:
         } action;
 
 
-    int width = 10,
-        height = 10,
-        minesCount = 10;
+public:
+    maxCoords getYX();
+    unsigned getMC();
+    maxCoords yx;
+
 public:
     Presenter();
 
@@ -42,6 +48,6 @@ public:
     
     void act(keyType);
     keyType chooseAction();
-    void drawValueTab(window win,const char* text,int value);
+    void printCenteredText(window,const char*);
     ~Presenter();
 };
