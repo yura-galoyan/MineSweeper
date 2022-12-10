@@ -28,14 +28,13 @@ protected:
       
 protected:
     Tab currTab;
+    List menuList;
 
 protected:    
     unsigned delta = 6;
     Coord overAllX = 67;
 
 protected: 
-
-    List menuList;
     int height = 10,
         width = 10,
         minesCount = 10;

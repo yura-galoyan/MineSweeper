@@ -1,7 +1,10 @@
 #include "controller.hpp"
 #include <ncurses.h>
 
-CONTROLLER::CONTROLLER(maxCoords yx,unsigned m):board{{yx.first,yx.second},m},gameActive(true),cursor{yx.first,yx.second}
+CONTROLLER::CONTROLLER(maxCoords yx,unsigned m):board{{yx.first,yx.second},m},
+                                                gameActive(true),
+                                                game{yx.first,yx.second,m},
+                                                cursor{yx.first,yx.second}
 {
    
 }

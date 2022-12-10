@@ -21,7 +21,13 @@ void CURSOR::cursorColor_end(){
     refresh();
 }
 
-
+int MAP::sum(Matrix mat){
+    int sum = 0;
+    for(int i = 0;i<y;++i)
+        for(int j = 0;j<x;++j)
+    sum += mat[i][j].first;
+    return sum;
+}
 
 void CURSOR::placeCursor(){
     noecho();

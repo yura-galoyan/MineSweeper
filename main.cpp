@@ -8,7 +8,7 @@ int main(){
         endwin();
         
     }
-   else if(presenter.play){
+    else if(presenter.play){
         CONTROLLER controller(presenter.getYX(),presenter.getMC());
         controller.startGame();
     }
