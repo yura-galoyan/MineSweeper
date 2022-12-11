@@ -1,17 +1,17 @@
-#include "../Board/board.hpp"
-#include "../Cursor/cursor.hpp"
 #include "../Game/game.hpp"
+
+#define cursOFF() curs_set(0)
+
+
 class CONTROLLER
 {
 private:
-    BOARD board;
-    CURSOR cursor;
     GAME game;
     
 private:
     bool gameActive;
 public:
-    CONTROLLER(maxCoords,unsigned);
+    CONTROLLER(Coords,unsigned);
 
     void startGame();
     int getPressedKey();

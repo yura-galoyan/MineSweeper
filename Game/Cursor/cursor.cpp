@@ -1,7 +1,5 @@
-#include <iostream>
 #include "cursor.hpp"
-#include <ncurses.h>
-enum direction{ left = 'a',right = 'd',up = 'w',down = 's',open = 'o',mark = 'm'} dir;  
+
 
 
 CURSOR::CURSOR(unsigned maxy,unsigned maxx){
@@ -13,89 +11,65 @@ void CURSOR::cursorColor_begin(){
     start_color();
     use_default_colors();
     init_pair(CURS_COLOR,COLOR_GREEN,-1);
-    attron(COLOR_PAIR(CURS_COLOR));
+    wattron(map,COLOR_PAIR(CURS_COLOR));
 };
 
-void CURSOR::cursorColor_end(){
-    attroff(COLOR_PAIR(CURS_COLOR));
-    refresh();
+void CURSOR::setCursorPosition(Coords ij){
+    i = ij.first;
+    j = ij.second;
 }
 
-int MAP::sum(Matrix mat){
-    int sum = 0;
-    for(int i = 0;i<y;++i)
-        for(int j = 0;j<x;++j)
-    sum += mat[i][j].first;
-    return sum;
+void CURSOR::setCursorWin(window w,Coords ij){
+    map = w;
+    i = ij.first;
+    j = ij.second;
 }
 
+Coords CURSOR::getCursorPosition(){
+    return {i,j};
+}
 void CURSOR::placeCursor(){
-    noecho();
-    cursOFF(); 
     cursorColor_begin();
-    mvprintw(i + 10, 2*j + 6,"[");
-    mvprintw(i + 10, 2*j + 8,"]");
-    cursorColor_end();
+    mvwprintw(map,i, 2*j - 1, "[");
+    mvwprintw(map,i, 2*j + 1, "]");
+    wrefresh(map);
 }
 
 void CURSOR::eraseCursor(){
-    mvprintw(i + 10,2*j + 6," ");
-    mvprintw(i + 10,2*j + 8," ");
+    mvwprintw(map,i, 2*j - 1, " ");
+    mvwprintw(map,i, 2*j + 1, " ");
+    wrefresh(map);
 }
 
 
-// for any pressed key
-void CURSOR::interact(const int& key){
-         if( key == left )
-         move(left);
-    else if( key == right )
-         move(right);
-    else if( key == up )
-         move(up);
-    else if( key == down )
-         move(down);
-    
-    if(canTouch()){
-        switch(key){
-        case open:
-             demine();
-        case mark:
-             putFlag(); 
-        }
-    }
-
-    mvprintw(1,1,"%3d  %3d",i + 1,j + 1);
-};
-
 void CURSOR::move(const int& key){
     switch(key){
-    case left:
+    case CURSOR::left:
         eraseCursor();
-            j = (j - 1) < 0 ? j - 1 + maxx : (j - 1) % maxx  ;
-            
+            j = (j - 1) < 1 ? j - 1 + maxx : (j - 1) % maxx  ; 
         placeCursor();
         break;
-    case right:
+    case CURSOR::right:
         eraseCursor();
-            j = (j + 1)%maxx;
+            j = (j + 1)%(maxx);
         placeCursor();
         break;
-    case up:
+    case CURSOR::up:
         eraseCursor();
-            i = (i - 1) < 0 ? (i - 1 + maxy) : (i - 1) % maxy;
+            i = (i - 1) < 1 ? (i - 1 + maxy) : (i - 1) % maxy;
         placeCursor();
         break;
-    case down:
+    case CURSOR::down:
         eraseCursor();
-            i = (i + 1)%maxy;
+            i = (i + 1)%(maxy);
         placeCursor();
         break;
     }    
 };
 
 
-bool CURSOR::canTouch(){
-    return false;   
+bool CURSOR::canTouch(Cell C){
+    return !C.state;   
 }
 
 

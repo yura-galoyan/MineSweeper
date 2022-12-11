@@ -23,7 +23,7 @@ public:
     bool isNotOnLimit(int);
     int getOptionValue(Tab);
     Tab getTab(const int&);
-    maxCoords getYX();
+    Coords getYX();
     unsigned getMC();
 
     ~OPTIONS();

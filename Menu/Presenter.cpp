@@ -107,7 +107,7 @@ keyType Presenter::getPressedKey(){
 }
 
 
-maxCoords Presenter::getYX(){
+Coords Presenter::getYX(){
     return optionsMenu.getYX();
 };
 

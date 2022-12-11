@@ -1,30 +1,37 @@
+#include <iostream>
+#include <ncurses.h>
+#include <utility>
+#include "../../Library/Types/types.hpp"
+constexpr auto CURS_COLOR = 1;
+using Cell = pair<int,bool>;
+using Coords = std::pair<unsigned,unsigned>;
 
-//#include <ncurses.h>
-#define CURS_COLOR 1
-#define cursOFF() curs_set(0)
 class CURSOR{
 
+
+public:
+    enum action{ left = 'a',right = 'd',up = 'w',down = 's',open = 'o',mark = 'm'};  
 
 public:
     CURSOR(unsigned, unsigned);
 
 public:
-    void cursorColor_begin(); // makes cursor colorfull
-    void cursorColor_end(); // makes cursor colorless again
+    void cursorColor_begin(); // makes cursor green
+    void setCursorPosition(Coords);
+    void setCursorWin(window,Coords);
+    Coords getCursorPosition();
     void placeCursor(); // creates cursor at cords
     void eraseCursor(); // erases cursor at latest cords
-    void interact(const int& key); // for any pressed key
-    void move(const int& key); // left, right, up, down
+    void move(const int& key); // CURSOR::left, CURSOR::right, CURSOR::up, CURSOR::down
     void putFlag(); // player puts flag,to remember that there might be a bomb
     void demine();  // player tries to demine a bomb
-    bool canTouch(); // checks if cell isn't open
+    
+    bool canTouch(Cell); // checks if cell isn't CURSOR::open
 
 private:
-    int i = 0,
-        j = 0;
+    int i,j;
+    window map;
     unsigned maxx,maxy; //coordinates
-    int y0 = 12; // up left coordiantes
-    int x0 = 7; // up left coordiantes
 private:
-    bool state; // shows if cell is opened or closed
+    bool state; // shows if cell is CURSOR::opened or closed
 };

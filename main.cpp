@@ -6,7 +6,6 @@ int main(){
     presenter.startMenu();
         if(presenter.quit){  
         endwin();
-        
     }
     else if(presenter.play){
         CONTROLLER controller(presenter.getYX(),presenter.getMC());

@@ -1,23 +1,19 @@
-#include "board.hpp"
+#include "gameView.hpp"
 
-
-
-
-BOARD::BOARD(maxCoords yx,unsigned m):yx{yx},minesCount{m}
+GAMEVIEW::GAMEVIEW(Coords yx,unsigned m):yx{yx},minesCount{m}
 {
 
 }
 
-void BOARD::createBoard(){
+void GAMEVIEW::createGameView(){
      initScreen();
      drawGameNameHeader();
-     drawBoardHeader();
-     drawBoardBody();
-
+     drawGameViewHeader();
+     drawGameViewBody();
      refresh();
 }
 
-void BOARD::drawGameNameHeader(){
+void GAMEVIEW::drawGameNameHeader(){
              mvprintw(1,62," _____  _            _____                                 \n");
              mvprintw(2,62,"|     ||_| ___  ___ |   __| _ _ _  ___  ___  ___  ___  ___ \n");
              mvprintw(3,62,"| | | || ||   || -_||__   || | | || -_|| -_|| . || -_||  _|\n");
@@ -25,7 +21,7 @@ void BOARD::drawGameNameHeader(){
              mvprintw(5,62,"                                            |_|            \n");
 } 
 
-void BOARD::drawBoardHeader(){
+void GAMEVIEW::drawGameViewHeader(){
   int posY = 7,
       posX = 5;
   move(posY,posX);
@@ -50,38 +46,39 @@ void BOARD::drawBoardHeader(){
 
 }
 
-
-
-void BOARD::drawBoardBody(){
- int posY = 9,posX = 5;
- for(int i = 0;i<yx.first;++i){//2
-   posY++;
-   move(posY,posX);
-   addch(ACS_VLINE);
-   for(int j = 0;j< yx.second;++j){//1
-     printw(" #");  
-   }
-   printw(" ");
-   addch(ACS_VLINE);
- }
- posY++;
- move(posY,posX);
- addch(ACS_LLCORNER);
- for(int j = 0;j<yx.second*2 + 1;++j){//1
-   addch(ACS_HLINE);
- }  
- addch(ACS_LRCORNER);
+void GAMEVIEW::setGameView(window w){
+  map = w;
 }
 
+void GAMEVIEW::drawGameViewBody(){
+  int i = 0;
+ for( ;i <= yx.first; ++i){
+   wmove(map,i,0);
+   waddch(map,ACS_VLINE);
+   for(int j = 0;j < yx.second; ++j){//1
+     wprintw(map," #");  
+   }
+   wprintw(map," ");
+   waddch(map,ACS_VLINE);
+ }
+ wmove(map,i,0);
+ waddch(map,ACS_LLCORNER);
+ for(int j = 0; j <= yx.second*2  ; ++j){//1
+   waddch(map,ACS_HLINE);
+ }  
+ waddch(map,ACS_LRCORNER);
 
-void BOARD::initScreen(){
+wrefresh(map);
+
+}
+
+void GAMEVIEW::initScreen(){
    initscr();
    noecho();
-   curs_set(0);
    use_default_colors();
    refresh();
 }
 
-BOARD::~BOARD(){
+GAMEVIEW::~GAMEVIEW(){
 
 }

@@ -17,11 +17,9 @@
                 "Menu/options.cpp",
                 "Menu/Presenter.cpp",
 
-                "Game/Board/board.cpp",
+                "Game/GameView/gameView.cpp",
                 "Game/Controller/controller.cpp",
                 "Game/Cursor/cursor.cpp",
-                "Game/Gameloop/gameloop.cpp",
-
             ],
             "options": {
                 "cwd": "${fileDirname}"

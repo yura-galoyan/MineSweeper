@@ -2,7 +2,7 @@
 #include "options.hpp"
 
 using keyType = int;
-using maxCoords  = std::pair<unsigned,unsigned>;
+using Coords  = std::pair<unsigned,unsigned>;
 
 constexpr auto incValue = 1;
 constexpr auto decValue = -1;
@@ -32,9 +32,9 @@ private:
 
 
 public:
-    maxCoords getYX();
+    Coords getYX();
     unsigned getMC();
-    maxCoords yx;
+    Coords yx;
 
 public:
     Presenter();

@@ -78,7 +78,7 @@ Tab OPTIONS::getTab(const int &i){
    return menuList[i];
 }
 
-maxCoords OPTIONS::getYX(){
+Coords OPTIONS::getYX(){
     return {height,width};
 }
 

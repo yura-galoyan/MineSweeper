@@ -21,7 +21,7 @@ public:
     MAINMENU();
 
     void createMainMenu();
-    void setUpBoardSize();
+    void setUpGameViewSize();
     void initScreen();
     void drawGameNameHeader();
     void initMainMenuTabs();

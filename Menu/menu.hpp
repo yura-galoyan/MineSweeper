@@ -1,12 +1,12 @@
 #pragma once
-#include "../Library/Types/types.cpp"
+#include "../Library/Types/types.hpp"
 #include "../Library/Colors/Colors.hpp"
 #include <ncurses.h>
 #include <vector>
 #include <string>
 
 using keyType = int;
-using Coord = int;
+using Coord = unsigned;
 
 
 const keyType UP   = 'w';
@@ -17,7 +17,7 @@ const auto colorEmpty = -1;
 using Tab = Win;
 using List = std::vector<Tab>;
 using keyType = int;
-using maxCoords = std::pair<unsigned,unsigned>;
+using Coords = std::pair<unsigned,unsigned>;
 
 class MENU
 {
