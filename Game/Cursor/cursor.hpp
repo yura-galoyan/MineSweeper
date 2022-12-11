@@ -18,13 +18,13 @@ private:
 
 private:
 
-COLOR white{COLOR_WHITE},
-      red{COLOR_RED},
-      yellow{COLOR_YELLOW},
-      green{COLOR_GREEN},
-      magenta{COLOR_MAGENTA},
-      blue{COLOR_BLUE},
-      cyan{COLOR_CYAN};
+COLOR white{5,COLOR_WHITE},
+      red{6,COLOR_RED},
+      yellow{7,COLOR_YELLOW},
+      green{8,COLOR_GREEN},
+      magenta{9,COLOR_MAGENTA},
+      blue{10,COLOR_BLUE},
+      cyan{11,COLOR_CYAN};
 
 public:
     enum action{ left = 'a',right = 'd',up = 'w',down = 's',open = 'e',mark = 'm'};  
@@ -40,6 +40,7 @@ public:
     void move(const int& key);
     void putFlag(); 
     void demine(Coords ij,const int&);  
+    void printColoredValue(const Coords ij,const int &v,COLOR&);
     
     bool canTouch(Cell); 
 

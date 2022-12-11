@@ -1,7 +1,7 @@
 #include "menu.hpp"
 
 MENU::MENU()
-    :green(COLOR_GREEN)
+    :green(1,COLOR_GREEN)
 {
    
 }
@@ -62,7 +62,7 @@ void MENU::drawTab(Tab tab){
 void MENU::drawTab(Tab tab,int value){
       box(tab.win,0,0);
       printCenteredText(tab.win,tab.name);
-      wprintw(tab.win," %d",value);
+      wprintw(tab.win," %4d",value);
       wrefresh(tab.win);
       refresh();   
 }

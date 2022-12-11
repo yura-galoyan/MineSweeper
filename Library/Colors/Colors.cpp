@@ -2,7 +2,8 @@
 
 
 
-    COLOR::COLOR(colorType font){
+    COLOR::COLOR(colorType c, colorType font){
+        color = c;
         start_color();
         init_pair(color,font,backGround);
     }

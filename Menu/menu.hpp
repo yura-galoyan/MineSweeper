@@ -24,7 +24,7 @@ class MENU
 private:
    
 protected:
-    COLOR green = {colorWhite};
+    COLOR green = {2,colorWhite};
       
 protected:
     Tab currTab;

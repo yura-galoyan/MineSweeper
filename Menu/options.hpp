@@ -9,7 +9,7 @@ class OPTIONS
 
 private:
     List menuList;
-
+    int coof;
 public:
     void drawOptionsHeader( int,int);
     OPTIONS();

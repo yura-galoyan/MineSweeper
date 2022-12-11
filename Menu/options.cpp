@@ -25,15 +25,16 @@ void OPTIONS::createOptionMenu(){
 }
 
 void OPTIONS::changeValue(const int &value,int op){
- switch(value){
+                coof = (height * width * 3) / 4;
+        switch(value){
             case 0:
-                height += op;
+                height = (height + op > 30) ? ( height) % 20 : (op < 0 && height + op < 10) ? height + 20 : height + op  ;
                 break;
             case 1:
-                width += op;
+                width = (width + op > 60) ? ( width) % 50 : (op < 0 && width + op < 10) ? width + 50 : width + op  ;
                 break;
             case 2:
-                minesCount += op;
+                minesCount = minesCount + op > coof ? minesCount % ( coof - 10 ): (minesCount + op < 10) ? minesCount + coof - 10 : minesCount + op;
                 break;
             default:
                 break;

@@ -79,13 +79,33 @@ void CURSOR::putFlag(){
 
 };
 
+void CURSOR::printColoredValue(const Coords ij,const int &v,COLOR& c){
+    c.startColor(map);
+    mvwprintw(map,ij.first,ij.second*2,"%d",v);
+    c.endColor(map);
+};
+
 void CURSOR::demine(Coords ij,const int& v){
     if(v == 0 )
-    mvwprintw(map,ij.first,ij.second * 2," ");
+        mvwprintw(map,ij.first,ij.second * 2," ");
     else if(v == 9)
-    mvwprintw(map,ij.first,ij.second * 2,"*");
+        mvwprintw(map,ij.first,ij.second * 2,"*");
+    else if(v == 1)
+        printColoredValue(ij,v,white);
+    else if(v == 2)
+        printColoredValue(ij,v,green);
+    else if(v == 3)
+        printColoredValue(ij,v,cyan);
+    else if(v == 4)
+        printColoredValue(ij,v,blue);
+    else if(v == 5)
+        printColoredValue(ij,v,magenta);
+    else if(v == 6)
+        printColoredValue(ij,v,yellow);
+    else if(v == 7)
+        printColoredValue(ij,v,red);
     else
-    mvwprintw(map,ij.first,ij.second * 2,"%d",v);
+        mvwprintw(map,ij.first,ij.second * 2,"%d",v);
     
     wrefresh(map);
 };  
