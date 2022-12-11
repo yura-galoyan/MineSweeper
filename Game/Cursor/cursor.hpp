@@ -2,36 +2,46 @@
 #include <ncurses.h>
 #include <utility>
 #include "../../Library/Types/types.hpp"
+#include "../../Library/Colors/Colors.hpp"
 constexpr auto CURS_COLOR = 1;
 using Cell = pair<int,bool>;
 using Coords = std::pair<unsigned,unsigned>;
 
 class CURSOR{
-
-
-public:
-    enum action{ left = 'a',right = 'd',up = 'w',down = 's',open = 'o',mark = 'm'};  
-
-public:
-    CURSOR(unsigned, unsigned);
-
-public:
-    void cursorColor_begin(); // makes cursor green
-    void setCursorPosition(Coords);
-    void setCursorWin(window,Coords);
-    Coords getCursorPosition();
-    void placeCursor(); // creates cursor at cords
-    void eraseCursor(); // erases cursor at latest cords
-    void move(const int& key); // CURSOR::left, CURSOR::right, CURSOR::up, CURSOR::down
-    void putFlag(); // player puts flag,to remember that there might be a bomb
-    void demine();  // player tries to demine a bomb
-    
-    bool canTouch(Cell); // checks if cell isn't CURSOR::open
-
 private:
     int i,j;
     window map;
-    unsigned maxx,maxy; //coordinates
+    unsigned maxx,maxy; 
+
 private:
-    bool state; // shows if cell is CURSOR::opened or closed
+    bool state;
+
+private:
+
+COLOR white{COLOR_WHITE},
+      red{COLOR_RED},
+      yellow{COLOR_YELLOW},
+      green{COLOR_GREEN},
+      magenta{COLOR_MAGENTA},
+      blue{COLOR_BLUE},
+      cyan{COLOR_CYAN};
+
+public:
+    enum action{ left = 'a',right = 'd',up = 'w',down = 's',open = 'e',mark = 'm'};  
+
+public:
+    CURSOR(unsigned, unsigned);
+    void cursorColor_begin();
+    void setCursorPosition(Coords);
+    void setCursorWin(window,Coords);
+    Coords getCursorPosition();
+    void placeCursor(); 
+    void eraseCursor(); 
+    void move(const int& key);
+    void putFlag(); 
+    void demine(Coords ij,const int&);  
+    
+    bool canTouch(Cell); 
+
+
 };

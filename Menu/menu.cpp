@@ -1,7 +1,7 @@
 #include "menu.hpp"
 
 MENU::MENU()
-    :green(COLOR_GREEN,-1 )
+    :green(COLOR_GREEN)
 {
    
 }

@@ -1,3 +1,4 @@
+#pragma once
 #include <ncurses.h>
 
 using colorType = int;
@@ -5,14 +6,11 @@ using colorType = int;
 class COLOR{
 
 private:
-
-    const colorType colorDefault = 1;
-    const colorType colorGreen = 2;
-    colorType fontColor;
-    colorType backgroundColor;
+    const colorType backGround = -1;
+    const colorType color = 2;
 
 public:
-    COLOR(colorType ,colorType );
+    COLOR(colorType  );
 
     void startColor(WINDOW*);
     void endColor(WINDOW*);

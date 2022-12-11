@@ -2,7 +2,8 @@
 
 
 
-CURSOR::CURSOR(unsigned maxy,unsigned maxx){
+CURSOR::CURSOR(unsigned maxy,unsigned maxx)
+{
     this->maxx = maxx;
     this->maxy = maxy;
 };
@@ -51,7 +52,7 @@ void CURSOR::move(const int& key){
         break;
     case CURSOR::right:
         eraseCursor();
-            j = (j + 1)%(maxx);
+            j = (j)%(maxx) + 1;
         placeCursor();
         break;
     case CURSOR::up:
@@ -61,7 +62,7 @@ void CURSOR::move(const int& key){
         break;
     case CURSOR::down:
         eraseCursor();
-            i = (i + 1)%(maxy);
+            i = (i)%(maxy) + 1;
         placeCursor();
         break;
     }    
@@ -78,8 +79,14 @@ void CURSOR::putFlag(){
 
 };
 
-// plamaxyer tries to demine a bomb
-void CURSOR::demine(){
-
+void CURSOR::demine(Coords ij,const int& v){
+    if(v == 0 )
+    mvwprintw(map,ij.first,ij.second * 2," ");
+    else if(v == 9)
+    mvwprintw(map,ij.first,ij.second * 2,"*");
+    else
+    mvwprintw(map,ij.first,ij.second * 2,"%d",v);
+    
+    wrefresh(map);
 };  
 
