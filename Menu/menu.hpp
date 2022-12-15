@@ -35,9 +35,9 @@ protected:
     Coord overAllX = 67;
 
 protected: 
-    int height = 30,
-        width = 60,
-        minesCount = 50;
+    int height = 10,
+        width = 10,
+        minesCount = 10;
 public:
     MENU(); 
     void clearScreen();

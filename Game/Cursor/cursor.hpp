@@ -27,7 +27,7 @@ COLOR white{5,COLOR_WHITE},
       cyan{11,COLOR_CYAN};
 
 public:
-    enum action{ left = 'a',right = 'd',up = 'w',down = 's',open = 'e',mark = 'm'};  
+    enum action{ left = 'a',right = 'd',up = 'w',down = 's',open = 'e',mark = 'q'};  
 
 public:
     CURSOR(unsigned, unsigned);
@@ -38,9 +38,10 @@ public:
     void placeCursor(); 
     void eraseCursor(); 
     void move(const int& key);
-    void putFlag(); 
+    void putFlag(bool); 
     void demine(Coords ij,const int&);  
     void printColoredValue(const Coords ij,const int &v,COLOR&);
+    void printColoredString(const Coords ij,const char*,COLOR&c);
     
     bool canTouch(Cell); 
 

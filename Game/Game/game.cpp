@@ -125,7 +125,7 @@ void GAME::interact(const int& key){
          reveal(matrix,ij.first,ij.second);
          break;
     case CURSOR::action::mark:
-         cursor.putFlag();
+         cursor.putFlag(matrix[ij.first][ij.second].state);
          break;
     }
     

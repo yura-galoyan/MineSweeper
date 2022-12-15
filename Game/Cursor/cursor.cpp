@@ -75,8 +75,10 @@ bool CURSOR::canTouch(Cell C){
 
 
 // plamaxyer puts flag,to remember that there might be a bomb
-void CURSOR::putFlag(){
-
+void CURSOR::putFlag(bool state){
+    if(state == false){
+    printColoredString({i,j},"#",red);
+    }
 };
 
 void CURSOR::printColoredValue(const Coords ij,const int &v,COLOR& c){
@@ -84,6 +86,12 @@ void CURSOR::printColoredValue(const Coords ij,const int &v,COLOR& c){
     mvwprintw(map,ij.first,ij.second*2,"%d",v);
     c.endColor(map);
 };
+
+void CURSOR::printColoredString(const Coords ij,const char* ch,COLOR& c){
+    c.startColor(map);
+    mvwprintw(map,ij.first,ij.second*2,"%s",ch);
+    c.endColor(map);
+}
 
 void CURSOR::demine(Coords ij,const int& v){
     if(v == 0 )
