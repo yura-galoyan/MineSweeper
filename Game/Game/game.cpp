@@ -143,7 +143,7 @@ void GAME::reveal(Matrix &matrix,int i,int j){
       if(0 <= matrix[i][j].value && matrix[i][j].value <= 8  && matrix[i][j].state == false){
           cursor.demine({i,j},matrix[i][j].value);
           matrix[i][j].state = true;
-          usleep(15000);
+          usleep(5000);
       }
       if(matrix[i][j].value == 0){
         for(int a = i - 1;a<=i+ 1;++a){
@@ -164,4 +164,5 @@ void GAME::setPosition(Coords c){
 
 GAME::~GAME()
 {
+  
 }
