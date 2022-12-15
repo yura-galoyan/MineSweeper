@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <vector>
-
+#include <unistd.h>
 
 GAME::GAME(Coords yx,unsigned m):height{yx.first},width{yx.second},minesCount{m},
                                  gameView{yx,m},
@@ -35,7 +35,7 @@ void GAME::startGame(){
 
 
 void GAME::plantBombs(){
-  srand(time(0));
+  
   for(int i = 1;i<=minesCount;++i){
          matrix[ rand()%height + 1 ][  rand()%width + 1  ].value = 9;
   }
@@ -104,30 +104,58 @@ Coords GAME::getCurrentPosition(){
 }
 
 void GAME::interact(const int& key){
-         if( key == CURSOR::action::left )
-         cursor.move(CURSOR::action::left);
-    else if( key == CURSOR::action::right )
-         cursor.move(CURSOR::action::right);
-    else if( key == CURSOR::action::up )
-         cursor.move(CURSOR::action::up);
-    else if( key == CURSOR::action::down )
-         cursor.move(CURSOR::action::down);
+    if( key == CURSOR::action::left ){
+      cursor.move(CURSOR::action::left);
+      }
+    else if( key == CURSOR::action::right ){
+      cursor.move(CURSOR::action::right);
+      }
+    else if( key == CURSOR::action::up ){
+      cursor.move(CURSOR::action::up);
+      }
+    else if( key == CURSOR::action::down ){
+      cursor.move(CURSOR::action::down);
+      }
 
     ij = cursor.getCursorPosition();
-    if(cursor.canTouch( matrix[ij.first][ij.second])){
-        switch(key){
-        case CURSOR::action::open:
-             cursor.demine(ij,matrix[ij.first][ij.second].value  );
-             matrix[ij.first][ij.second].state = true; 
-             break;
-        case CURSOR::action::mark:
-             cursor.putFlag();
-             break;
-        }
+    
+    switch(key){
+    case CURSOR::action::open:
+         cursor.demine(ij,matrix[ij.first][ij.second].value  );
+         reveal(matrix,ij.first,ij.second);
+         break;
+    case CURSOR::action::mark:
+         cursor.putFlag();
+         break;
     }
+    
 
     mvprintw(1,1,"%3d  %3d",ij.first,ij.second );
 };
+
+
+void GAME::reveal(Matrix &matrix,int i,int j){
+    noecho();
+    if(i < 1 || j < 1 || i > matrix.size() - 2 || j > matrix[0].size() - 2){
+        return;
+    }
+    else{
+      if(0 <= matrix[i][j].value && matrix[i][j].value <= 8  && matrix[i][j].state == false){
+          cursor.demine({i,j},matrix[i][j].value);
+          matrix[i][j].state = true;
+          usleep(15000);
+      }
+      if(matrix[i][j].value == 0){
+        for(int a = i - 1;a<=i+ 1;++a){
+          for(int b = j - 1;b <= j + 1;++b){
+            if( !( a == i && b == j) && matrix[a][b].state == false && 0 <= matrix[a][b].value <= 8 ){
+              reveal(matrix,a,b);
+            }
+          }
+        }
+      }
+    }    
+}
 
 void GAME::setPosition(Coords c){
   ij = c;

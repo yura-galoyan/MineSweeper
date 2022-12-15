@@ -35,7 +35,7 @@ public:
     void setPosition(Coords);
     Coords getCurrentPosition();
     void startGame();
-
+    void reveal(Matrix&,int,int);
     int countBombs(int,int);
     int sum(Matrix);
 

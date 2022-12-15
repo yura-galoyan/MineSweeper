@@ -88,8 +88,10 @@ void CURSOR::printColoredValue(const Coords ij,const int &v,COLOR& c){
 void CURSOR::demine(Coords ij,const int& v){
     if(v == 0 )
         mvwprintw(map,ij.first,ij.second * 2," ");
-    else if(v == 9)
+    else if(v == 9){
+        red.startColor(map);
         mvwprintw(map,ij.first,ij.second * 2,"*");
+        red.endColor(map);}
     else if(v == 1)
         printColoredValue(ij,v,white);
     else if(v == 2)
