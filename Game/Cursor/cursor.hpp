@@ -29,19 +29,21 @@ COLOR white{5,COLOR_WHITE},
 public:
     enum action{ left = 'a',right = 'd',up = 'w',down = 's',open = 'e',mark = 'q'};  
 
-public:
+public: 
     CURSOR(unsigned, unsigned);
     void cursorColor_begin();
     void setCursorPosition(Coords);
-    void setCursorWin(window,Coords);
+    void initCursorForWin(window,Coords);
     Coords getCursorPosition();
     void placeCursor(); 
     void eraseCursor(); 
-    void move(const int& key);
-    void putFlag(bool); 
+
+    void moveTo(const int& key);
     void demine(Coords ij,const int&);  
-    void printColoredValue(const Coords ij,const int &v,COLOR&);
-    void printColoredString(const Coords ij,const char*,COLOR&c);
+    void putFlag(bool);
+
+    void printColoredValue(const Coords ij, const int &v, COLOR&);
+    void printColoredString(const Coords ij, const char*, COLOR&);
     
     bool canTouch(Cell); 
 

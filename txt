@@ -1,0 +1,11 @@
+
+    switch(key){
+    case CURSOR::action::open:
+         cursor.demine(ij,matrix[ij.first][ij.second].value  );
+         reveal(matrix,ij.first,ij.second);
+         break;
+    case CURSOR::action::mark:
+         cursor.putFlag(matrix[ij.first][ij.second].state);
+         break;
+    }
+    

@@ -14,6 +14,7 @@ private:
     unsigned height,
              width,
              minesCount;
+    bool gameState = false;
     Matrix matrix;
 
 private:
@@ -21,23 +22,29 @@ private:
     CURSOR cursor;
 private:
     Coords ij = {1,1};
-
     window map;
 
-
+public:
+    inline bool gameIsStarted(){
+        return gameState;
+    }
+    void setGameState(const bool state);
 
 public:
     GAME(Coords,unsigned);
-    void interact(const int& key); // for any pressed key
+    void proccess(const int& key); // for any pressed key
+    void chooseAction(const int& key);
     void fillMap();
     void plantBombs();
     void printClean();
     void setPosition(Coords);
     Coords getCurrentPosition();
-    void startGame();
+    void printMatrix(const Matrix matrix,Coords startintPoint);
+    void initGameView();
+    void generateMap();
     void reveal(Matrix&,int,int);
     int countBombs(int,int);
     int sum(Matrix);
-
+    
     ~GAME();
 };

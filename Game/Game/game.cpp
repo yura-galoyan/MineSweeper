@@ -16,26 +16,19 @@ GAME::GAME(Coords yx,unsigned m):height{yx.first},width{yx.second},minesCount{m}
   matrix.assign(height + 2,tempArray);
 
   map = newwin(yx.first * 2 + 2,yx.second * 2 + 3,9,5);
-  cursor.setCursorWin(map,ij);
+  cursor.initCursorForWin(map,ij);
   gameView.setGameView(map);
 }
 
-void GAME::startGame(){
+void GAME::initGameView(){
   gameView.createGameView();
-  cursor.setCursorWin(map,ij);
+  cursor.initCursorForWin(map,ij);
   cursor.placeCursor();
   wrefresh(map);
-
-  plantBombs();
-
- 
-  fillMap();
-
 }
 
 
 void GAME::plantBombs(){
-  
   for(int i = 1;i<=minesCount;++i){
          matrix[ rand()%height + 1 ][  rand()%width + 1  ].value = 9;
   }
@@ -77,62 +70,53 @@ int GAME::sum(Matrix mat){
     return sum;
 }
 
-void GAME::printClean(){
-move(height + 6,2);
- for(int i = 0;i<height;++i)
-        { for(int j = 0;j<width;++j){
-            if(matrix[i][j].value == 0){
-              printw(" ");
-            }
-            else if(matrix[i][j].value != 9) {
-              printw("%d",matrix[i][j].value);
-            }
-            else {
-              printw("%c",char(33 + matrix[i][j].value ));
-            };
 
-            printw(" ");            
-         }
-        printw("\n  ");
-        }
+void GAME::proccess(const int& key){
+  if(key == CURSOR::action::left || key == CURSOR::action::right || key == CURSOR::action::up || key == CURSOR::action::down){
+        cursor.moveTo(key);
+  }
+  else if( key == CURSOR::action::mark){
+    printMatrix(matrix,{15,40});
   
-}
+  }
+  else if( key == CURSOR::action::open || key == CURSOR::action::mark ){
+    if(gameIsStarted())
 
-
-Coords GAME::getCurrentPosition(){
-  return ij;
-}
-
-void GAME::interact(const int& key){
-    if( key == CURSOR::action::left ){
-      cursor.move(CURSOR::action::left);
-      }
-    else if( key == CURSOR::action::right ){
-      cursor.move(CURSOR::action::right);
-      }
-    else if( key == CURSOR::action::up ){
-      cursor.move(CURSOR::action::up);
-      }
-    else if( key == CURSOR::action::down ){
-      cursor.move(CURSOR::action::down);
-      }
-
+        chooseAction(key);
+  }
+    
     ij = cursor.getCursorPosition();
     
-    switch(key){
-    case CURSOR::action::open:
-         cursor.demine(ij,matrix[ij.first][ij.second].value  );
-         reveal(matrix,ij.first,ij.second);
-         break;
-    case CURSOR::action::mark:
-         cursor.putFlag(matrix[ij.first][ij.second].state);
-         break;
-    }
-    
 
-    mvprintw(1,1,"%3d  %3d",ij.first,ij.second );
+    mvprintw(1,1,"%3d  %3d -- h = %3d,w =  %3d,mc =  %3d",ij.first,ij.second,height,width,minesCount   );
 };
 
+void GAME::chooseAction(const int& key){
+  if( key == CURSOR::action::open ){
+    cursor.demine(ij,matrix[ij.first][ij.second].value);
+    reveal(matrix,ij.first,ij.second);
+  }
+  else if( key == CURSOR::action::mark ){
+    cursor.putFlag( matrix[ij.first][ij.second].state );
+  }
+}
+
+void GAME::printMatrix(const Matrix matrix,Coords startintPoint){
+  for(int i = 1;i< matrix.size();i++){
+    for(int j = 1;j<matrix[0].size();j++){
+      mvprintw(i + startintPoint.first,j*2 + startintPoint.second,"%d",matrix[i][j].value);
+    }
+  }
+}
+
+
+void GAME::generateMap(){
+  plantBombs();
+  fillMap();
+  setGameState(true);
+
+  reveal(matrix,ij.first,ij.second);
+};
 
 void GAME::reveal(Matrix &matrix,int i,int j){
     noecho();
@@ -155,6 +139,14 @@ void GAME::reveal(Matrix &matrix,int i,int j){
         }
       }
     }    
+}
+
+void GAME::setGameState(const bool state){
+  gameState = state;
+}
+
+Coords GAME::getCurrentPosition(){
+  return ij;
 }
 
 void GAME::setPosition(Coords c){

@@ -20,7 +20,7 @@ void CURSOR::setCursorPosition(Coords ij){
     j = ij.second;
 }
 
-void CURSOR::setCursorWin(window w,Coords ij){
+void CURSOR::initCursorForWin(window w,Coords ij){
     map = w;
     i = ij.first;
     j = ij.second;
@@ -42,8 +42,7 @@ void CURSOR::eraseCursor(){
     wrefresh(map);
 }
 
-
-void CURSOR::move(const int& key){
+void CURSOR::moveTo(const int& key){
     switch(key){
     case CURSOR::left:
         eraseCursor();
@@ -69,6 +68,8 @@ void CURSOR::move(const int& key){
 };
 
 
+
+
 bool CURSOR::canTouch(Cell C){
     return !C.state;   
 }
@@ -92,6 +93,8 @@ void CURSOR::printColoredString(const Coords ij,const char* ch,COLOR& c){
     mvwprintw(map,ij.first,ij.second*2,"%s",ch);
     c.endColor(map);
 }
+
+
 
 void CURSOR::demine(Coords ij,const int& v){
     if(v == 0 )

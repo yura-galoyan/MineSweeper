@@ -7,7 +7,7 @@ class CONTROLLER
 {
 private:
     GAME game;
-    
+    int input;
 private:
     bool gameActive;
 public:
@@ -15,6 +15,7 @@ public:
 
     void startGame();
     int getPressedKey();
+    bool keyIsPressed(const int& key);
     ~CONTROLLER();
 };
 
