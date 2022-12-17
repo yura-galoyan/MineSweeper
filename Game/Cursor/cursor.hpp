@@ -4,7 +4,6 @@
 #include "../../Library/Types/types.hpp"
 #include "../../Library/Colors/Colors.hpp"
 constexpr auto CURS_COLOR = 1;
-using Cell = pair<int,bool>;
 using Coords = std::pair<unsigned,unsigned>;
 
 class CURSOR{
@@ -12,9 +11,6 @@ private:
     int i,j;
     window map;
     unsigned maxx,maxy; 
-
-private:
-    bool state;
 
 private:
 
@@ -27,7 +23,7 @@ COLOR white{5,COLOR_WHITE},
       cyan{11,COLOR_CYAN};
 
 public:
-    enum action{ left = 'a',right = 'd',up = 'w',down = 's',open = 'e',mark = 'q'};  
+    enum action{ left = 'a',right = 'd',up = 'w',down = 's',open = 'e',flag = 'q'};  
 
 public: 
     CURSOR(unsigned, unsigned);
@@ -40,8 +36,8 @@ public:
 
     void moveTo(const int& key);
     void demine(Coords ij,const int&);  
-    void putFlag(bool);
-
+    void mark();
+    void unMark();
     void printColoredValue(const Coords ij, const int &v, COLOR&);
     void printColoredString(const Coords ij, const char*, COLOR&);
     

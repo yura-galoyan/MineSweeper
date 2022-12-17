@@ -14,12 +14,13 @@ template <typename T1,typename T2,typename T3>
     };
 
 template <typename T1,typename T2>
-    struct pair{
+    struct triple{
         T1 value;
-        T2 state;
+        T2 isOpened;
+        T2 isNotMarked;;
         
     };
 
 
-using Cell = pair<int,bool>;
+using Cell = triple<int,bool>;
 using Win = Win_<window,int,const char*>;

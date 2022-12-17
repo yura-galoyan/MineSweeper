@@ -4,8 +4,8 @@
          cursor.demine(ij,matrix[ij.first][ij.second].value  );
          reveal(matrix,ij.first,ij.second);
          break;
-    case CURSOR::action::mark:
-         cursor.putFlag(matrix[ij.first][ij.second].state);
+    case CURSOR::action::flag:
+         cursor.flag(matrix[ij.first][ij.second].isOpened);
          break;
     }
     

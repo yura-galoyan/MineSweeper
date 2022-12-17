@@ -4,13 +4,13 @@
 #include <vector>
 #include <unistd.h>
 
-GAME::GAME(Coords yx,unsigned m):height{yx.first},width{yx.second},minesCount{m},
+GAME::GAME(Coords yx,unsigned m):height{yx.first},width{yx.second},minesCount{m},playeMineCounter{m},
                                  gameView{yx,m},
                                  cursor{yx.first,yx.second}
 
                                   
 {
-  Cell tempCell = {0,0};
+  Cell tempCell = {0,0,1};
   Array tempArray; 
   tempArray.assign(width + 2,tempCell);
   matrix.assign(height + 2,tempArray);
@@ -75,26 +75,39 @@ void GAME::proccess(const int& key){
   if(key == CURSOR::action::left || key == CURSOR::action::right || key == CURSOR::action::up || key == CURSOR::action::down){
         cursor.moveTo(key);
   }
-  else if( key == CURSOR::action::open || key == CURSOR::action::mark ){
+  else if( key == CURSOR::action::open || key == CURSOR::action::flag ){
     if(gameIsStarted())
-
-        chooseAction(key);
+      chooseAction(key);
   }
     
-    ij = cursor.getCursorPosition();
-    
+  ij = cursor.getCursorPosition();
 
-    mvprintw(1,1,"%3d  %3d -- h = %3d,w =  %3d,mc =  %3d",ij.first,ij.second,height,width,minesCount   );
+  mvprintw(8,23,"%03d",playeMineCounter);    
+
+
+  mvprintw(1,1,"%3d  %3d  h = %3d,w =  %3d,mc =  %3d",ij.first,ij.second,height,width,minesCount   );
 };
 
 void GAME::chooseAction(const int& key){
-  if( key == CURSOR::action::open ){
+  if( key == CURSOR::action::open && !(matrix[ij.first][ij.second].isOpened) ){
     cursor.demine(ij,matrix[ij.first][ij.second].value);
     reveal(matrix,ij.first,ij.second);
   }
-  else if( key == CURSOR::action::mark ){
-    cursor.putFlag( matrix[ij.first][ij.second].state );
+  else if( key == CURSOR::action::flag  && !matrix[ij.first][ij.second].isOpened){
+    if(matrix[ij.first][ij.second].isNotMarked){
+      cursor.mark();
+      playeMineCounter--;
+      matrix[ij.first][ij.second].isNotMarked = false;
+    }
+    else{
+      cursor.unMark();
+      playeMineCounter++;
+      matrix[ij.first][ij.second].isNotMarked = true;
+    }
+  
   }
+
+
 }
 
 void GAME::printMatrix(const Matrix matrix,Coords startintPoint){
@@ -121,15 +134,15 @@ void GAME::reveal(Matrix &matrix,int i,int j){
         return;
     }
     else{
-      if(0 <= matrix[i][j].value && matrix[i][j].value <= 8  && matrix[i][j].state == false){
+      if(0 <= matrix[i][j].value && matrix[i][j].value <= 8  && !(matrix[i][j].isOpened) ){
           cursor.demine({i,j},matrix[i][j].value);
-          matrix[i][j].state = true;
+          matrix[i][j].isOpened = true;
           usleep(5000);
       }
       if(matrix[i][j].value == 0){
         for(int a = i - 1;a<=i+ 1;++a){
           for(int b = j - 1;b <= j + 1;++b){
-            if( !( a == i && b == j) && matrix[a][b].state == false && 0 <= matrix[a][b].value <= 8 ){
+            if( !( a == i && b == j) && !matrix[a][b].isOpened && 0 <= matrix[a][b].value <= 8 ){
               reveal(matrix,a,b);
             }
           }
@@ -138,8 +151,8 @@ void GAME::reveal(Matrix &matrix,int i,int j){
     }    
 }
 
-void GAME::setGameState(const bool state){
-  gameState = state;
+void GAME::setGameState(const bool isOpened){
+  gameState = isOpened;
 }
 
 Coords GAME::getCurrentPosition(){
