@@ -29,13 +29,12 @@ void GAME::initGameView(){
 
 
 void GAME::plantBombs(){
-  for(int i = 1;i<=minesCount;++i){
-         matrix[ rand()%height + 1 ][  rand()%width + 1  ].value = 9;
+         int count = 0;
+  while(sum(matrix) != minesCount * 9 ){
+         int i = rand()%height + 1;
+         int j = rand()%width + 1;
+         matrix[ i ][ j ].value = 9;
   }
-
-  while(sum(matrix) != minesCount * 9){
-         matrix[ rand()%height + 1 ][  rand()%width + 1 ].value = 9;
-   }
 }
 
 int GAME::countBombs(int i,int j){
@@ -46,10 +45,12 @@ int GAME::countBombs(int i,int j){
         if(a == i && b == j){ }
         else if(matrix[a][b].value == 9)
           temp++;
-      }
+      } 
     }
     return temp;
   }
+
+
     return 9;
 }
 
@@ -57,15 +58,14 @@ void GAME::fillMap(){
   for(int i = 1;i<=height;++i){
     for(int j = 1;j<=width;++j){
      matrix[i][j].value = countBombs(i,j);
-
     }
   }
 }
 
 int GAME::sum(Matrix mat){
     int sum = 0;
-    for(int i = 0;i<height;++i)
-        for(int j = 0;j<width;++j)
+    for(int i = 0; i <= height; ++i)
+        for(int j = 0; j <= width; ++j)
     sum += mat[i][j].value;
     return sum;
 }
@@ -74,10 +74,6 @@ int GAME::sum(Matrix mat){
 void GAME::proccess(const int& key){
   if(key == CURSOR::action::left || key == CURSOR::action::right || key == CURSOR::action::up || key == CURSOR::action::down){
         cursor.moveTo(key);
-  }
-  else if( key == CURSOR::action::mark){
-    printMatrix(matrix,{15,40});
-  
   }
   else if( key == CURSOR::action::open || key == CURSOR::action::mark ){
     if(gameIsStarted())
@@ -104,13 +100,14 @@ void GAME::chooseAction(const int& key){
 void GAME::printMatrix(const Matrix matrix,Coords startintPoint){
   for(int i = 1;i< matrix.size();i++){
     for(int j = 1;j<matrix[0].size();j++){
-      mvprintw(i + startintPoint.first,j*2 + startintPoint.second,"%d",matrix[i][j].value);
-    }
+      if(matrix[i][j].value == 9 ) mvprintw(i + startintPoint.first,j*2 + startintPoint.second,"%d",matrix[i][j].value);
+      else mvprintw(i + startintPoint.first,j*2 + startintPoint.second," ");
+   }
   }
 }
 
 
-void GAME::generateMap(){
+void GAME::start(){
   plantBombs();
   fillMap();
   setGameState(true);

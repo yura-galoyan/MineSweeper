@@ -41,7 +41,7 @@ public:
     Coords getCurrentPosition();
     void printMatrix(const Matrix matrix,Coords startintPoint);
     void initGameView();
-    void generateMap();
+    void start();
     void reveal(Matrix&,int,int);
     int countBombs(int,int);
     int sum(Matrix);
