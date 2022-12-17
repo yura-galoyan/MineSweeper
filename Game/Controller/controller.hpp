@@ -9,7 +9,7 @@ private:
     GAME game;
     int input;
 private:
-    bool gameActive;
+    bool gameIsActive;
 public:
     CONTROLLER(Coords,unsigned);
 

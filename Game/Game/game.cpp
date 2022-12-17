@@ -1,9 +1,4 @@
 #include "game.hpp"
-#include <cstdlib>
-#include <ctime>
-#include <vector>
-#include <unistd.h>
-
 GAME::GAME(Coords yx,unsigned m):height{yx.first},width{yx.second},minesCount{m},playeMineCounter{m},
                                  gameView{yx,m},
                                  cursor{yx.first,yx.second}
@@ -26,7 +21,6 @@ void GAME::initGameView(){
   cursor.placeCursor();
   wrefresh(map);
 }
-
 
 void GAME::plantBombs(){
          int count = 0;
@@ -70,7 +64,6 @@ int GAME::sum(Matrix mat){
     return sum;
 }
 
-
 void GAME::proccess(const int& key){
   if(key == CURSOR::action::left || key == CURSOR::action::right || key == CURSOR::action::up || key == CURSOR::action::down){
         cursor.moveTo(key);
@@ -78,19 +71,19 @@ void GAME::proccess(const int& key){
   else if( key == CURSOR::action::open || key == CURSOR::action::flag ){
     if(gameIsStarted())
       chooseAction(key);
+      mvprintw(5,35,"%d",numberOfOpenedCells);
   }
-    
   ij = cursor.getCursorPosition();
-
   mvprintw(8,23,"%03d",playeMineCounter);    
-
-
   mvprintw(1,1,"%3d  %3d  h = %3d,w =  %3d,mc =  %3d",ij.first,ij.second,height,width,minesCount   );
 };
 
 void GAME::chooseAction(const int& key){
-  if( key == CURSOR::action::open && !(matrix[ij.first][ij.second].isOpened) ){
-    cursor.demine(ij,matrix[ij.first][ij.second].value);
+  if( key == CURSOR::action::open && !(matrix[ij.first][ij.second].isOpened) ){ 
+      if( matrix[ij.first][ij.second].value == 9 ){
+      gameOver = true;
+      return;
+    }
     reveal(matrix,ij.first,ij.second);
   }
   else if( key == CURSOR::action::flag  && !matrix[ij.first][ij.second].isOpened){
@@ -104,10 +97,8 @@ void GAME::chooseAction(const int& key){
       playeMineCounter++;
       matrix[ij.first][ij.second].isNotMarked = true;
     }
-  
   }
-
-
+ 
 }
 
 void GAME::printMatrix(const Matrix matrix,Coords startintPoint){
@@ -119,13 +110,41 @@ void GAME::printMatrix(const Matrix matrix,Coords startintPoint){
   }
 }
 
-
 void GAME::start(){
   plantBombs();
   fillMap();
   setGameState(true);
 
   reveal(matrix,ij.first,ij.second);
+};
+
+bool GAME::isWin(){
+  if(height * width - numberOfOpenedCells == minesCount){
+    return true;
+  }
+}
+
+bool GAME::isOver(){
+  return gameOver;
+}
+
+void GAME::printGameOverHeader(int y){
+mvprintw(y++,60, " _____                       ____                 "       );
+mvprintw(y++,60, "/ ____|                            / __ \\                "     );
+mvprintw(y++,60, "| |  __         __ _ _ __ ___   ___| |  | |_   _____ _ __ "      );
+mvprintw(y++,60, "| | |_ |       / _` | '_ ` _ \\ / _ \\ |  | \\ \\ / / _ \\ '__|" );
+mvprintw(y++,60, "| |__| |        (_| | | | | | |  __/ |__| |\\ V /  __/ |   "     );
+mvprintw(y++,60,"\\______|       \\__,_|_| |_| |_|\\___|\\____/  \\_/ \\___|_|   ");
+                                                    
+}
+
+void GAME::printYouWinHeader(int y){
+
+}
+
+
+void GAME::setNumberOfOpenedCells(int count){
+  numberOfOpenedCells = count;
 };
 
 void GAME::reveal(Matrix &matrix,int i,int j){
@@ -136,6 +155,7 @@ void GAME::reveal(Matrix &matrix,int i,int j){
     else{
       if(0 <= matrix[i][j].value && matrix[i][j].value <= 8  && !(matrix[i][j].isOpened) ){
           cursor.demine({i,j},matrix[i][j].value);
+          numberOfOpenedCells++;
           matrix[i][j].isOpened = true;
           usleep(5000);
       }
@@ -162,7 +182,6 @@ Coords GAME::getCurrentPosition(){
 void GAME::setPosition(Coords c){
   ij = c;
 }
-
 
 GAME::~GAME()
 {

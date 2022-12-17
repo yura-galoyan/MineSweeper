@@ -20,7 +20,6 @@ public:
     void highlightCursor(Tab,int);
     void unHighlightCursor(Tab,int);
 
-    bool isNotOnLimit(int);
     int getOptionValue(Tab);
     Tab getTab(const int&);
     Coords getYX();

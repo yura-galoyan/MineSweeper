@@ -2,7 +2,7 @@
 #include <ncurses.h>
 
 CONTROLLER::CONTROLLER(Coords yx,unsigned m):game{yx,m},                                                
-                                             gameActive(true)
+                                             gameIsActive(true)
 { 
     noecho();
     cursOFF(); 
@@ -10,14 +10,24 @@ CONTROLLER::CONTROLLER(Coords yx,unsigned m):game{yx,m},
 
 void CONTROLLER::startGame(){
     game.initGameView();
-    while(gameActive){
-        input = getPressedKey();
-        game.proccess(input);
+    while(gameIsActive && !( game.isWin() ) && !( game.isOver() )){
         if(keyIsPressed(CURSOR::action::open) && !game.gameIsStarted()){
             game.start();    
         }
+        input = getPressedKey();
+        game.proccess(input);
     }
+    clear();
+    if(game.isOver()){
+        game.printGameOverHeader(15);
+    }
+    else if(game.isWin()){
+        game.printYouWinHeader(15);
+    }
+    getch();
 }
+
+
 
 int CONTROLLER::getPressedKey(){
     return getch();

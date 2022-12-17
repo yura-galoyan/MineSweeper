@@ -35,9 +35,9 @@ protected:
     Coord overAllX = 67;
 
 protected: 
-    int height = 20,
-        width = 30,
-        minesCount = 60;
+    int height = 10,
+        width = 10,
+        minesCount = 10;
 public:
     MENU(); 
     void clearScreen();
@@ -53,7 +53,6 @@ public:
     
     void highlightCursor(Tab);
     void unHighlightCursor(Tab);
-    void changeHighlightedTab(Tab tab,int value);
 
     void setCurrTab(const Tab&);
     Tab getCurrTab();

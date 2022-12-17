@@ -67,9 +67,6 @@ void MENU::drawTab(Tab tab,int value){
       refresh();   
 }
 
-void MENU::changeHighlightedTab(Tab tab,int value){
-    
-}
 Tab MENU::getCurrTab(){
     return currTab;
 }
