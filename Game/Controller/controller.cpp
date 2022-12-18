@@ -2,39 +2,38 @@
 #include <ncurses.h>
 
 CONTROLLER::CONTROLLER(Coords yx,unsigned m):game{yx,m},                                                
-                                             gameIsActive(true)
+                                             gameIsActive{true}
 { 
     noecho();
-    cursOFF(); 
 }
 
 void CONTROLLER::startGame(){
     game.initGameView();
     while(gameIsActive && !( game.isWin() ) && !( game.isOver() )){
-        if(keyIsPressed(CURSOR::action::open) && !game.gameIsStarted()){
+
+        int input = getPressedKey();
+        if(input == CURSOR::action::open && !game.isStarted()){
             game.start();    
         }
-        input = getPressedKey();
-        game.proccess(input);
+        else game.proccess(input);
     }
+
     clear();
+    game.setGameState(false);
+    gameIsActive = false;
+
     if(game.isOver()){
-        game.printGameOverHeader(15);
+        game.printGameOverHeader(labelPosition);
     }
     else if(game.isWin()){
-        game.printYouWinHeader(15);
+        game.printYouWinHeader(labelPosition);
     }
-    getch();
-}
 
+}
 
 
 int CONTROLLER::getPressedKey(){
     return getch();
-}
-
-bool CONTROLLER::keyIsPressed(const int& key){
-    return input == key;
 }
 
 CONTROLLER::~CONTROLLER(){

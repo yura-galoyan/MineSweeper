@@ -69,7 +69,7 @@ void GAME::proccess(const int& key){
         cursor.moveTo(key);
   }
   else if( key == CURSOR::action::open || key == CURSOR::action::flag ){
-    if(gameIsStarted())
+    if(isStarted())
       chooseAction(key);
       mvprintw(5,35,"%d",numberOfOpenedCells);
   }
@@ -113,9 +113,11 @@ void GAME::printMatrix(const Matrix matrix,Coords startintPoint){
 void GAME::start(){
   plantBombs();
   fillMap();
+  if(matrix[ij.first][ij.second].value != 9){
   setGameState(true);
-
   reveal(matrix,ij.first,ij.second);
+  }
+  else gameOver = true;
 };
 
 bool GAME::isWin(){
@@ -129,12 +131,12 @@ bool GAME::isOver(){
 }
 
 void GAME::printGameOverHeader(int y){
-mvprintw(y++,60, " _____                       ____                 "       );
-mvprintw(y++,60, "/ ____|                            / __ \\                "     );
-mvprintw(y++,60, "| |  __         __ _ _ __ ___   ___| |  | |_   _____ _ __ "      );
-mvprintw(y++,60, "| | |_ |       / _` | '_ ` _ \\ / _ \\ |  | \\ \\ / / _ \\ '__|" );
-mvprintw(y++,60, "| |__| |        (_| | | | | | |  __/ |__| |\\ V /  __/ |   "     );
-mvprintw(y++,60,"\\______|       \\__,_|_| |_| |_|\\___|\\____/  \\_/ \\___|_|   ");
+mvprintw(y++,60, " _____                ____                 "       );
+mvprintw(y++,60, "/ ____|                     / __ \\                "     );
+mvprintw(y++,60, "| |  __  __ _ _ __ ___   ___| |  | |_   _____ _ __ "      );
+mvprintw(y++,60, "| | |_ |/ _` | '_ ` _ \\ / _ \\ |  | \\ \\ / / _ \\ '__|" );
+mvprintw(y++,60, "| |__| | (_| | | | | | |  __/ |__| |\\ V /  __/ |   "     );
+mvprintw(y++,60,"\\______|\\__,_|_| |_| |_|\\___|\\____/  \\_/ \\___|_|   ");
                                                     
 }
 
@@ -171,8 +173,8 @@ void GAME::reveal(Matrix &matrix,int i,int j){
     }    
 }
 
-void GAME::setGameState(const bool isOpened){
-  gameState = isOpened;
+void GAME::setGameState(const bool state){
+  gameState = state;
 }
 
 Coords GAME::getCurrentPosition(){

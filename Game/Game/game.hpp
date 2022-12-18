@@ -31,10 +31,11 @@ private:
     window map;
 
 public:
-    inline bool gameIsStarted(){
+    inline bool isStarted(){
         return gameState;
     }
-    void setGameState(const bool isOpened);
+
+    void setGameState(const bool );
 
 public:
     GAME(Coords,unsigned);
