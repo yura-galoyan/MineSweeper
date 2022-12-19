@@ -2,22 +2,22 @@
 
 
 
-Presenter::Presenter():menuActive{true}
+Presenter::Presenter():menuIsActive{true}
 {
     
 }
 
 void Presenter::startMenu(){
-    mainMenu.createMainMenu();
-    mainMenu.highlightCursor(mainMenu.getTab(0));
-    Tab currTab = mainMenu.getCurrTab();
-    while(menuActive){
+    mainMenuView.createMainMenu();
+    mainMenuView.highlightCursor(mainMenuModel.getTab(0));
+    Tab currTab = mainMenuModel.getCurrTab();
+    while(menuIsActive){
        actionKey = chooseAction();
        if(actionKey == action.down  ){
-          mainMenu.moveCursor(currTab,mainMenu.getTab( (currTab.index + 1 ) % 4));
+          mainMenuView.moveCursor(currTab,mainMenuModel.getTab( (currTab.index + 1 ) % 4));
        }
        else if( actionKey == action.up ){
-          mainMenu.moveCursor(currTab,mainMenu.getTab( (currTab.index - 1) < 0 ? currTab.index + 3 : currTab.index - 1));
+          mainMenuView.moveCursor(currTab,mainMenuModel.getTab( (currTab.index - 1) < 0 ? currTab.index + 3 : currTab.index - 1));
        }
        else if(actionKey == action.enter ){
         if(currTab.index == 3) {
@@ -36,34 +36,33 @@ void Presenter::startMenu(){
 }
 
 void Presenter::enterOptionsSubMenu(){
-        optionsMenu.createOptionMenu();
-        Tab currTab = optionsMenu.getTab(0);
-        optionsMenu.highlightCursor(currTab,optionsMenu.getOptionValue(currTab));
-        while(menuActive){
+        optionsMenuView.createOptionMenu();
+        Tab currTab = optionsMenuModel.getTab(0);
+        optionsMenuView.highlightCursor(currTab,optionsMenuModel.getOptionValue(currTab));
+        while(menuIsActive){
             actionKey = chooseAction();
             if(actionKey == action.down  ){
-                optionsMenu.moveCursor(currTab,optionsMenu.getTab( (currTab.index + 1 ) % 4) );
+                optionsMenuView.moveCursor(currTab,optionsMenuModel.getTab( (currTab.index + 1 ) % 4) );
             }
             else if( actionKey == action.up ){
-                optionsMenu.moveCursor(currTab,optionsMenu.getTab( (currTab.index - 1 < 0 ? currTab.index + 3 : currTab.index - 1 ))        );
+                optionsMenuView.moveCursor(currTab,optionsMenuModel.getTab( (currTab.index - 1 < 0 ? currTab.index + 3 : currTab.index - 1 ))        );
             }
-            else if( actionKey == action.right/* && optionsMenu.isNotOnLimit( optionsMenu.getOptionValue(currTab) */)
-            {
-                optionsMenu.changeValue(currTab.index,incValue);
+            else if( actionKey == action.right){
+                optionsMenuModel.changeValue(currTab.index,incValue);
             }
-            else if( actionKey == action.left/* && optionsMenu.isNotOnLimit( optionsMenu.getOptionValue(currTab)*/){
-                optionsMenu.changeValue(currTab.index,decValue);
+            else if( actionKey == action.left){
+                optionsMenuModel.changeValue(currTab.index,decValue);
             }
             else if(actionKey == action.enter ){
                 if(currTab.index == 3){
-                    mainMenu.createMainMenu();
-                    Tab currTab = mainMenu.getTab(1);
-                    mainMenu.highlightCursor(currTab);
+                    mainMenuView.createMainMenu();
+                    Tab currTab = mainMenuModel.getTab(1);
+                    mainMenuView.highlightCursor(currTab);
                     break;
                 }
             }
             if(currTab.index != 3){
-                optionsMenu.highlightCursor(currTab,optionsMenu.getOptionValue(currTab));
+                optionsMenuView.highlightCursor(currTab,optionsMenuModel.getOptionValue(currTab));
             }
         }
 }
@@ -75,7 +74,7 @@ void Presenter::enterOptionsSubMenu(){
 void Presenter::startGame(){
     play = true;
     quit = false;
-    mainMenu.clearScreen();
+    mainMenuView.clearScreen();
 }
 
 void Presenter::endGame(){
@@ -108,11 +107,11 @@ keyType Presenter::getPressedKey(){
 
 
 Coords Presenter::getYX(){
-    return optionsMenu.getYX();
+    return optionsMenuModel.getYX();
 };
 
 unsigned Presenter::getMC(){
-    return optionsMenu.getMC();
+    return optionsMenuModel.getMC();
 }
 
 Presenter::~Presenter(){

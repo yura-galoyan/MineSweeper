@@ -24,10 +24,12 @@ void CONTROLLER::startGame(){
 
     if(game.isOver()){
         game.printGameOverHeader(labelPosition);
+       // game.RevealAllBombs(); TODO:
     }
     else if(game.isWin()){
         game.printYouWinHeader(labelPosition);
     }
+    sleep(1);
 
 }
 

@@ -124,6 +124,8 @@ bool GAME::isWin(){
   if(height * width - numberOfOpenedCells == minesCount){
     return true;
   }
+  else 
+    return false;
 }
 
 bool GAME::isOver(){
@@ -131,17 +133,17 @@ bool GAME::isOver(){
 }
 
 void GAME::printGameOverHeader(int y){
-mvprintw(y++,60, " _____                ____                 "       );
-mvprintw(y++,60, "/ ____|                     / __ \\                "     );
-mvprintw(y++,60, "| |  __  __ _ _ __ ___   ___| |  | |_   _____ _ __ "      );
-mvprintw(y++,60, "| | |_ |/ _` | '_ ` _ \\ / _ \\ |  | \\ \\ / / _ \\ '__|" );
-mvprintw(y++,60, "| |__| | (_| | | | | | |  __/ |__| |\\ V /  __/ |   "     );
-mvprintw(y++,60,"\\______|\\__,_|_| |_| |_|\\___|\\____/  \\_/ \\___|_|   ");
+
+  mvprintw(y,60,"GAME OVER");
+refresh();
                                                     
 }
 
 void GAME::printYouWinHeader(int y){
 
+  mvprintw(y,60,"YOU WIN");
+  refresh();
+                 
 }
 
 

@@ -1,5 +1,7 @@
-#include "mainmenu.hpp"
-#include "options.hpp"
+#include "mainMenuModel.hpp"
+#include "mainMenuView.hpp"
+#include "optionsMenuModel.hpp"
+#include "optionsMenuView.hpp"
 
 using keyType = int;
 using Coords  = std::pair<unsigned,unsigned>;
@@ -12,11 +14,14 @@ class Presenter
 
 
 private:
-    MAINMENU mainMenu;
-    OPTIONS optionsMenu;
+    MAINMENUMODEL mainMenuModel;
+    MAINMENUVIEW mainMenuView;
+    OPTIONSMENUMODEL optionsMenuModel;
+    OPTIONSMENUVIEW optionsMenuView;
+    
 private:
     keyType actionKey;
-    bool menuActive;
+    bool menuIsActive;
 
 private:
     keyType getPressedKey();

@@ -1,57 +1,47 @@
-#include "menu.hpp"
+#include "menuView.hpp"
 
-MENU::MENU()
+MENUVIEW::MENUVIEW()
     :green(1,COLOR_GREEN)
 {
    
 }
 
-Tab MENU::initTab(const Coord i ,const Coord Y,const char * text){
-    Tab tab;
-    tab.coordY = Y;
-    tab.name = text;
-    tab.index = i;
-    tab.win = newwin(5,45,Y,overAllX);
-    return tab;
-}
-void MENU::clearScreen(){
+void MENUVIEW::clearScreen(){
     clear();
     refresh();
 }
 
-void MENU:: moveCursor(Tab &currTab,const Tab &nextTab){
+void MENUVIEW:: moveCursor(Tab &currTab,const Tab &nextTab){
     unHighlightCursor(currTab);
     currTab = nextTab;
     highlightCursor(currTab);
 }
 
-void MENU::highlightCursor( Tab tab){
+void MENUVIEW::highlightCursor( Tab tab){
     green.startColor(tab.win);
     drawTab(tab);
     green.endColor(tab.win);
 }
 
-
-
-void MENU::unHighlightCursor(Tab tab){
+void MENUVIEW::unHighlightCursor(Tab tab){
     green.endColor(tab.win); 
     drawTab(tab);
 }
 
-void MENU::drawHighlightedTab(Tab tab,int value){
+void MENUVIEW::drawHighlightedTab(Tab tab,int value){
     green.startColor(tab.win);
     drawTab(tab,value);
     green.endColor(tab.win);
 };
 
-void MENU::printCenteredText(window win, const char *text){
+void MENUVIEW::printCenteredText(window win, const char *text){
       std::string ex = text;
       Coord halfX = win->_maxx/2 - ex.length()/2;
       Coord halfY = win->_maxy/2;
       mvwprintw(win,halfY,halfX,"%s",text);
 }
 
-void MENU::drawTab(Tab tab){
+void MENUVIEW::drawTab(Tab tab){
       wclear(tab.win);
       box(tab.win,0,0);
       printCenteredText(tab.win,tab.name);
@@ -59,7 +49,7 @@ void MENU::drawTab(Tab tab){
       refresh();
 }
 
-void MENU::drawTab(Tab tab,int value){
+void MENUVIEW::drawTab(Tab tab,int value){
       box(tab.win,0,0);
       printCenteredText(tab.win,tab.name);
       wprintw(tab.win," %4d",value);
@@ -67,16 +57,12 @@ void MENU::drawTab(Tab tab,int value){
       refresh();   
 }
 
-Tab MENU::getCurrTab(){
-    return currTab;
-}
-
-window MENU::getWin(const int &i){
-   return this->menuList[i].win;
-}
 
 
 
-MENU::~MENU(){
+
+
+
+MENUVIEW::~MENUVIEW(){
     
 }

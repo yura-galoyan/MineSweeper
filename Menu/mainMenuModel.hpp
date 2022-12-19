@@ -1,5 +1,6 @@
+#pragma once
 
-#include "menu.hpp"
+#include "menuModel.hpp"
 
 #include <ncurses.h>
 #include <string>
@@ -9,8 +10,8 @@ using word = std::string;
 using window = WINDOW*;
 
 
-class MAINMENU
-    :public MENU{
+class MAINMENUMODEL
+    :public MENUMODEL{
 
 private:
 
@@ -18,15 +19,12 @@ private:
     List menuList;
     
 public:
-    MAINMENU();
+    MAINMENUMODEL();
 
-    void createMainMenu();
-    void setUpGameViewSize();
     void initScreen();
-    void drawGameNameHeader();
     void initMainMenuTabs();
-
     Tab getTab(const int&);
-    ~MAINMENU();
+
+    ~MAINMENUMODEL();
 
 };
