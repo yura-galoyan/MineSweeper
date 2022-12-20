@@ -4,7 +4,7 @@ MAINLOOP::MAINLOOP(){
 
 }
 
-void MAINLOOP::startGame(){
+void MAINLOOP::start(){
     while(isOnMainLoop){
     MENUCONTROLLER menuController;
     menuController.startMenu();

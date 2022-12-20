@@ -1,12 +1,9 @@
 #include "mainMenuView.hpp"
 
 
-MAINMENUVIEW::MAINMENUVIEW(/* args */)
-{
+MAINMENUVIEW::MAINMENUVIEW(){
     
 }
-
-
 
 void MAINMENUVIEW::drawGameNameHeader(){
              mvprintw(1,62," _____  _            _____                                 \n");
@@ -25,7 +22,6 @@ void MAINMENUVIEW::createMainMenu(){
    drawTab(mainMenuModel.getTab(3));
 }   
 
-MAINMENUVIEW::~MAINMENUVIEW()
-{
+MAINMENUVIEW::~MAINMENUVIEW(){
 
 }

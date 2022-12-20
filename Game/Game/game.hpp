@@ -16,7 +16,7 @@ private:
              width,
              minesCount;
     int playeMineCounter;
-    int labelPosition = 15;
+    int labelPosition = 1;
 
     bool gameState = false;
     bool gameOver = false;
@@ -44,7 +44,7 @@ public:
     void chooseAction(const int& key);
     void start();
     bool isWin();
-    bool isOver();
+    bool isLost();
 
 public:
     void plantBombs();

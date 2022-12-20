@@ -33,8 +33,10 @@ void GAME::initTime(){
 void GAME::plantBombs(){
          int count = 0;
   while(sum(matrix) != minesCount * 9 ){
+    
          int i = rand()%height + 1;
          int j = rand()%width + 1;
+         if( i != ij.first || j != ij.second)
          matrix[ i ][ j ].value = 9;
   }
 }
@@ -142,7 +144,7 @@ bool GAME::isWin(){
     return false;
 }
 
-bool GAME::isOver(){
+bool GAME::isLost(){
   return gameOver;
 }
 
@@ -188,7 +190,8 @@ void GAME::endGame(){
 }
 
 void GAME::waitUntillInput(){
-  mvprintw(labelPosition + 5,60,"press any key to continue...");
+  nodelay(stdscr,false);
+  mvprintw(2,2,"Press any key to continue...");
   getch();
   clear();
 }

@@ -1,7 +1,7 @@
 #pragma once
 #include <ncurses.h>
 #include <utility>
-
+#include "../../Library/Colors/Colors.hpp"
 using Coords = std::pair<unsigned,unsigned>;
 using Coord = unsigned;
 using window = WINDOW *;
@@ -14,6 +14,8 @@ private:
 private:
     int startingX = 5;
     window map;
+    COLOR lose{6,COLOR_RED};
+    COLOR win{8,COLOR_GREEN};
 public:
     GAMEVIEW(Coords,unsigned);
     void setGameView(window);

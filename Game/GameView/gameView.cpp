@@ -6,19 +6,19 @@ GAMEVIEW::GAMEVIEW(Coords yx,unsigned m):yx{yx},minesCount{m}
 }
 
 void GAMEVIEW::createGameView(){
-     initScreen();
-     drawGameNameHeader();
-     drawGameViewHeader();
-     drawGameViewBody();
-     refresh();
+  initScreen();
+  drawGameNameHeader();
+  drawGameViewHeader();
+  drawGameViewBody();
+  refresh();
 }
 
 void GAMEVIEW::drawGameNameHeader(){
-             mvprintw(1,62," _____  _            _____                                 \n");
-             mvprintw(2,62,"|     ||_| ___  ___ |   __| _ _ _  ___  ___  ___  ___  ___ \n");
-             mvprintw(3,62,"| | | || ||   || -_||__   || | | || -_|| -_|| . || -_||  _|\n");
-             mvprintw(4,62,"|_|_|_||_||_|_||___||_____||_____||___||___||  _||___||_|  \n");
-             mvprintw(5,62,"                                            |_|            \n");
+  mvprintw(1,90," _____  _            _____                                 \n");
+  mvprintw(2,90,"|     ||_| ___  ___ |   __| _ _ _  ___  ___  ___  ___  ___ \n");
+  mvprintw(3,90,"| | | || ||   || -_||__   || | | || -_|| -_|| . || -_||  _|\n");
+  mvprintw(4,90,"|_|_|_||_||_|_||___||_____||_____||___||___||  _||___||_|  \n");
+  mvprintw(5,90,"                                            |_|            \n");
 } 
 
 void GAMEVIEW::drawGameViewHeader(){
@@ -72,16 +72,21 @@ wrefresh(map);
 
 
 void GAMEVIEW::printGameOverHeader(int y){
-
-  mvprintw(y,60,"GAME OVER");
-refresh();
-                                                    
+  lose.startColor(stdscr);
+  mvprintw(y,    32," _____ _____ _____ _____   _____ _____ _____ _____");
+  mvprintw(y + 1,32,"|   __|  _  |     |   __| |     |  |  |   __| __  |");
+  mvprintw(y + 2,32,"|  |  |     | | | |   __| |  |  |  |  |   __|    -|");
+  mvprintw(y + 3,32,"|_____|__|__|_|_|_|_____| |_____|\\___/|_____|__|__|");
+  lose.endColor(stdscr);
 }
 
 void GAMEVIEW::printYouWinHeader(int y){
-
-  mvprintw(y,60,"YOU WIN");
-  refresh();
+  win.startColor(stdscr);                              
+  mvprintw(y,32,"   __ __ _____ _____    _ _ _ _____ _____ ");
+  mvprintw(y + 1,32,"  |  |  |     |  |  |  | | | |     |   | |");
+  mvprintw(y + 2,32,"  |_   _|  |  |  |  |  | | | |  |  | | | |");
+  mvprintw(y + 3,32,"    |_| |_____|_____|  |_____|_____|_|___|");
+  win.endColor(stdscr);
                  
 }
 

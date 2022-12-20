@@ -10,7 +10,7 @@ private:
 public:
     MAINLOOP();
 
-    void startGame();
+    void start();
 
     ~MAINLOOP();
 };
