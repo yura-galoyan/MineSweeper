@@ -33,7 +33,7 @@ void GAMEVIEW::drawGameViewHeader(){
   posY++;
   move(posY,posX);
   addch(ACS_VLINE);
-  printw(" 00:00(x_x)(o.O)[000]");
+  printw("       (o.O)  [     ]");
   move(posY,2*yx.second +3 + posX - 1);
   addch(ACS_VLINE);
   posY++;
@@ -67,12 +67,28 @@ void GAMEVIEW::drawGameViewBody(){
    waddch(map,ACS_HLINE);
  }  
  waddch(map,ACS_LRCORNER);
-
 wrefresh(map);
-
 }
 
+
+void GAMEVIEW::printGameOverHeader(int y){
+
+  mvprintw(y,60,"GAME OVER");
+refresh();
+                                                    
+}
+
+void GAMEVIEW::printYouWinHeader(int y){
+
+  mvprintw(y,60,"YOU WIN");
+  refresh();
+                 
+}
+
+
+
 void GAMEVIEW::initScreen(){
+   nodelay(stdscr,true);
    initscr();
    noecho();
    use_default_colors();

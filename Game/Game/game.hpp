@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <unistd.h>
-
+#include <chrono>
 #include "../GameView/gameView.hpp"
 #include "../Cursor/cursor.hpp"
 
@@ -16,6 +16,7 @@ private:
              width,
              minesCount;
     int playeMineCounter;
+    int labelPosition = 15;
 
     bool gameState = false;
     bool gameOver = false;
@@ -29,18 +30,16 @@ private:
 private:
     Coords ij = {1,1};
     window map;
+    std::chrono::_V2::steady_clock::time_point old;
 
 public:
     inline bool isStarted(){
         return gameState;
     }
-
     void setGameState(const bool );
 
 public:
     GAME(Coords,unsigned);
-
-public:
     void proccess(const int& key); // for any pressed key
     void chooseAction(const int& key);
     void start();
@@ -58,15 +57,16 @@ public:
     Coords getCurrentPosition();
 
 public:
-    void printClean();
-    void printMatrix(const Matrix matrix,Coords startintPoint);
-    
-    void printGameOverHeader(int);
-    void printYouWinHeader(int);
-    
+    void initTime();
+    void initMatrix();
+    void waitUntillInput();
     void initGameView();
+    void countAndPrintTime();
     void reveal(Matrix&,int,int);
-    void setNumberOfOpenedCells(int );
+    void revealAllBombs();
+    void endGame();
+    void updateIJ();
+    void printMineCount();
     
     ~GAME();
 };

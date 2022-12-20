@@ -7,7 +7,6 @@ class GAMECONTROLLER
 {
 private:
     GAME game;
-    int labelPosition = 15;
 private:
     bool gameIsActive;
 public:

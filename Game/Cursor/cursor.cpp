@@ -20,7 +20,7 @@ void CURSOR::setCursorPosition(Coords ij){
     j = ij.second;
 }
 
-void CURSOR::initCursorForWin(window w,Coords ij){
+void CURSOR::initCursor(const window& w,Coords ij){
     map = w;
     i = ij.first;
     j = ij.second;
@@ -29,6 +29,7 @@ void CURSOR::initCursorForWin(window w,Coords ij){
 Coords CURSOR::getCursorPosition(){
     return {i,j};
 }
+
 void CURSOR::placeCursor(){
     cursorColor_begin();
     mvwprintw(map,i, 2*j - 1, "[");
@@ -67,15 +68,6 @@ void CURSOR::moveTo(const int& key){
     }    
 };
 
-
-
-
-bool CURSOR::canTouch(Cell C){
-    return !C.isOpened;   
-}
-
-
-// plamaxyer puts flag,to remember that there might be a bomb
 void CURSOR::mark(){
     printColoredString({i,j},"#",red);
 };
@@ -84,27 +76,23 @@ void CURSOR::unMark(){
     printColoredString({i,j},"#",white);
 }
 
-void CURSOR::printColoredValue(const Coords ij,const int &v,COLOR& c){
+void CURSOR::printColoredValue(const Coords ij,const int &v,COLOR c){
     c.startColor(map);
     mvwprintw(map,ij.first,ij.second*2,"%d",v);
     c.endColor(map);
 };
 
-void CURSOR::printColoredString(const Coords ij,const char* ch,COLOR& c){
+void CURSOR::printColoredString(const Coords ij,const char* ch,COLOR c){
     c.startColor(map);
     mvwprintw(map,ij.first,ij.second*2,"%s",ch);
     c.endColor(map);
 }
 
-
-
 void CURSOR::demine(Coords ij,const int& v){
     if(v == 0 )
-        mvwprintw(map,ij.first,ij.second * 2," ");
-    else if(v == 9){
-        red.startColor(map);
-        mvwprintw(map,ij.first,ij.second * 2,"*");
-        red.endColor(map);}
+        printColoredString(ij," ",white);
+    else if(v == 9)
+        printColoredString(ij,"*",red);
     else if(v == 1)
         printColoredValue(ij,v,white);
     else if(v == 2)
@@ -120,7 +108,7 @@ void CURSOR::demine(Coords ij,const int& v){
     else if(v == 7)
         printColoredValue(ij,v,red);
     else
-        mvwprintw(map,ij.first,ij.second * 2,"%d",v);
+        printColoredValue(ij,v,white);
     
     wrefresh(map);
 };  

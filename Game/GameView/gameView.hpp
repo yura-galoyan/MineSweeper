@@ -21,6 +21,11 @@ public:
     void createGameView();
     void drawGameViewHeader();
     void drawGameViewBody();
+
+    void printGameOverHeader(int);
+    void printYouWinHeader(int);
+    
+
     void drawGameNameHeader();
     void initScreen();
     void printCenteredText();

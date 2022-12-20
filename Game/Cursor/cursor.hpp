@@ -29,7 +29,7 @@ public:
     CURSOR(unsigned, unsigned);
     void cursorColor_begin();
     void setCursorPosition(Coords);
-    void initCursorForWin(window,Coords);
+    void initCursor(const window&,Coords);
     Coords getCursorPosition();
     void placeCursor(); 
     void eraseCursor(); 
@@ -38,10 +38,7 @@ public:
     void demine(Coords ij,const int&);  
     void mark();
     void unMark();
-    void printColoredValue(const Coords ij, const int &v, COLOR&);
-    void printColoredString(const Coords ij, const char*, COLOR&);
+    void printColoredValue(const Coords ij, const int &v, COLOR );
+    void printColoredString(const Coords ij, const char*, COLOR );
     
-    bool canTouch(Cell); 
-
-
 };

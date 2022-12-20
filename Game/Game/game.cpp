@@ -5,22 +5,30 @@ GAME::GAME(Coords yx,unsigned m):height{yx.first},width{yx.second},minesCount{m}
 
                                   
 {
+  initMatrix();
+  map = newwin(yx.first * 2 + 2,yx.second * 2 + 3,9,5);
+  cursor.initCursor(map,ij);
+  gameView.setGameView(map);
+}
+
+void GAME::initMatrix(){
   Cell tempCell = {0,0,1};
   Array tempArray; 
   tempArray.assign(width + 2,tempCell);
   matrix.assign(height + 2,tempArray);
-
-  map = newwin(yx.first * 2 + 2,yx.second * 2 + 3,9,5);
-  cursor.initCursorForWin(map,ij);
-  gameView.setGameView(map);
 }
 
 void GAME::initGameView(){
   gameView.createGameView();
-  cursor.initCursorForWin(map,ij);
+  cursor.initCursor(map,ij);
   cursor.placeCursor();
   wrefresh(map);
 }
+
+void GAME::initTime(){
+  old = std::chrono::steady_clock::now();
+}
+
 
 void GAME::plantBombs(){
          int count = 0;
@@ -71,12 +79,26 @@ void GAME::proccess(const int& key){
   else if( key == CURSOR::action::open || key == CURSOR::action::flag ){
     if(isStarted())
       chooseAction(key);
-      mvprintw(5,35,"%d",numberOfOpenedCells);
   }
-  ij = cursor.getCursorPosition();
-  mvprintw(8,23,"%03d",playeMineCounter);    
-  mvprintw(1,1,"%3d  %3d  h = %3d,w =  %3d,mc =  %3d",ij.first,ij.second,height,width,minesCount   );
+  updateIJ();
+  printMineCount(); 
+  if(isStarted()){ 
+  countAndPrintTime();
+  }  
 };
+
+void GAME::updateIJ(){
+  ij = cursor.getCursorPosition();
+}
+
+void GAME::printMineCount(){
+  mvprintw(8,23,"%03d",playeMineCounter);
+}
+
+void GAME::countAndPrintTime(){
+  auto dur = std::chrono::steady_clock::now() - old;
+  mvprintw(8,7,"%ld",std::chrono::duration_cast<std::chrono::seconds>(dur).count() );
+}
 
 void GAME::chooseAction(const int& key){
   if( key == CURSOR::action::open && !(matrix[ij.first][ij.second].isOpened) ){ 
@@ -101,18 +123,10 @@ void GAME::chooseAction(const int& key){
  
 }
 
-void GAME::printMatrix(const Matrix matrix,Coords startintPoint){
-  for(int i = 1;i< matrix.size();i++){
-    for(int j = 1;j<matrix[0].size();j++){
-      if(matrix[i][j].value == 9 ) mvprintw(i + startintPoint.first,j*2 + startintPoint.second,"%d",matrix[i][j].value);
-      else mvprintw(i + startintPoint.first,j*2 + startintPoint.second," ");
-   }
-  }
-}
-
 void GAME::start(){
   plantBombs();
   fillMap();
+  initTime();
   if(matrix[ij.first][ij.second].value != 9){
   setGameState(true);
   reveal(matrix,ij.first,ij.second);
@@ -132,24 +146,7 @@ bool GAME::isOver(){
   return gameOver;
 }
 
-void GAME::printGameOverHeader(int y){
 
-  mvprintw(y,60,"GAME OVER");
-refresh();
-                                                    
-}
-
-void GAME::printYouWinHeader(int y){
-
-  mvprintw(y,60,"YOU WIN");
-  refresh();
-                 
-}
-
-
-void GAME::setNumberOfOpenedCells(int count){
-  numberOfOpenedCells = count;
-};
 
 void GAME::reveal(Matrix &matrix,int i,int j){
     noecho();
@@ -161,7 +158,6 @@ void GAME::reveal(Matrix &matrix,int i,int j){
           cursor.demine({i,j},matrix[i][j].value);
           numberOfOpenedCells++;
           matrix[i][j].isOpened = true;
-          usleep(5000);
       }
       if(matrix[i][j].value == 0){
         for(int a = i - 1;a<=i+ 1;++a){
@@ -174,6 +170,29 @@ void GAME::reveal(Matrix &matrix,int i,int j){
       }
     }    
 }
+
+void GAME::revealAllBombs(){
+  for(int i = 1;i<=matrix.size() - 2;++i){
+    for(int j = 1;j<=matrix[0].size() - 2;++j){
+      if(matrix[i][j].value == 9){
+        cursor.printColoredString({i,j},"*",COLOR{6,COLOR_RED});
+        usleep(15000);
+        }
+    }
+  }
+  gameView.printGameOverHeader(labelPosition);
+}
+
+void GAME::endGame(){
+  gameView.printYouWinHeader(labelPosition);
+}
+
+void GAME::waitUntillInput(){
+  mvprintw(labelPosition + 5,60,"press any key to continue...");
+  getch();
+  clear();
+}
+
 
 void GAME::setGameState(const bool state){
   gameState = state;

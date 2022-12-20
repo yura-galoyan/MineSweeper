@@ -1,8 +1,7 @@
 #include "game_controller.hpp"
 #include <ncurses.h>
 
-GAMECONTROLLER::GAMECONTROLLER(Coords yx,unsigned m):game{yx,m},                                                
-                                             gameIsActive{true}
+GAMECONTROLLER::GAMECONTROLLER(Coords yx,unsigned m):game{yx,m},gameIsActive{true}
 { 
     noecho();
 }
@@ -13,23 +12,21 @@ void GAMECONTROLLER::startGame(){
 
         int input = getPressedKey();
         if(input == CURSOR::action::open && !game.isStarted()){
-            game.start();    
+            game.start(); 
         }
         else game.proccess(input);
     }
 
-    clear();
     game.setGameState(false);
     gameIsActive = false;
 
     if(game.isOver()){
-        game.printGameOverHeader(labelPosition);
-       // game.RevealAllBombs(); TODO:
+       game.revealAllBombs(); 
     }
     else if(game.isWin()){
-        game.printYouWinHeader(labelPosition);
+        game.endGame();
     }
-    sleep(1);
+    game.waitUntillInput();
 
 }
 
