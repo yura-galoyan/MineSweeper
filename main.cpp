@@ -2,5 +2,5 @@
 
 int main(){
     MAINLOOP mainLoop;
-    mainLoop.startMainLoop();
+    mainLoop.startGame();
 }

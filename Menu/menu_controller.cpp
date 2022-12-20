@@ -1,13 +1,13 @@
-#include "Presenter.hpp"
+#include "menu_controller.hpp"
 
 
 
-Presenter::Presenter():menuIsActive{true}
+MENUCONTROLLER::MENUCONTROLLER():menuIsActive{true}
 {
     
 }
 
-void Presenter::startMenu(){
+void MENUCONTROLLER::startMenu(){
     mainMenuView.createMainMenu();
     mainMenuView.highlightCursor(mainMenuModel.getTab(0));
     Tab currTab = mainMenuModel.getCurrTab();
@@ -35,7 +35,7 @@ void Presenter::startMenu(){
     }
 }
 
-void Presenter::enterOptionsSubMenu(){
+void MENUCONTROLLER::enterOptionsSubMenu(){
         optionsMenuView.createOptionMenu();
         Tab currTab = optionsMenuModel.getTab(0);
         optionsMenuView.highlightCursor(currTab,optionsMenuModel.getOptionValue(currTab));
@@ -71,18 +71,18 @@ void Presenter::enterOptionsSubMenu(){
 
 
 
-void Presenter::startGame(){
+void MENUCONTROLLER::startGame(){
     play = true;
     quit = false;
     mainMenuView.clearScreen();
 }
 
-void Presenter::endGame(){
+void MENUCONTROLLER::endGame(){
     play = false;
     quit = true;
 }
 
-keyType Presenter::chooseAction(){
+keyType MENUCONTROLLER::chooseAction(){
     keyType key = getPressedKey();
     switch (key)
     {
@@ -101,19 +101,19 @@ keyType Presenter::chooseAction(){
     }
 }
 
-keyType Presenter::getPressedKey(){
+keyType MENUCONTROLLER::getPressedKey(){
     return getch();
 }
 
 
-Coords Presenter::getYX(){
+Coords MENUCONTROLLER::getYX(){
     return optionsMenuModel.getYX();
 };
 
-unsigned Presenter::getMC(){
+unsigned MENUCONTROLLER::getMC(){
     return optionsMenuModel.getMC();
 }
 
-Presenter::~Presenter(){
+MENUCONTROLLER::~MENUCONTROLLER(){
 
 }

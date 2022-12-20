@@ -1,13 +1,13 @@
-#include "controller.hpp"
+#include "game_controller.hpp"
 #include <ncurses.h>
 
-CONTROLLER::CONTROLLER(Coords yx,unsigned m):game{yx,m},                                                
+GAMECONTROLLER::GAMECONTROLLER(Coords yx,unsigned m):game{yx,m},                                                
                                              gameIsActive{true}
 { 
     noecho();
 }
 
-void CONTROLLER::startGame(){
+void GAMECONTROLLER::startGame(){
     game.initGameView();
     while(gameIsActive && !( game.isWin() ) && !( game.isOver() )){
 
@@ -34,10 +34,10 @@ void CONTROLLER::startGame(){
 }
 
 
-int CONTROLLER::getPressedKey(){
+int GAMECONTROLLER::getPressedKey(){
     return getch();
 }
 
-CONTROLLER::~CONTROLLER(){
+GAMECONTROLLER::~GAMECONTROLLER(){
 
 }

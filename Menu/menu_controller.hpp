@@ -9,7 +9,7 @@ using Coords  = std::pair<unsigned,unsigned>;
 constexpr auto incValue = 1;
 constexpr auto decValue = -1;
 
-class Presenter
+class MENUCONTROLLER
 {
 
 
@@ -42,7 +42,7 @@ public:
     Coords yx;
 
 public:
-    Presenter();
+    MENUCONTROLLER();
 
     void startMenu();
     void enterOptionsSubMenu();
@@ -54,5 +54,5 @@ public:
     void act(keyType);
     keyType chooseAction();
     void printCenteredText(window,const char*);
-    ~Presenter();
+    ~MENUCONTROLLER();
 };

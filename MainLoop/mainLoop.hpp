@@ -1,5 +1,5 @@
-#include "../Menu/Presenter.hpp"
-#include "../Game/Controller/controller.hpp"
+#include "../Menu/menu_controller.hpp"
+#include "../Game/Controller/game_controller.hpp"
 
 
 
@@ -10,7 +10,7 @@ private:
 public:
     MAINLOOP();
 
-    void startMainLoop();
+    void startGame();
 
     ~MAINLOOP();
 };

@@ -3,7 +3,7 @@
 #define cursOFF() curs_set(0)
 
 
-class CONTROLLER
+class GAMECONTROLLER
 {
 private:
     GAME game;
@@ -11,12 +11,12 @@ private:
 private:
     bool gameIsActive;
 public:
-    CONTROLLER(Coords,unsigned);
+    GAMECONTROLLER(Coords,unsigned);
 
     void startGame();
     int getPressedKey();
     bool keyIsPressed(const int& key);
-    ~CONTROLLER();
+    ~GAMECONTROLLER();
 };
 
 

@@ -1,25 +1,23 @@
 #include "mainLoop.hpp"
 
-MAINLOOP::MAINLOOP()
-{
+MAINLOOP::MAINLOOP(){
 
 }
 
-void MAINLOOP::startMainLoop(){
+void MAINLOOP::startGame(){
     while(isOnMainLoop){
-    Presenter presenter;
-    presenter.startMenu();
-        if(presenter.quit){  
+    MENUCONTROLLER menuController;
+    menuController.startMenu();
+    if(menuController.quit){  
         endwin();
         break;
     }
-    else if(presenter.play){
-        CONTROLLER controller(presenter.getYX(),presenter.getMC());
-        controller.startGame();    }
+    else if(menuController.play){
+        GAMECONTROLLER gameController(menuController.getYX(),menuController.getMC());
+        gameController.startGame();    }
 }
 };
 
-MAINLOOP::~MAINLOOP()
-{
+MAINLOOP::~MAINLOOP(){
 
 }
