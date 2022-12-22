@@ -12,14 +12,14 @@ void MENUCONTROLLER::startMenu(){
     mainMenuView.highlightCursor(mainMenuModel.getTab(0));
     Tab currTab = mainMenuModel.getCurrTab();
     while(menuIsActive){
-       actionKey = chooseAction();
-       if(actionKey == action.down  ){
+       actionKey = chooseAction(); //TODO: move into another function
+       if(actionKey == DOWN  ){
           mainMenuView.moveCursor(currTab,mainMenuModel.getTab( (currTab.index + 1 ) % 4));
        }
-       else if( actionKey == action.up ){
+       else if( actionKey == UP ){
           mainMenuView.moveCursor(currTab,mainMenuModel.getTab( (currTab.index - 1) < 0 ? currTab.index + 3 : currTab.index - 1));
        }
-       else if(actionKey == action.enter ){
+       else if(actionKey == ENTER ){
         if(currTab.index == 3) {
             endGame();
             return;
@@ -36,35 +36,35 @@ void MENUCONTROLLER::startMenu(){
 }
 
 void MENUCONTROLLER::enterOptionsSubMenu(){
-        optionsMenuView.createOptionMenu();
-        Tab currTab = optionsMenuModel.getTab(0);
-        optionsMenuView.highlightCursor(currTab,optionsMenuModel.getOptionValue(currTab));
-        while(menuIsActive){
-            actionKey = chooseAction();
-            if(actionKey == action.down  ){
-                optionsMenuView.moveCursor(currTab,optionsMenuModel.getTab( (currTab.index + 1 ) % 4) );
-            }
-            else if( actionKey == action.up ){
-                optionsMenuView.moveCursor(currTab,optionsMenuModel.getTab( (currTab.index - 1 < 0 ? currTab.index + 3 : currTab.index - 1 ))        );
-            }
-            else if( actionKey == action.right){
-                optionsMenuModel.changeValue(currTab.index,incValue);
-            }
-            else if( actionKey == action.left){
-                optionsMenuModel.changeValue(currTab.index,decValue);
-            }
-            else if(actionKey == action.enter ){
-                if(currTab.index == 3){
-                    mainMenuView.createMainMenu();
-                    Tab currTab = mainMenuModel.getTab(1);
-                    mainMenuView.highlightCursor(currTab);
-                    break;
-                }
-            }
-            if(currTab.index != 3){
-                optionsMenuView.highlightCursor(currTab,optionsMenuModel.getOptionValue(currTab));
+    optionsMenuView.createOptionMenu();
+    Tab currTab = optionsMenuModel.getTab(0);
+    optionsMenuView.highlightCursor(currTab,optionsMenuModel.getOptionValue(currTab));
+    while(menuIsActive){
+        actionKey = chooseAction();
+        if(actionKey == DOWN  ){
+            optionsMenuView.moveCursor(currTab,optionsMenuModel.getTab( (currTab.index + 1 ) % 4) );
+        }
+        else if( actionKey == UP ){
+            optionsMenuView.moveCursor(currTab,optionsMenuModel.getTab( (currTab.index - 1 < 0 ? currTab.index + 3 : currTab.index - 1 ))        );
+        }
+        else if( actionKey == RIGHT){
+            optionsMenuModel.changeValue(currTab.index,incValue);
+        }   
+        else if( actionKey == LEFT){
+            optionsMenuModel.changeValue(currTab.index,decValue);
+        }
+        else if(actionKey == ENTER ){
+            if(currTab.index == 3){
+                mainMenuView.createMainMenu();
+                Tab currTab = mainMenuModel.getTab(1);
+                mainMenuView.highlightCursor(currTab);
+                break;
             }
         }
+        if(currTab.index != 3){
+            optionsMenuView.highlightCursor(currTab,optionsMenuModel.getOptionValue(currTab));
+        }
+    }
 }
 
 
@@ -72,30 +72,30 @@ void MENUCONTROLLER::enterOptionsSubMenu(){
 
 
 void MENUCONTROLLER::startGame(){
-    play = true;
-    quit = false;
+    playIsPressed = true;
+    quitIsPressed = false;
     mainMenuView.clearScreen();
 }
 
 void MENUCONTROLLER::endGame(){
-    play = false;
-    quit = true;
+    playIsPressed = false;
+    quitIsPressed = true;
 }
 
 keyType MENUCONTROLLER::chooseAction(){
     keyType key = getPressedKey();
     switch (key)
     {
-    case 's':
-        return action.down;
-    case 'w':
-        return action.up;
-    case 'd':
-        return action.right;
-    case 'a':
-        return action.left;
-    case 'e':
-        return action.enter;
+    case DOWN:
+        return DOWN;
+    case UP:
+        return UP;
+    case RIGHT:
+        return RIGHT;
+    case LEFT:
+        return LEFT;
+    case ENTER:
+        return ENTER;
     default:
         return 255;
     }

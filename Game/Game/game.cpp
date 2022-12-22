@@ -18,7 +18,7 @@ void GAME::initMatrix(){
   matrix.assign(height + 2,tempArray);
 }
 
-void GAME::initGameView(){
+void GAME::initView(){
   gameView.createGameView();
   cursor.initCursor(map,ij);
   cursor.placeCursor();
@@ -31,30 +31,30 @@ void GAME::initTime(){
 
 
 void GAME::plantBombs(){
-         int count = 0;
-  while(sum(matrix) != minesCount * 9 ){
-    
-         int i = rand()%height + 1;
-         int j = rand()%width + 1;
-         if( i != ij.first || j != ij.second)
-         matrix[ i ][ j ].value = 9;
+  int count = 0;
+  int k = -1;
+  while( ++k <= minesCount ){
+    int i = rand()%height + 1;
+    int j = rand()%width + 1; 
+    if( matrix[i][j].value != 9 )
+      if( i != ij.first || j != ij.second  )
+        matrix[ i ][ j ].value = 9;
   }
 }
 
 int GAME::countBombs(int i,int j){
   int temp = 0;
   if(matrix[i][j].value!= 9){
-    for(int a = i - 1;a <= i + 1;++a ){
-      for(int b = j - 1;b<= j + 1;++b){
-        if(a == i && b == j){ }
-        else if(matrix[a][b].value == 9)
+    for(int a = i - 1;a <= i + 1; ++a ){
+      for(int b = j - 1 ; b <= j + 1; ++b ){
+        if(a == i && b == j);
+        else if( matrix[a][b].value == 9 ){
           temp++;
-      } 
+        }
+      }
     }
     return temp;
   }
-
-
     return 9;
 }
 
@@ -75,10 +75,10 @@ int GAME::sum(Matrix mat){
 }
 
 void GAME::proccess(const int& key){
-  if(key == CURSOR::action::left || key == CURSOR::action::right || key == CURSOR::action::up || key == CURSOR::action::down){
+  if(key == CURSOR::action::LEFT || key == CURSOR::action::RIGHT || key == CURSOR::action::UP || key == CURSOR::action::DOWN){
         cursor.moveTo(key);
   }
-  else if( key == CURSOR::action::open || key == CURSOR::action::flag ){
+  else if( key == CURSOR::action::OPEN || key == CURSOR::action::FLAG ){
     if(isStarted())
       chooseAction(key);
   }
@@ -103,14 +103,14 @@ void GAME::countAndPrintTime(){
 }
 
 void GAME::chooseAction(const int& key){
-  if( key == CURSOR::action::open && !(matrix[ij.first][ij.second].isOpened) ){ 
+  if( key == CURSOR::action::OPEN && !(matrix[ij.first][ij.second].isOpened) ){ 
       if( matrix[ij.first][ij.second].value == 9 ){
       gameOver = true;
       return;
     }
     reveal(matrix,ij.first,ij.second);
   }
-  else if( key == CURSOR::action::flag  && !matrix[ij.first][ij.second].isOpened){
+  else if( key == CURSOR::action::FLAG  && !matrix[ij.first][ij.second].isOpened){
     if(matrix[ij.first][ij.second].isNotMarked){
       cursor.mark();
       playeMineCounter--;
@@ -148,10 +148,7 @@ bool GAME::isLost(){
   return gameOver;
 }
 
-
-
 void GAME::reveal(Matrix &matrix,int i,int j){
-    noecho();
     if(i < 1 || j < 1 || i > matrix.size() - 2 || j > matrix[0].size() - 2){
         return;
     }
@@ -178,7 +175,6 @@ void GAME::revealAllBombs(){
     for(int j = 1;j<=matrix[0].size() - 2;++j){
       if(matrix[i][j].value == 9){
         cursor.printColoredString({i,j},"*",COLOR{6,COLOR_RED});
-        usleep(15000);
         }
     }
   }
@@ -186,7 +182,13 @@ void GAME::revealAllBombs(){
 }
 
 void GAME::endGame(){
-  gameView.printYouWinHeader(labelPosition);
+    if( isLost() ){
+       gameView.printYouWinHeader(labelPosition);
+       revealAllBombs(); 
+    }
+    else if( isWin() ){
+      gameView.printYouWinHeader(labelPosition);
+    }
 }
 
 void GAME::waitUntillInput(){
@@ -196,13 +198,8 @@ void GAME::waitUntillInput(){
   clear();
 }
 
-
 void GAME::setGameState(const bool state){
   gameState = state;
-}
-
-Coords GAME::getCurrentPosition(){
-  return ij;
 }
 
 void GAME::setPosition(Coords c){

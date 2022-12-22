@@ -6,7 +6,7 @@ class OPTIONSMENUMODEL
 {
 private:
     List menuList;
-    int coof;
+    int coefficient;
 
 public:
     OPTIONSMENUMODEL(/* args */);

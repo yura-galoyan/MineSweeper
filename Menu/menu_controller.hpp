@@ -18,15 +18,9 @@ private:
     MAINMENUVIEW mainMenuView;
     OPTIONSMENUMODEL optionsMenuModel;
     OPTIONSMENUVIEW optionsMenuView;
-    
-private:
     keyType actionKey;
     bool menuIsActive;
-
-private:
     keyType getPressedKey();
-
-private:
     struct actions{
         keyType down = 0;
         keyType up = 1;
@@ -35,11 +29,10 @@ private:
         keyType left = 4;
         } action;
 
-
+    enum keys{ DOWN = 's', UP = 'w', LEFT = 'a',RIGHT = 'd',ENTER = 'e'};
 public:
-    Coords getYX();
-    unsigned getMC();
-    Coords yx;
+    bool playIsPressed = false;
+    bool quitIsPressed = false;
 
 public:
     MENUCONTROLLER();
@@ -48,10 +41,8 @@ public:
     void enterOptionsSubMenu();
     void startGame();
     void endGame();
-    bool play = false;
-    bool quit = false;
-    
-    void act(keyType);
+    Coords getYX();
+    unsigned getMC();
     keyType chooseAction();
     void printCenteredText(window,const char*);
     ~MENUCONTROLLER();

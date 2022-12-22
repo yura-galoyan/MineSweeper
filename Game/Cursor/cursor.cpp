@@ -45,22 +45,22 @@ void CURSOR::eraseCursor(){
 
 void CURSOR::moveTo(const int& key){
     switch(key){
-    case CURSOR::left:
+    case CURSOR::LEFT:
         eraseCursor();
             j = (j - 1) < 1 ? j - 1 + maxx : (j - 1) % maxx  ; 
         placeCursor();
         break;
-    case CURSOR::right:
+    case CURSOR::RIGHT:
         eraseCursor();
             j = (j)%(maxx) + 1;
         placeCursor();
         break;
-    case CURSOR::up:
+    case CURSOR::UP:
         eraseCursor();
             i = (i - 1) < 1 ? (i - 1 + maxy) : (i - 1) % maxy;
         placeCursor();
         break;
-    case CURSOR::down:
+    case CURSOR::DOWN:
         eraseCursor();
             i = (i)%(maxy) + 1;
         placeCursor();
@@ -89,27 +89,38 @@ void CURSOR::printColoredString(const Coords ij,const char* ch,COLOR c){
 }
 
 void CURSOR::demine(Coords ij,const int& v){
-    if(v == 0 )
+    switch(v){
+    case 0:    
         printColoredString(ij," ",white);
-    else if(v == 9)
+        break;
+    case 9:
         printColoredString(ij,"*",red);
-    else if(v == 1)
+        break;
+    case 1:
         printColoredValue(ij,v,white);
-    else if(v == 2)
+        break;
+    case 2:
         printColoredValue(ij,v,green);
-    else if(v == 3)
+        break;
+    case 3:
         printColoredValue(ij,v,cyan);
-    else if(v == 4)
+        break;
+    case 4:
         printColoredValue(ij,v,blue);
-    else if(v == 5)
+        break;
+    case 5:
         printColoredValue(ij,v,magenta);
-    else if(v == 6)
+        break;
+    case 6:
         printColoredValue(ij,v,yellow);
-    else if(v == 7)
+        break;
+    case 7:
         printColoredValue(ij,v,red);
-    else
+        break;
+    default:
         printColoredValue(ij,v,white);
-    
+        break;
+}
     wrefresh(map);
 };  
 

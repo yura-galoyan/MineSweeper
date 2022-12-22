@@ -18,8 +18,8 @@ private:
     COLOR win{8,COLOR_GREEN};
 public:
     GAMEVIEW(Coords,unsigned);
-    void setGameView(window);
     void startNcurses();
+    void setGameView(window);
     void createGameView();
     void drawGameViewHeader();
     void drawGameViewBody();

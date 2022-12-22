@@ -17,13 +17,10 @@ private:
              minesCount;
     int playeMineCounter;
     int labelPosition = 1;
-
     bool gameState = false;
     bool gameOver = false;
-
     int numberOfOpenedCells = 0;
     Matrix matrix;
-
 private:
     GAMEVIEW gameView;
     CURSOR cursor;
@@ -45,22 +42,15 @@ public:
     void start();
     bool isWin();
     bool isLost();
-
-public:
     void plantBombs();
     int sum(Matrix);
     void fillMap();
     int countBombs(int,int);
-
-public:
     void setPosition(Coords);
-    Coords getCurrentPosition();
-
-public:
     void initTime();
     void initMatrix();
     void waitUntillInput();
-    void initGameView();
+    void initView();
     void countAndPrintTime();
     void reveal(Matrix&,int,int);
     void revealAllBombs();

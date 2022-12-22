@@ -11,6 +11,6 @@ public:
     MAINLOOP();
 
     void start();
-
+    void exit();
     ~MAINLOOP();
 };

@@ -23,7 +23,7 @@ COLOR white{5,COLOR_WHITE},
       cyan{11,COLOR_CYAN};
 
 public:
-    enum action{ left = 'a',right = 'd',up = 'w',down = 's',open = 'e',flag = 'q'};  
+    enum action{ LEFT = 'a',RIGHT = 'd',UP = 'w',DOWN = 's',OPEN = 'e',FLAG = 'q'};  
 
 public: 
     CURSOR(unsigned, unsigned);

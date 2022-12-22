@@ -7,10 +7,10 @@ GAMECONTROLLER::GAMECONTROLLER(Coords yx,unsigned m):game{yx,m},gameIsActive{tru
 }
 
 void GAMECONTROLLER::startGame(){
-    game.initGameView();
+    game.initView();
     while(gameIsActive && !( game.isWin() ) && !( game.isLost() )){
         int input = getPressedKey();
-        if(input == CURSOR::action::open && !game.isStarted()){
+        if(input == CURSOR::action::OPEN && !game.isStarted()){
             game.start(); 
         }
         else game.proccess(input);
@@ -19,12 +19,7 @@ void GAMECONTROLLER::startGame(){
     game.setGameState(false);
     gameIsActive = false;
 
-    if(game.isLost()){
-       game.revealAllBombs(); 
-    }
-    else if(game.isWin()){
-        game.endGame();
-    }
+    game.endGame();
     game.waitUntillInput();
 
 }

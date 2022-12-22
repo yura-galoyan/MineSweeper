@@ -5,19 +5,24 @@ MAINLOOP::MAINLOOP(){
 }
 
 void MAINLOOP::start(){
-    while(isOnMainLoop){
     MENUCONTROLLER menuController;
+    while(isOnMainLoop){
     menuController.startMenu();
-    if(menuController.quit){  
-        endwin();
-        break;
+    if(menuController.quitIsPressed){  
+      exit();
     }
-    else if(menuController.play){
+    else if(menuController.playIsPressed){
         GAMECONTROLLER gameController(menuController.getYX(),menuController.getMC());
-        gameController.startGame();    }
+        gameController.startGame();
+    }
 }
 };
 
+void MAINLOOP::exit(){
+    isOnMainLoop = false;
+    clear();
+    endwin();
+}
 MAINLOOP::~MAINLOOP(){
 
 }

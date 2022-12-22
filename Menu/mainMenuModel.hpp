@@ -14,8 +14,6 @@ class MAINMENUMODEL
     :public MENUMODEL{
 
 private:
-
-    
     List menuList;
     
 public:
