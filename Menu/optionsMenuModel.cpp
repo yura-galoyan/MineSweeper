@@ -57,7 +57,6 @@ unsigned OPTIONSMENUMODEL::getMC(){
     return minesCount;
 }
 
-
 OPTIONSMENUMODEL::~OPTIONSMENUMODEL()
 {
 }

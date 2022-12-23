@@ -8,11 +8,11 @@ MENUCONTROLLER::MENUCONTROLLER():menuIsActive{true}
 }
 
 void MENUCONTROLLER::startMenu(){
-    mainMenuView.createMainMenu();
+    mainMenuView.createMainMenu(mainMenuModel.getMenuList());
     mainMenuView.highlightCursor(mainMenuModel.getTab(0));
     Tab currTab = mainMenuModel.getCurrTab();
     while(menuIsActive){
-       actionKey = chooseAction(); //TODO: move into another function
+       actionKey = chooseAction();
        if(actionKey == DOWN  ){
           mainMenuView.moveCursor(currTab,mainMenuModel.getTab( (currTab.index + 1 ) % 4));
        }
@@ -36,7 +36,7 @@ void MENUCONTROLLER::startMenu(){
 }
 
 void MENUCONTROLLER::enterOptionsSubMenu(){
-    optionsMenuView.createOptionMenu();
+    optionsMenuView.createOptionMenu(optionsMenuModel.getMenuList());
     Tab currTab = optionsMenuModel.getTab(0);
     optionsMenuView.highlightCursor(currTab,optionsMenuModel.getOptionValue(currTab));
     while(menuIsActive){
@@ -55,7 +55,7 @@ void MENUCONTROLLER::enterOptionsSubMenu(){
         }
         else if(actionKey == ENTER ){
             if(currTab.index == 3){
-                mainMenuView.createMainMenu();
+                mainMenuView.createMainMenu(mainMenuModel.getMenuList());
                 Tab currTab = mainMenuModel.getTab(1);
                 mainMenuView.highlightCursor(currTab);
                 break;

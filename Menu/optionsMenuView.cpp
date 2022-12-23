@@ -5,13 +5,13 @@ OPTIONSMENUVIEW::OPTIONSMENUVIEW(){
 
 }
 
-void OPTIONSMENUVIEW::createOptionMenu(){
+void OPTIONSMENUVIEW::createOptionMenu(const List& menuList){
     clearScreen();
     drawOptionsHeader(1,62);
-    drawTab(optMenuModel.getTab(0) );
-    drawTab(optMenuModel.getTab(1) );
-    drawTab(optMenuModel.getTab(2) );
-    drawTab(optMenuModel.getTab(3) );
+    drawTab(menuList[0]);
+    drawTab(menuList[1]);
+    drawTab(menuList[2]);
+    drawTab(menuList[3]);
 }
 
 void OPTIONSMENUVIEW::drawOptionsHeader(const int y ,const int x){

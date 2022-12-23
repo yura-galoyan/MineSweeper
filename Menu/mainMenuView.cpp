@@ -13,13 +13,13 @@ void MAINMENUVIEW::drawGameNameHeader(){
              mvprintw(5,62,"                                            |_|            \n");
 }
 
-void MAINMENUVIEW::createMainMenu(){
+void MAINMENUVIEW::createMainMenu(const List &menuList){
    clearScreen();
    drawGameNameHeader();
-   drawTab(mainMenuModel.getTab(0)); 
-   drawTab(mainMenuModel.getTab(1));
-   drawTab(mainMenuModel.getTab(2));
-   drawTab(mainMenuModel.getTab(3));
+   drawTab(menuList[0]); // mainMenuModel.getTab(0)); 
+   drawTab(menuList[1]); // mainMenuModel.getTab(1));
+   drawTab(menuList[2]); // mainMenuModel.getTab(2));
+   drawTab(menuList[3]); // mainMenuModel.getTab(3));
 }   
 
 MAINMENUVIEW::~MAINMENUVIEW(){

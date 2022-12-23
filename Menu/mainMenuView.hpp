@@ -5,15 +5,11 @@
 class MAINMENUVIEW
     :public MENUVIEW
 {
-private:
-    MAINMENUMODEL mainMenuModel;
 public:
     MAINMENUVIEW( );
 
-
-
     void drawGameNameHeader();
-    void createMainMenu();
+    void createMainMenu(const List&);
     
 
     ~MAINMENUVIEW();

@@ -17,10 +17,9 @@ Tab MENUMODEL::getCurrTab(){
     return currTab;
 }
 
-window MENUMODEL::getWin(const int &i){
-   return this->menuList[i].win;
+List MENUMODEL::getMenuList(){
+    return this->menuList;
 }
-
 
 MENUMODEL::~MENUMODEL(){
 

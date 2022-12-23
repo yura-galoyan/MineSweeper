@@ -19,18 +19,19 @@ class MENUMODEL
 {
 protected:
     Tab currTab;
-    List menuList;
     Coord overAllX = 67;
     int height = 10,
         width = 10,
         minesCount = 10;
     unsigned delta = 6;
+    Tab initTab(const Coord ,const Coord,const char*);
+    
+    List menuList;
     
 public:
     MENUMODEL();
-    Tab initTab(const Coord ,const Coord,const char*);
     Tab getCurrTab();
-    window getWin(const int &);
+    List getMenuList();
     ~MENUMODEL();
 };
 

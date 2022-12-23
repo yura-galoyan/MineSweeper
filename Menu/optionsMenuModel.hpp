@@ -5,7 +5,6 @@ class OPTIONSMENUMODEL
     :public MENUMODEL
 {
 private:
-    List menuList;
     int coefficient;
 
 public:

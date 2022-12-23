@@ -9,14 +9,11 @@
 class OPTIONSMENUVIEW
     :public MENUVIEW
 {
-private:
-    OPTIONSMENUMODEL optMenuModel;
-
 public:
     OPTIONSMENUVIEW();
    
     void drawOptionsHeader(const int,const int);
-    void createOptionMenu();
+    void createOptionMenu(const List& menuList);
     void highlightCursor(Tab,const int);
     void unHighlightCursor(Tab,const int);
 
